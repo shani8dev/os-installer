@@ -89,6 +89,8 @@ class DeviceSummaryRow(Adw.ExpanderRow):
         self._device = device
         super().__init__(**kwargs)
 
+        translate_widgets(self)
+
         # Hacky workaround to make AdwExpanderRow have property style
         # box -> list_box -> action row
         first_row = self.get_child().get_first_child().get_first_child()
