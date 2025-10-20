@@ -4,6 +4,7 @@ from gi.repository import Adw, GObject, Gtk
 
 from .config import config
 from .device_info import DeviceInfo
+from .state_machine import state_machine
 from .translations import translate_widgets
 
 
@@ -90,6 +91,10 @@ class DeviceSummaryRow(Adw.ExpanderRow):
         super().__init__(**kwargs)
 
         translate_widgets(self)
+
+        if not state_machine.is_page_available('disk'):
+            self.set_visible(False)
+            return
 
         # Hacky workaround to make AdwExpanderRow have property style
         # box -> list_box -> action row
