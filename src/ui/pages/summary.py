@@ -15,10 +15,6 @@ from .translations import translate_widgets
 class SummaryPage(Gtk.Box):
     __gtype_name__ = __qualname__
 
-    list = Gtk.Template.Child()
-
-    disk_row_index = 2
-
     # rows
     language_row = Gtk.Template.Child()
     desktop_row = Gtk.Template.Child()
@@ -40,23 +36,11 @@ class SummaryPage(Gtk.Box):
         self.has_install = config.get('scripts')['install'] is not None
         if self.has_install:
             # These values can only be edited if install step has not already
-            # been started wtih them
+            # been started with them
             self.language_row.set_activatable(False)
             self.desktop_row.set_activatable(False)
 
-        config.subscribe('chosen_device', self._update_device_row)
-
     ### callbacks ###
-
-    def _update_device_row(self, device):
-        if device == None:
-            print('Internal error: Disk was not set before summary page')
-        else:
-            row = self.list.get_row_at_index(self.disk_row_index)
-            if type(row) == DeviceSummaryRow:
-                self.list.remove(row)
-            row = DeviceSummaryRow(device)
-            self.list.insert(row, self.disk_row_index)
 
     def _update_user_autologin(self, autologin):
         self.user_autologin.set_visible(autologin)

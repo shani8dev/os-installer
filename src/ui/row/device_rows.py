@@ -86,8 +86,7 @@ class DeviceRow(Adw.ActionRow):
 class DeviceSummaryRow(Adw.ExpanderRow):
     __gtype_name__ = __qualname__
 
-    def __init__(self, device, **kwargs):
-        self._device = device
+    def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
         translate_widgets(self)
@@ -101,9 +100,22 @@ class DeviceSummaryRow(Adw.ExpanderRow):
         first_row = self.get_child().get_first_child().get_first_child()
         first_row.add_css_class('property')
 
-        row = DeviceRow(device)
-        row.connect('activated', self._row_activated)
-        self.add_row(row)
+        self.children = []
+        config.subscribe('chosen_device', self._update)
+
+    def _update(self, device):
+        for row in self.children:
+            self.remove(row)
+
+        if device == None:
+            print("Internal error: Device was not set, can't show summary")
+            self.set_subtitle("")
+        else:
+            self.set_subtitle(device.name)
+            row = DeviceRow(device)
+            row.connect('activated', self._row_activated)
+            self.add_row(row)
+            self.children = [row]
 
     def _row_activated(self, _):
         config.set('displayed-page', 'disk')

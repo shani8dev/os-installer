@@ -11,10 +11,14 @@ template $ConfirmPage : Box {
     styles ["heading"]
   }
 
-  ListBox list {
+  ListBox {
     receives-default: true;
     selection-mode: none;
     styles ["boxed-list"]
+
+    $DeviceSummaryRow disk_row {
+      name: "disk";
+    }
   }
 
   $ConfirmButton {
