@@ -55,7 +55,7 @@ class SummaryPage(Gtk.Box):
             row = self.list.get_row_at_index(self.disk_row_index)
             if type(row) == DeviceSummaryRow:
                 self.list.remove(row)
-            row = DeviceSummaryRow(device, not self.has_install)
+            row = DeviceSummaryRow(device)
             self.list.insert(row, self.disk_row_index)
 
     def _update_user_autologin(self, autologin):

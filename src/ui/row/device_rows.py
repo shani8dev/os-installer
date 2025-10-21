@@ -86,7 +86,7 @@ class DeviceRow(Adw.ActionRow):
 class DeviceSummaryRow(Adw.ExpanderRow):
     __gtype_name__ = __qualname__
 
-    def __init__(self, device, nested_activatable=False, **kwargs):
+    def __init__(self, device, **kwargs):
         self._device = device
         super().__init__(**kwargs)
 
@@ -102,7 +102,6 @@ class DeviceSummaryRow(Adw.ExpanderRow):
         first_row.add_css_class('property')
 
         row = DeviceRow(device)
-        row.set_activatable(nested_activatable)
         row.connect('activated', self._row_activated)
         self.add_row(row)
 
