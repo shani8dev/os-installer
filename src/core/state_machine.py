@@ -107,6 +107,8 @@ class StateMachine:
                     if prev_page == 'confirm':
                         installation_scripting.can_run_install()
                         ret_val = 'no_return'
+                        confirm_index = self.available_pages.index('confirm')
+                        del self.available_pages[0:confirm_index]
                 case 'install':
                     installation_scripting.can_run_configure()
                     ret_val = 'no_return'
