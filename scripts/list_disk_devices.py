@@ -49,36 +49,38 @@ for device in devices:
         print(f'  partition table: {partition_table}')
         continue
 
-    drive = udisks_client.get_drive_for_block(block)
-    if not drive:
-        print(f'Not a drive: {block}')
-        continue
-    drive_name = f'{drive.props.vendor} {drive.props.model}'
-    if drive.props.optical:
-        print(f'Drive ({drive_name}) is considered optical')
-        continue
-    if drive.props.size <= 0:
-        print(f'ignored drive ({drive_name}) size {drive.props.size}')
-
-    print(f'* Disk ({drive_name}), '
-          f'size {size_to_str(block.props.size)}, path {block.props.device}:')
-
-    if not partition_table:
-        print('  drive has no partition table')
-        continue
-    for partition_name in partition_table.props.partitions:
-        partition_object = udisks_client.get_object(partition_name)
-        if not partition_object:
-            print(f'  no udisks object for partition {partition_name}')
+    if drive:= udisks_client.get_drive_for_block(block):
+        drive_name = f'{drive.props.vendor} {drive.props.model}'
+        if drive.props.optical:
+            print(f'Drive ({drive_name}) is considered optical')
             continue
+        if drive.props.size <= 0:
+            print(f'ignored drive ({drive_name}) size {drive.props.size}')
 
-        block = partition_object.get_block()
-        partition = partition_object.get_partition()
-        if block and partition:
-            efi = ''
-            if partition.props.type.upper() == EFI_PARTITION_GUID:
-                efi = 'EFI '
+        print(f'* Disk ({drive_name}), '
+            f'size {size_to_str(block.props.size)}, path {block.props.device}:')
 
-            print(f'    * {efi}Partition #{partition.props.number} ("{block.props.id_label}"), size {size_to_str(block.props.size)}, path {block.props.device}')
-        else:
-            print('    * Unknow partition? Ignoring.')
+        if not partition_table:
+            print('  drive has no partition table')
+            continue
+        for partition_name in partition_table.props.partitions:
+            partition_object = udisks_client.get_object(partition_name)
+            if not partition_object:
+                print(f'  no udisks object for partition {partition_name}')
+                continue
+
+            block = partition_object.get_block()
+            partition = partition_object.get_partition()
+            if block and partition:
+                efi = ''
+                if partition.props.type.upper() == EFI_PARTITION_GUID:
+                    efi = 'EFI '
+
+                print(f'    * {efi}Partition #{partition.props.number} ("{block.props.id_label}"), size {size_to_str(block.props.size)}, path {block.props.device}')
+            else:
+                print('    * Unknow partition? Ignoring.')
+    elif block.props.crypto_backing_device:
+        if not udisks_object.get_loop():
+            print(f'Device {device} is crypto backed by {block.props.crypto_backing_device}')
+    else:
+        print(f'Unhandled device {device}')
