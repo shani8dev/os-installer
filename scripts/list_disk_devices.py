@@ -31,7 +31,15 @@ for device in devices:
     if partition:
         block = udisks_object.get_block()
         drive = udisks_client.get_drive_for_block(block)
-        print(f'Is a partition: ({drive.props.vendor} {drive.props.model})')
+
+        # Check filesystem for mount points
+        if filesystem := udisks_object.get_filesystem():
+            mount_points = f'mounted at {filesystem.props.mount_points}'
+        else:
+            mount_points = f'(not mounted)'
+
+        name=f'{drive.props.vendor} {drive.props.model}'
+        print(f'Is a partition: {name} {mount_points}')
         continue
 
     block = udisks_object.get_block()
