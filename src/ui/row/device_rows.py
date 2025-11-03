@@ -29,6 +29,45 @@ class DeviceChoiceRow(Adw.ExpanderRow):
         return self._device
 
 
+@Gtk.Template(resource_path='/com/github/p3732/os-installer/ui/row/device_mounted_row.ui')
+class DeviceMountedRow(Adw.ActionRow):
+    __gtype_name__ = __qualname__
+
+    mounted_label = Gtk.Template.Child()
+    unmount_button = Gtk.Template.Child()
+
+    def __init__(self, device, unmount_callback, **kwargs):
+        self._device = device
+        self.unmount_callback = unmount_callback
+        super().__init__(**kwargs)
+
+        translate_widgets(self.mounted_label)
+
+    @Gtk.Template.Callback('unmount_clicked')
+    def _unmount_clicked(self, button):
+        self.unmount_callback(self)
+
+    @GObject.Property(type=DeviceInfo)
+    def device(self):
+        return self._device
+
+
+@Gtk.Template(resource_path='/com/github/p3732/os-installer/ui/row/device_rootfs_disk_row.ui')
+class DeviceRootfsDiskRow(Adw.ActionRow):
+    __gtype_name__ = __qualname__
+
+    rootfs_label = Gtk.Template.Child()
+
+    def __init__(self, device, **kwargs):
+        self._device = device
+        super().__init__(**kwargs)
+        translate_widgets(self.rootfs_label)
+
+    @GObject.Property(type=DeviceInfo)
+    def device(self):
+        return self._device
+
+
 @Gtk.Template(resource_path='/com/github/p3732/os-installer/ui/row/device_row.ui')
 class DeviceRow(Adw.ActionRow):
     __gtype_name__ = __qualname__

@@ -43,6 +43,8 @@
     <file preprocess="xml-stripblanks">ui/pages/welcome.ui</file>
 
     <file preprocess="xml-stripblanks">ui/row/device_choice_row.ui</file>
+    <file preprocess="xml-stripblanks">ui/row/device_mounted_row.ui</file>
+    <file preprocess="xml-stripblanks">ui/row/device_rootfs_disk_row.ui</file>
     <file preprocess="xml-stripblanks">ui/row/device_row.ui</file>
     <file preprocess="xml-stripblanks">ui/row/device_summary_row.ui</file>
     <file preprocess="xml-stripblanks">ui/row/device_too_small_row.ui</file>

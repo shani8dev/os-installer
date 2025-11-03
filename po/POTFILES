@@ -21,6 +21,7 @@ data/resources/ui/pages/welcome.blp
 
 data/resources/ui/row/device_choice_row.blp
 data/resources/ui/row/device_summary_row.blp
+data/resources/ui/row/device_mounted_row.blp
 data/resources/ui/row/device_too_small_row.blp
 data/resources/ui/row/no_efi_partition_row.blp
 

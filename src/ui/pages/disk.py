@@ -6,9 +6,10 @@ from gi.repository import Gio, Gtk
 
 from .config import config
 from .device_info import DeviceInfo, Disk
-from .device_rows import DeviceChoiceRow, DeviceRow, DeviceTooSmallRow, NoEfiPartitionRow
+from .device_rows import DeviceChoiceRow, DeviceRootfsDiskRow, DeviceRow, DeviceTooSmallRow, DeviceMountedRow, NoEfiPartitionRow
 from .disk_provider import disk_provider
 from .functions import reset_model
+from .translator import config_gettext
 from .translations import translate_widgets
 
 
@@ -49,6 +50,10 @@ class DiskPage(Gtk.Stack):
     def _create_device_row(self, device: DeviceInfo):
         if not self._is_big_enough(device.size_number):
             return DeviceTooSmallRow(device)
+        if device.has_root_fs:
+            return DeviceRootfsDiskRow(device)
+        if device.has_mounted_fs:
+            return DeviceMountedRow(device, self._handle_unmount)
         if not self.partition_ok or not device.partitions:
             return DeviceRow(device)
 
@@ -69,6 +74,17 @@ class DiskPage(Gtk.Stack):
             else:
                 expander_row.add_row(DeviceTooSmallRow(partition))
         return expander_row
+
+    def _handle_unmount(self, row):
+        if error := disk_provider.unmount_filesystems(row.device):
+            _ = config_gettext
+            # Translators: Error when unmount fails. {} is replaced with error details
+            config.set('display-toast', _("Failed to unmount filesystems: {}").format(error))
+            print(error)
+        else:
+            root = self.get_root()
+            if root:
+                root.activate_action('win.reload-page', None)
 
     ### callbacks ###
 

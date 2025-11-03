@@ -243,6 +243,21 @@ msgstr ""
 msgid "Use Whole Disk"
 msgstr ""
 
+#. Translators: Label for disk with mounted filesystem
+#: data/resources/ui/row/device_mounted_row.blp
+msgid "Has filesystem(s) in use"
+msgstr ""
+
+#. Translators: Button to unmount filesystems
+#: data/resources/ui/row/device_mounted_row.blp
+msgid "Unmount"
+msgstr ""
+
+# Translators: Label for disk with root filesystem mounted
+#: data/resources/ui/row/device_rootfs_disk_row.blp
+msgid "System disk in use"
+msgstr ""
+
 #. Translators: Shown for partitions that are not big enough to be installed on.
 #. * "{}" is replaced by a disk size value, e.g. "21.3 GB".
 #: data/resources/ui/row/device_too_small_row.blp

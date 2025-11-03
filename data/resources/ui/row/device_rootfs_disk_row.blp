@@ -1,0 +1,28 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $DeviceRootfsDiskRow : Adw.ActionRow {
+  activatable: false;
+  focusable: false;
+  selectable: false;
+  title: bind template.device as <$DeviceInfo>.name;
+  subtitle: bind template.device as <$DeviceInfo>.device_path;
+
+  [prefix]
+  Label {
+    label: bind template.device as <$DeviceInfo>.size;
+    width-chars: 5;
+    max-width-chars: 7;
+    xalign: 1;
+    styles ["dimmed"]
+  }
+
+  [suffix]
+  Label rootfs_label {
+    /* Translators: Label for disk with root filesystem mounted */
+    label: _("System disk in use");
+    styles ["dim-label"]
+    wrap: true;
+    xalign: 0;
+  }
+}

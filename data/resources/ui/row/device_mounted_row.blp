@@ -1,0 +1,41 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $DeviceMountedRow : Adw.ActionRow {
+  activatable: false;
+  focusable: false;
+  selectable: false;
+  title: bind template.device as <$DeviceInfo>.name;
+  subtitle: bind template.device as <$DeviceInfo>.device_path;
+
+  [prefix]
+  Label {
+    label: bind template.device as <$DeviceInfo>.size;
+    width-chars: 5;
+    max-width-chars: 7;
+    xalign: 1;
+    styles ["dimmed"]
+  }
+
+  [suffix]
+  Box {
+    spacing: 12;
+
+    Label mounted_label {
+      /* Translators: Label for disk with mounted filesystem */
+      label: _("Has filesystem(s) in use");
+      styles ["dim-label"]
+      wrap: true;
+      xalign: 0;
+    }
+
+    Button unmount_button {
+      icon-name: "media-eject-symbolic";
+      /* Translators: Tooltip for unmount button */
+      tooltip-text: _("Unmount");
+      clicked => $unmount_clicked();
+      valign: center;
+      styles ["flat", "circular"]
+    }
+  }
+}
