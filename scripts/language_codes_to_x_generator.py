@@ -1,3 +1,5 @@
+#!/bin/python3
+
 import gi
 gi.require_version('GnomeDesktop', '3.0')  # noqa: E402
 from gi.repository import GnomeDesktop
