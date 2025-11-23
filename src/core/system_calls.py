@@ -19,7 +19,10 @@ def _execute(args):
 def _run_program(args):
     env = os.environ.copy()
     env["LANG"] = config.get('language_chosen').locale
-    Popen(args, env=env)
+    try:
+        Popen(args, env=env)
+    except Exception as e:
+        print(f"Error running {args}: {e}")
 
 
 class SystemCaller:
