@@ -131,29 +131,24 @@ class DiskProvider(Preloadable):
         manager = self.udisks_client.get_manager()
         devices = manager.call_get_block_devices_sync(dummy_var, None)
 
-        # First pass: collect direct filesystems
-        for device in devices:
-            if not (udisks_object := self.udisks_client.get_object(device)):
-                continue
-            if not (block := udisks_object.get_block()):
-                continue
-            if udisks_object.get_loop():
-                continue
+        # Pre-filter device
+        filtered_devices = [
+            (device, udisks_object)
+            for device in devices
+            if (udisks_object := self.udisks_client.get_object(device))
+            and udisks_object.get_block()
+            and not udisks_object.get_loop()
+        ]
 
+        # First pass: collect direct filesystems
+        for device, udisks_object in filtered_devices:
             # If device has filesystem, store its mount points
             if (fs := udisks_object.get_filesystem()) and fs.props.mount_points:
                 mount_map[device] = DeviceMountInfo(mount_points=list(fs.props.mount_points))
 
         # Second pass: handle LVM
         vg_mount_map = {}
-        for device in devices:
-            if not (udisks_object := self.udisks_client.get_object(device)):
-                continue
-            if not (block := udisks_object.get_block()):
-                continue
-            if udisks_object.get_loop():
-                continue
-
+        for device, udisks_object in filtered_devices:
             if not (block_lvm2 := udisks_object.get_block_lvm2()):
                 continue
 
@@ -189,14 +184,8 @@ class DiskProvider(Preloadable):
                 mount_map[device].mount_points.extend(vg_mount_map[vg_path])
 
         # Third pass: handle LUKS (propagate cleartext mount points to backing device)
-        for device in devices:
-            if not (udisks_object := self.udisks_client.get_object(device)):
-                continue
-            if not (block := udisks_object.get_block()):
-                continue
-            if udisks_object.get_loop():
-                continue
-
+        for device, udisks_object in filtered_devices:
+            block = udisks_object.get_block()
             if backing_device := block.props.crypto_backing_device:
                 if device in mount_map:
                     if backing_device not in mount_map:
