@@ -3,8 +3,8 @@ msgstr ""
 "Project-Id-Version: os-installer\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-10-16 14:26-0400\n"
-"PO-Revision-Date: 2024-10-17 19:15+0000\n"
-"Last-Translator: Matthaiks <kitynska@gmail.com>\n"
+"PO-Revision-Date: 2025-12-01 15:13+0000\n"
+"Last-Translator: Micro Wvae <micro.mail88@gmail.com>\n"
 "Language-Team: Polish <https://hosted.weblate.org/projects/os-installer/os-"
 "installer/pl/>\n"
 "Language: pl\n"
@@ -13,7 +13,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
-"X-Generator: Weblate 5.8-rc\n"
+"X-Generator: Weblate 5.15-dev\n"
 
 msgid "OS-Installer"
 msgstr "Instalator systemu operacyjnego"
@@ -47,7 +47,7 @@ msgstr "_Kontynuuj"
 
 #. Translators: Followed by a disk or partition name
 msgid "This will delete all data on"
-msgstr "To usunie wszystkie pliki"
+msgstr "Usunie to wszystkie pliki z"
 
 #. Translators: On button.
 msgid "_Confirm"
@@ -235,7 +235,7 @@ msgstr "_Nazwa"
 
 #. Translators: Used with entry field for linux username
 msgid "_Username"
-msgstr "_Użytkownik"
+msgstr "Nazwa _użytkownika"
 
 #. Translators: Used with option to enable automatic login of user upon booting
 msgid "Automatic Login"
@@ -254,7 +254,7 @@ msgid ""
 "This application will guide you through the installation of {} onto your "
 "system."
 msgstr ""
-"Ta aplikacja poprowadzi Cię przez proces instalacji {} w Twoim systemie."
+"Ta aplikacja poprowadzi Cię przez proces instalacji {} na Twoim systemie."
 
 #. Translators: Fallback name for partitions that don't have a name.
 msgid "Unnamed Partition"
