@@ -50,4 +50,4 @@ class SummaryPage(Gtk.Box):
 
     @Gtk.Template.Callback('summary_row_activated')
     def _summary_row_activated(self, list_box, row):
-        config.set('displayed-page', row.get_name())
+        config.set('displayed-page', row.page_name)
