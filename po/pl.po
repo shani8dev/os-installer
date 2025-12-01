@@ -3,8 +3,8 @@ msgstr ""
 "Project-Id-Version: os-installer\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-10-16 14:26-0400\n"
-"PO-Revision-Date: 2025-12-01 15:13+0000\n"
-"Last-Translator: Micro Wvae <micro.mail88@gmail.com>\n"
+"PO-Revision-Date: 2025-12-02 16:02+0000\n"
+"Last-Translator: Marcel Mrówka <micro.mail88@gmail.com>\n"
 "Language-Team: Polish <https://hosted.weblate.org/projects/os-installer/os-"
 "installer/pl/>\n"
 "Language: pl\n"
@@ -75,7 +75,7 @@ msgstr "_Przeładuj"
 
 #. Translators: Button label to restart system directly after successful installation. Underscore can not be for same letter as 'Restart Later'.
 msgid "_Restart System"
-msgstr "_Uruchom ponownie komputer"
+msgstr "_Uruchom ponownie"
 
 #. Translators: Button label to delay restart after successful installation. Underscore can not be for same letter as 'Restart System'.
 msgid "Restart _Later"
@@ -83,7 +83,7 @@ msgstr "Uruchom _później"
 
 #. Translators: Hover information on toggle button that shows terminal output during installation.
 msgid "Show Terminal Output"
-msgstr "Pokaż zaawansowane wyjście"
+msgstr "Pokaż wyjście terminala"
 
 #. Translators: Used with option to enable disk encryption
 msgid "Encrypt Files"
