@@ -54,7 +54,7 @@ class OsInstallerWindow(Adw.ApplicationWindow):
 
         if config.is_test():
             self._add_action('fail-page', lambda _, __: self.navigation.show_failed(), ['<Ctl>F'])
-            self._add_action('skip', lambda _, __: self.navigation.advance(), ['<Ctl>S'])
+            self._add_action('skip', lambda _, __: self.navigation.advance(_), ['<Ctl>S'])
 
         self.insert_action_group('win', self.action_group)
         self.add_controller(self.shortcut_controller)
