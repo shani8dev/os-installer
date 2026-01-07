@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: os-installer\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-10-16 14:26-0400\n"
-"PO-Revision-Date: 2024-10-16 18:27+0000\n"
-"Last-Translator: Prefill add-on <noreply-addon-prefill@weblate.org>\n"
+"PO-Revision-Date: 2026-01-08 01:01+0000\n"
+"Last-Translator: Malo <malo.billore@gmail.com>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/os-installer/os-"
 "installer/fr/>\n"
 "Language: fr\n"
@@ -18,13 +18,13 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.8-rc\n"
+"X-Generator: Weblate 5.15.1\n"
 
 msgid "OS-Installer"
 msgstr "Installeur de systèmes"
 
 msgid "Install an Operating System"
-msgstr "Installer un système d'exploitation"
+msgstr "Installer un système d’exploitation"
 
 #. Translators: Dialog title
 msgid "Installation Running"
@@ -40,7 +40,7 @@ msgstr ""
 
 #. Translators: Underscore can not be the same as for 'Stop Installation'.
 msgid "_Continue Installation"
-msgstr "_Continuer l'Installation"
+msgstr "_Continuer l’Installation"
 
 #. Translators: Underscore can not be the same as for 'Continue Installation'.
 msgid "_Stop Installation"
@@ -59,9 +59,8 @@ msgid "_Confirm"
 msgstr "_Valider"
 
 #. Translators: On button, brackets will be replaced with desktop name.
-#, fuzzy
 msgid "_Use {}"
-msgstr "_Use {}"
+msgstr "_Utiliser {}"
 
 #. Translators: Button label to open disk management tool.
 msgid "_Manage Disks"
@@ -100,9 +99,8 @@ msgid "Encryption PIN"
 msgstr "Code PIN de chiffrement"
 
 #. Translators: Disk encryption pin confirmation entry field
-#, fuzzy
 msgid "Confirm PIN"
-msgstr "_Valider"
+msgstr "Valider le code PIN"
 
 #. Translators: Hint for disk encryption
 msgid ""
@@ -113,7 +111,7 @@ msgstr ""
 
 #. Translators: Shown if installation fails.
 msgid "Search for Help on the Internet"
-msgstr "Chercher de l'aide sur Internet"
+msgstr "Chercher de l’aide sur Internet"
 
 msgid "Filter"
 msgstr "Filtre"
@@ -126,17 +124,15 @@ msgstr "Aucun résultat"
 msgid "Try a different search"
 msgstr "Essayez une autre recherche"
 
-#, fuzzy
 msgid "No connection detected"
-msgstr "Pas de connexion."
+msgstr "Aucune connexion détectée"
 
 #. Translators: On button for opening wifi settings.
 msgid "_Open Settings"
 msgstr "_Ouvrir les paramètres"
 
-#, fuzzy
 msgid "Connection detected"
-msgstr "Connection detected"
+msgstr "Connexion détectée"
 
 #. selectable: false;
 #. Translators: Followed by a language name.
@@ -146,7 +142,7 @@ msgstr "Langue du clavier"
 
 #. Translators: Used as placeholder in a entry field to try out a keyboard layout
 msgid "Test the Keyboard Layout Here"
-msgstr "Tester l'agencement du clavier"
+msgstr "Tester l’agencement du clavier"
 
 #. Translators: Presented next to the current Timezone.
 #. Translators: Description of selected timezone.
@@ -191,7 +187,7 @@ msgstr ""
 
 #. Translators: Bullet point listing.
 msgid "  • BIOS boot partition"
-msgstr "  • BIOS boot partition"
+msgstr "  • Partition de démarrage BIOS"
 
 #. Translators: Title of a hint page
 #, fuzzy
@@ -246,9 +242,8 @@ msgid "_Name"
 msgstr "_Nom"
 
 #. Translators: Used with entry field for linux username
-#, fuzzy
 msgid "_Username"
-msgstr "User"
+msgstr "Nom d’_utilisateur"
 
 #. Translators: Used with option to enable automatic login of user upon booting
 msgid "Automatic Login"
@@ -268,7 +263,7 @@ msgid ""
 "This application will guide you through the installation of {} onto your "
 "system."
 msgstr ""
-"Cette application va vous guider pendant l'installation de {} sur votre "
+"Cette application va vous guider pendant l’installation de {} sur votre "
 "système."
 
 #. Translators: Fallback name for partitions that don't have a name.
@@ -278,16 +273,15 @@ msgstr "Partition sans nom"
 #. Translators: Shown for partitions that are not big enough to be installed on.
 #. * "{}" is replaced by a disk size value, e.g. "21.3 GB".
 msgid "Not enough space for installation ({} required)"
-msgstr "Pas assez d'espace disque pour l'installation ({} requis)"
+msgstr "Pas assez d’espace disque pour l’installation ({} requis)"
 
 #. Translators: Page title
 msgid "Confirmation"
 msgstr "Confirmer"
 
 #. Translators: Page title
-#, fuzzy
 msgid "Desktop Selection"
-msgstr "Sélection du disque"
+msgstr "Sélection du bureau"
 
 #. Translators: Page title
 msgid "Disk Selection"
@@ -319,7 +313,7 @@ msgstr "Test de la connexion Internet"
 
 #. Translators: Page title
 msgid "Keyboard Layout Selection"
-msgstr "Sélection de l'agencement du clavier"
+msgstr "Sélection de l’agencement du clavier"
 
 #. Translators: Page title
 msgid "Adapt to Location"
@@ -342,9 +336,8 @@ msgid "Welcome"
 msgstr "Bienvenue"
 
 #. Translators: Notification text
-#, fuzzy
 msgid "Finished Installation"
-msgstr "_Continuer l'Installation"
+msgstr "Installation terminée"
 
 #, fuzzy
 #~ msgid "Disk"
