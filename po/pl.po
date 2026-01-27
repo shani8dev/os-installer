@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: os-installer\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-10-16 14:26-0400\n"
-"PO-Revision-Date: 2025-12-02 16:02+0000\n"
+"PO-Revision-Date: 2026-01-28 12:35+0000\n"
 "Last-Translator: Marcel Mrówka <micro.mail88@gmail.com>\n"
 "Language-Team: Polish <https://hosted.weblate.org/projects/os-installer/os-"
 "installer/pl/>\n"
@@ -13,7 +13,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
-"X-Generator: Weblate 5.15-dev\n"
+"X-Generator: Weblate 5.16-dev\n"
 
 msgid "OS-Installer"
 msgstr "Instalator systemu operacyjnego"
@@ -79,7 +79,7 @@ msgstr "_Uruchom ponownie"
 
 #. Translators: Button label to delay restart after successful installation. Underscore can not be for same letter as 'Restart System'.
 msgid "Restart _Later"
-msgstr "Uruchom _później"
+msgstr "Zrestartuj _później"
 
 #. Translators: Hover information on toggle button that shows terminal output during installation.
 msgid "Show Terminal Output"
