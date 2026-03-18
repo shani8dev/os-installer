@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: os-installer\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-10-16 14:26-0400\n"
-"PO-Revision-Date: 2025-06-23 08:01+0000\n"
+"PO-Revision-Date: 2026-03-19 16:09+0000\n"
 "Last-Translator: ButterflyOfFire <boffire@users.noreply.hosted.weblate.org>\n"
 "Language-Team: none\n"
 "Language: kab\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.13-dev\n"
+"X-Generator: Weblate 5.17-dev\n"
 
 #: data/com.github.p3732.OS-Installer.desktop.in
 msgid "OS-Installer"
@@ -30,7 +30,7 @@ msgstr "Sebded anagraw n wammud"
 #. Translators: Dialog title
 #: data/resources/ui/confirm_quit_dialog.blp
 msgid "Installation Running"
-msgstr ""
+msgstr "Asbeddi iteddu"
 
 #. Translators: Text in dialog shown if user wants to close app with installation running
 #: data/resources/ui/confirm_quit_dialog.blp
@@ -86,7 +86,7 @@ msgstr "Ulac iḍebsiyen yettwafen"
 #. Translators: Body of a hint page
 #: data/resources/ui/pages/disk.blp
 msgid "Connect a disk and reload this page."
-msgstr ""
+msgstr "Qqen-d yiwen n uḍebsi sakkin ɛiwed ɛebbi-d asebter-a"
 
 #. Translators: On button.
 #: data/resources/ui/pages/disk.blp
@@ -106,7 +106,7 @@ msgstr "Ales asekker _ticki"
 #. Translators: Hover information on toggle button that shows terminal output during installation.
 #: data/resources/ui/pages/done.blp data/resources/ui/pages/install.blp
 msgid "Show Terminal Output"
-msgstr ""
+msgstr "Sken-d tuffɣa n yixef"
 
 #. Translators: Used with option to enable disk encryption
 #: data/resources/ui/pages/encrypt.blp
@@ -193,7 +193,7 @@ msgstr ""
 #. Translators: Label to use whole disk rather than a single partition.
 #: data/resources/ui/pages/partition.blp
 msgid "Use Whole Disk"
-msgstr ""
+msgstr "Seqdec akk aḍebsi"
 
 #. Translators: Heading of list of partitions
 #: data/resources/ui/pages/partition.blp
@@ -207,12 +207,12 @@ msgstr "Aḍebsi ur yesɛi ara iḥricen."
 #. Translators: Shown if a disk is currently not compatible with the way a system was booted.
 #: data/resources/ui/pages/partition.blp
 msgid "Selecting a partition is not possible."
-msgstr ""
+msgstr "D aweɣzi ufran n weḥric"
 
 #. Translators: Followed by a list of requirements
 #: data/resources/ui/pages/partition.blp
 msgid "The disk requires:"
-msgstr ""
+msgstr "Aḍebsi yesra:"
 
 #. Translators: Bullet point listing.
 #: data/resources/ui/pages/partition.blp
@@ -224,7 +224,7 @@ msgstr ""
 #. Translators: Bullet point listing.
 #: data/resources/ui/pages/partition.blp
 msgid "  • BIOS boot partition"
-msgstr ""
+msgstr "  • Aḥric n wawel n BIOS"
 
 #. Translators: Title of a hint page
 #: data/resources/ui/pages/partition.blp
