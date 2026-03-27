@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: os-installer\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-10-16 14:26-0400\n"
-"PO-Revision-Date: 2024-10-16 18:27+0000\n"
-"Last-Translator: Prefill add-on <noreply-addon-prefill@weblate.org>\n"
+"PO-Revision-Date: 2026-03-28 13:09+0000\n"
+"Last-Translator: tfr tint <tfrtint@gmail.com>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/os-installer/os-"
 "installer/it/>\n"
 "Language: it\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.8-rc\n"
+"X-Generator: Weblate 5.17-dev\n"
 
 msgid "OS-Installer"
 msgstr "OS-Installer"
@@ -26,9 +26,8 @@ msgid "Install an Operating System"
 msgstr "Installa un sistema operativo"
 
 #. Translators: Dialog title
-#, fuzzy
 msgid "Installation Running"
-msgstr "Installazione non riuscita"
+msgstr "Installazione in corso"
 
 #. Translators: Text in dialog shown if user wants to close app with installation running
 msgid ""
@@ -59,13 +58,12 @@ msgid "_Confirm"
 msgstr "_Conferma"
 
 #. Translators: On button, brackets will be replaced with desktop name.
-#, fuzzy
 msgid "_Use {}"
-msgstr "_Use {}"
+msgstr "_Usa {}"
 
 #. Translators: Button label to open disk management tool.
 msgid "_Manage Disks"
-msgstr "_Gestione DIschi"
+msgstr "_Gestione dIschi"
 
 #. Translators: Title of a hint page
 msgid "No Disks avaliable"
@@ -76,9 +74,8 @@ msgid "Connect a disk and reload this page."
 msgstr "Collega un disco e ricarica questa pagina."
 
 #. Translators: On button.
-#, fuzzy
 msgid "_Reload"
-msgstr "_Reload"
+msgstr "_Ricarica"
 
 #. Translators: Button label to restart system directly after successful installation. Underscore can not be for same letter as 'Restart Later'.
 msgid "_Restart System"
@@ -101,9 +98,8 @@ msgid "Encryption PIN"
 msgstr "PIN di crittografia"
 
 #. Translators: Disk encryption pin confirmation entry field
-#, fuzzy
 msgid "Confirm PIN"
-msgstr "_Conferma"
+msgstr "Conferma PIN"
 
 #. Translators: Hint for disk encryption
 msgid ""
@@ -116,31 +112,26 @@ msgstr ""
 msgid "Search for Help on the Internet"
 msgstr "Cerca Aiuto su Internet"
 
-#, fuzzy
 msgid "Filter"
-msgstr "Filter"
+msgstr "Filtro"
 
 #. Translators: Empty result placeholder title
-#, fuzzy
 msgid "No Results"
-msgstr "No Results"
+msgstr "Nessun risultato"
 
 #. Translators: Empty result placeholder, meant as a suggestion
-#, fuzzy
 msgid "Try a different search"
-msgstr "Try a different search"
+msgstr "Prova una ricerca diversa"
 
-#, fuzzy
 msgid "No connection detected"
-msgstr "Nessuna connessione."
+msgstr "Nessuna connessione rilevata"
 
 #. Translators: On button for opening wifi settings.
 msgid "_Open Settings"
 msgstr "_Apri Impostazioni"
 
-#, fuzzy
 msgid "Connection detected"
-msgstr "Connection detected"
+msgstr "Connessione rilevata"
 
 #. selectable: false;
 #. Translators: Followed by a language name.
@@ -215,15 +206,13 @@ msgid "_Return to Disk List"
 msgstr "_Return to Disk List"
 
 #. Translators: Description of selected language.
-#, fuzzy
 msgid "Language"
-msgstr "Lingua della tastiera"
+msgstr "Lingua"
 
 #. Translators: Description of selected keyboard layout.
 #. Translators: Page title
-#, fuzzy
 msgid "Keyboard Layout"
-msgstr "Selezione Layout Tastiera"
+msgstr "Schema tastiera"
 
 #. Translators: Description of defined user account name and autologin status.
 #. Translators: Page title
@@ -231,9 +220,8 @@ msgid "User Account"
 msgstr "Account Utente"
 
 #. Translators: Gets shown when autologin is enabled.
-#, fuzzy
 msgid "(Automatic Login)"
-msgstr "Login Automatico"
+msgstr "(Accesso automatico)"
 
 #. Translators: Description of selected additional software.
 #. Translators: Page title
@@ -242,34 +230,29 @@ msgstr "Software Aggiuntivo"
 
 #. Translators: Shown when list of selected software is empty.
 #. Translators: Shown when list of selected features is empty.
-#, fuzzy
 msgid "None"
-msgstr "None"
+msgstr "Nessuno"
 
 #. Translators: Description of selected additional software.
 #. Translators: Page title
-#, fuzzy
 msgid "Additional Features"
-msgstr "Software Aggiuntivo"
+msgstr "Funzioni aggiuntive"
 
 #. Translators: Used with entry field for User's name
-#, fuzzy
 msgid "_Name"
-msgstr "Nome"
+msgstr "_Nome"
 
 #. Translators: Used with entry field for linux username
-#, fuzzy
 msgid "_Username"
-msgstr "User"
+msgstr "_Nome utente"
 
 #. Translators: Used with option to enable automatic login of user upon booting
 msgid "Automatic Login"
 msgstr "Login Automatico"
 
 #. Translators: User password entry field
-#, fuzzy
 msgid "_Password"
-msgstr "Password"
+msgstr "_Password"
 
 #. Translators: Used password confirmation entry field
 #, fuzzy
@@ -289,18 +272,16 @@ msgstr "Partizione senza nome"
 
 #. Translators: Shown for partitions that are not big enough to be installed on.
 #. * "{}" is replaced by a disk size value, e.g. "21.3 GB".
-#, fuzzy
 msgid "Not enough space for installation ({} required)"
-msgstr "Spazio insufficiente per l'installazione"
+msgstr "Spazio per l'installazione insufficiente (richiesto {})"
 
 #. Translators: Page title
 msgid "Confirmation"
 msgstr "Conferma"
 
 #. Translators: Page title
-#, fuzzy
 msgid "Desktop Selection"
-msgstr "Selezione Disco"
+msgstr "Selezione desktop"
 
 #. Translators: Page title
 msgid "Disk Selection"
@@ -343,9 +324,8 @@ msgid "Restarting"
 msgstr "Riavviando"
 
 #. Translators: Page title
-#, fuzzy
 msgid "Summary"
-msgstr "Summary"
+msgstr "Sommario"
 
 #. Translators: Page title
 msgid "Select Location"
@@ -356,9 +336,8 @@ msgid "Welcome"
 msgstr "Benvenuto"
 
 #. Translators: Notification text
-#, fuzzy
 msgid "Finished Installation"
-msgstr "Continua l'installazione"
+msgstr "Installazione terminata"
 
 #, fuzzy
 #~ msgid "Disk"
