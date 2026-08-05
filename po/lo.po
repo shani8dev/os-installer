@@ -8,94 +8,95 @@ msgstr ""
 "Project-Id-Version: os-installer\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-08 00:09+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2026-08-06 11:01+0000\n"
+"Last-Translator: BoneNI <bounkirdni@gmail.com>\n"
 "Language-Team: none\n"
 "Language: lo\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 2026.8.1.dev0\n"
 
 #: data/com.github.p3732.OS-Installer.desktop.in
 msgid "OS-Installer"
-msgstr ""
+msgstr "ຕົວຕິດຕັ້ງລະບົບປະຕິບັດການ"
 
 #: data/com.github.p3732.OS-Installer.desktop.in
 #: data/com.github.p3732.OS-Installer.metainfo.xml.in
 msgid "Install an Operating System"
-msgstr ""
+msgstr "ຕິດຕັ້ງລະບົບປະຕິບັດການ"
 
 #. Translators: Label on button to copy terminal output.
 #: data/resources/ui/terminal_dialog.blp
 msgid "_Copy"
-msgstr ""
+msgstr "_ຄັດລອກ"
 
 #. Translators: Followed by a disk or partition name
 #: data/resources/ui/pages/confirm.blp
 msgid "This will delete all data on"
-msgstr ""
+msgstr "ສິ່ງນີ້ຈະລຶບຂໍ້ມູນທັງໝົດໃນ"
 
 #. Translators: On button, brackets will be replaced with desktop name.
 #: data/resources/ui/pages/desktop.blp
 msgid "_Use {}"
-msgstr ""
+msgstr "_ໃຊ້ {}"
 
 #. Translators: Button label to open disk management tool.
 #: data/resources/ui/pages/disk.blp
 msgid "_Manage Disks"
-msgstr ""
+msgstr "_ຈັດການດິດ"
 
 #. Translators: Title of a hint page
 #: data/resources/ui/pages/disk.blp
 msgid "No Disks avaliable"
-msgstr ""
+msgstr "ບໍ່ມີດິດທີ່ພ້ອມໃຊ້ງານ"
 
 #. Translators: Body of a hint page
 #: data/resources/ui/pages/disk.blp
 msgid "Connect a disk and reload this page."
-msgstr ""
+msgstr "ເຊື່ອມຕໍ່ດິດແລ້ວໂຫຼດໜ້ານີ້ໃໝ່."
 
 #. Translators: On button.
 #: data/resources/ui/pages/disk.blp
 msgid "_Reload"
-msgstr ""
+msgstr "_ໂຫຼດໃໝ່"
 
 #. Translators: Button label to restart system directly after successful installation. Underscore can not be for same letter as 'Restart Later'.
 #: data/resources/ui/pages/done.blp
 msgid "_Restart System"
-msgstr ""
+msgstr "_ເລີ່ມລະບົບໃໝ່"
 
 #. Translators: Button label to delay restart after successful installation. Underscore can not be for same letter as 'Restart System'.
 #: data/resources/ui/pages/done.blp
 msgid "Restart _Later"
-msgstr ""
+msgstr "ເລີ່ມໃໝ່ _ພາຍຫຼັງ"
 
 #. Translators: Used with option to enable disk encryption
 #: data/resources/ui/pages/encrypt.blp
 msgid "Encrypt Files"
-msgstr ""
+msgstr "ເຂົ້າລະຫັດໄຟລ໌"
 
 #. Translators: Disk encryption pin confirmation entry field
 #: data/resources/ui/pages/encrypt.blp
 msgid "Encryption PIN"
-msgstr ""
+msgstr "ລະຫັດ PIN ສຳລັບການເຂົ້າລະຫັດ"
 
 #. Translators: Disk encryption pin confirmation entry field
 #: data/resources/ui/pages/encrypt.blp
 msgid "Confirm PIN"
-msgstr ""
+msgstr "ຢືນຢັນ PIN"
 
 #. Translators: Hint for disk encryption
 #: data/resources/ui/pages/encrypt.blp
 msgid ""
 "Memorize this PIN well. Without it you will not be able to access your files."
-msgstr ""
+msgstr "ຈື່ PIN ນີ້ໄວ້ໃຫ້ດີ. ຖ້າບໍ່ມີມັນ ທ່ານຈະບໍ່ສາມາດເຂົ້າເຖິງໄຟລ໌ຂອງທ່ານໄດ້."
 
 #. Translators: Title of installation failure page.
 #: data/resources/ui/pages/failed.blp
 msgid "Error During Installation"
-msgstr ""
+msgstr "ເກີດຂໍ້ຜິດພາດໃນລະຫວ່າງການຕິດຕັ້ງ"
 
 #. Translators: Installation failure description. Brackets will be replaced by the distribution name.
 #: data/resources/ui/pages/failed.blp
@@ -103,62 +104,63 @@ msgid ""
 "Details on the error that occured can be found in the installation logs. "
 "Please report this error to {}."
 msgstr ""
+"ລາຍລະອຽດກ່ຽວກັບຂໍ້ຜິດພາດທີ່ເກີດຂຶ້ນສາມາດເບິ່ງໄດ້ໃນບັນທຶກການຕິດຕັ້ງ. ກະລຸນາລາຍງານຂໍ້ຜິດພາດນີ້ໄປຍັງ {}."
 
 #. Translators: Shown if installation fails.
 #: data/resources/ui/pages/failed.blp
 msgid "Search for Help on the Internet"
-msgstr ""
+msgstr "ຄົ້ນຫາຄວາມຊ່ວຍເຫຼືອໃນອິນເຕີເນັດ"
 
 #: data/resources/ui/pages/filter.blp
 msgid "Filter"
-msgstr ""
+msgstr "ການກັ່ນຕອງ"
 
 #. Translators: Empty result placeholder title
 #: data/resources/ui/pages/filter.blp
 msgid "No Results"
-msgstr ""
+msgstr "ບໍ່ພົບຜົນການຄົ້ນຫາ"
 
 #. Translators: Empty result placeholder, meant as a suggestion
 #: data/resources/ui/pages/filter.blp
 msgid "Try a different search"
-msgstr ""
+msgstr "ລອງຄົ້ນຫາແບບອື່ນ"
 
 #: data/resources/ui/pages/internet.blp
 msgid "No connection detected"
-msgstr ""
+msgstr "ກວດບໍ່ພົບການເຊື່ອມຕໍ່"
 
 #. Translators: On button for opening wifi settings.
 #: data/resources/ui/pages/internet.blp
 msgid "_Open Settings"
-msgstr ""
+msgstr "_ເປີດການຕັ້ງຄ່າ"
 
 #: data/resources/ui/pages/internet.blp
 msgid "Connection detected"
-msgstr ""
+msgstr "ກວດພົບການເຊື່ອມຕໍ່ແລ້ວ"
 
 #. selectable: false;
 #. Translators: Followed by a language name.
 #. Translators: Page title
 #: data/resources/ui/pages/keyboard_layout.blp src/ui/page_wrapper.py
 msgid "Keyboard Language"
-msgstr ""
+msgstr "ພາສາແປ້ນພິມ"
 
 #. Translators: Used as placeholder in a entry field to try out a keyboard layout
 #: data/resources/ui/pages/keyboard_overview.blp
 msgid "Test the Keyboard Layout Here"
-msgstr ""
+msgstr "ທົດລອງການວາງຜັງແປ້ນພິມຢູ່ບ່ອນນີ້"
 
 #. Translators: Presented next to the current Timezone.
 #. Translators: Description of selected timezone.
 #: data/resources/ui/pages/region.blp data/resources/ui/pages/summary.blp
 msgid "Timezone"
-msgstr ""
+msgstr "ເຂດເວລາ"
 
 #. Translators: Presented next to the current Formats.
 #. Translators: Description of selected format.
 #: data/resources/ui/pages/region.blp data/resources/ui/pages/summary.blp
 msgid "Formats"
-msgstr ""
+msgstr "ຮູບແບບ"
 
 #. Translators: Description of what is covered by formats.
 #: data/resources/ui/pages/region.blp
@@ -166,113 +168,114 @@ msgid ""
 "Formats define how dates, times and numbers are presented. They also impact "
 "office program defaults."
 msgstr ""
+"ຮູບແບບກຳນົດວິທີການສະແດງວັນທີ, ເວລາ ແລະ ຕົວເລກ. ມັນຍັງສົ່ງຜົນຕໍ່ຄ່າເລີ່ມຕົ້ນຂອງໂປຣແກຣມຫ້ອງການນຳອີກ."
 
 #. Translators: Description of selected language.
 #: data/resources/ui/pages/summary.blp
 msgid "Language"
-msgstr ""
+msgstr "ພາສາ"
 
 #. Translators: Description of selected keyboard layout.
 #. Translators: Page title
 #: data/resources/ui/pages/summary.blp src/ui/page_wrapper.py
 msgid "Keyboard Layout"
-msgstr ""
+msgstr "ຜັງແປ້ນພິມ"
 
 #. Translators: Description of selected keyboard layout.
 #: data/resources/ui/pages/summary.blp
 msgid "Desktop"
-msgstr ""
+msgstr "ເດັສທັອບ"
 
 #. Translators: Description of defined user account name and autologin status.
 #. Translators: Page title
 #: data/resources/ui/pages/summary.blp src/ui/page_wrapper.py
 msgid "User Account"
-msgstr ""
+msgstr "ບັນຊີຜູ້ໃຊ້"
 
 #. Translators: Gets shown when autologin is enabled.
 #: data/resources/ui/pages/summary.blp
 msgid "(Automatic Login)"
-msgstr ""
+msgstr "(ເຂົ້າສູ່ລະບົບອັດຕະໂນມັດ)"
 
 #. Translators: Description of selected additional software.
 #. Translators: Page title
 #: data/resources/ui/pages/summary.blp src/ui/page_wrapper.py
 msgid "Additional Software"
-msgstr ""
+msgstr "ຊອບແວເພີ່ມເຕີມ"
 
 #. Translators: Description of selected additional features.
 #. Translators: Page title
 #: data/resources/ui/pages/summary.blp src/ui/page_wrapper.py
 msgid "Additional Features"
-msgstr ""
+msgstr "ຄຸນສົມບັດເພີ່ມເຕີມ"
 
 #. Translators: Used with entry field for User's name
 #: data/resources/ui/pages/user.blp
 msgid "_Name"
-msgstr ""
+msgstr "_ຊື່"
 
 #. Translators: Used with entry field for linux username
 #: data/resources/ui/pages/user.blp
 msgid "_Username"
-msgstr ""
+msgstr "_ຊື່ຜູ້ໃຊ້"
 
 #. Translators: Used with option to enable automatic login of user upon booting
 #: data/resources/ui/pages/user.blp
 msgid "Automatic Login"
-msgstr ""
+msgstr "ການເຂົ້າສູ່ລະບົບອັດຕະໂນມັດ"
 
 #. Translators: User password entry field
 #: data/resources/ui/pages/user.blp
 msgid "_Password"
-msgstr ""
+msgstr "_ລະຫັດຜ່ານ"
 
 #. Translators: Used password confirmation entry field
 #: data/resources/ui/pages/user.blp
 msgid "C_onfirm Password"
-msgstr ""
+msgstr "ຢືນ_ຢັນລະຫັດຜ່ານ"
 
 #. Translators: Default welcome text. Squiggly brackets are replaced by distribution name.
 #: data/resources/ui/pages/welcome.blp
 msgid ""
 "This application will guide you through the installation of {} onto your "
 "system."
-msgstr ""
+msgstr "ແອັບພລິເຄຊັນນີ້ຈະແນະນຳທ່ານຜ່ານຂັ້ນຕອນການຕິດຕັ້ງ {} ລົງໃນລະບົບຂອງທ່ານ."
 
 #. Translators: Label to use whole disk rather than a single partition.
 #: data/resources/ui/row/device_choice_row.blp
 msgid "Use Whole Disk"
-msgstr ""
+msgstr "ໃຊ້ດິດທັງໝົດ"
 
 #. Translators: Label for disk with mounted filesystem
 #: data/resources/ui/row/device_mounted_row.blp
 msgid "Has filesystem(s) in use"
-msgstr ""
+msgstr "ມີລະບົບໄຟລ໌ທີ່ກຳລັງໃຊ້ງານຢູ່"
 
 #. Translators: Button to unmount filesystems
 #: data/resources/ui/row/device_mounted_row.blp
 msgid "Unmount"
-msgstr ""
+msgstr "ຖອນການຕິດຕັ້ງ (Unmount)"
 
 # Translators: Label for disk with root filesystem mounted
 #: data/resources/ui/row/device_rootfs_disk_row.blp
 msgid "System disk in use"
-msgstr ""
+msgstr "ດິດລະບົບກຳລັງໃຊ້ງານຢູ່"
 
 #. Translators: Shown for partitions that are not big enough to be installed on.
 #. * "{}" is replaced by a disk size value, e.g. "21.3 GB".
 #: data/resources/ui/row/device_too_small_row.blp
 msgid "Not enough space for installation ({} required)"
-msgstr ""
+msgstr "ພື້ນທີ່ບໍ່ພຽງພໍສຳລັບການຕິດຕັ້ງ (ຕ້ອງການ {})"
 
 #. Translators: Shown if a disk is currently not compatible with the way a system was booted.
 #: data/resources/ui/row/no_efi_partition_row.blp
 msgid "Selecting a partition is not possible."
-msgstr ""
+msgstr "ບໍ່ສາມາດເລືອກພາທິຊັນໄດ້."
 
 #. Translators: Followed by a list of requirements
 #: data/resources/ui/row/no_efi_partition_row.blp
 msgid "The disk requires:"
-msgstr ""
+msgstr "ດິດຕ້ອງການ:"
 
 #. Translators: Bullet point listing.
 #: data/resources/ui/row/no_efi_partition_row.blp
@@ -280,151 +283,154 @@ msgid ""
 "  • GPT partitioning\n"
 "  • EFI partition"
 msgstr ""
+"  • ການແບ່ງພາທິຊັນແບບ GPT\n"
+"  • ພາທິຊັນ EFI"
 
 #. Translators: Bullet point listing.
 #: data/resources/ui/row/no_efi_partition_row.blp
 msgid "  • BIOS boot partition"
-msgstr ""
+msgstr "  • ພາທິຊັນບູດ BIOS"
 
 #. Translators: Notification text
 #. Translators: Page title
 #: src/core/installation_scripting.py src/ui/page_wrapper.py
 msgid "Installation Failed"
-msgstr ""
+msgstr "ການຕິດຕັ້ງຫຼົ້ມເຫຼວ"
 
 #. Translators: Notification text
 #: src/core/installation_scripting.py
 msgid "Finished Installation"
-msgstr ""
+msgstr "ສິ້ນສຸດການຕິດຕັ້ງ"
 
 #. Translators: Fallback name for partitions that don't have a name
 #: src/provider/disk_provider.py
 msgid "Unnamed Partition"
-msgstr ""
+msgstr "ພາທິຊັນທີ່ບໍ່ມີຊື່"
 
 #. Translators: Squiggly brackets are replaced with partition name
 #: src/provider/disk_provider.py
 #, python-brace-format
 msgid "{} (Partition)"
-msgstr ""
+msgstr "{} (ພາທິຊັນ)"
 
 #. Translators: Fallback name for partitions that don't have a name
 #: src/provider/disk_provider.py
 msgid "Unnamed Disk"
-msgstr ""
+msgstr "ດິດທີ່ບໍ່ມີຊື່"
 
 #. Translators: On button.
 #: src/ui/buttons.py
 msgid "_Continue"
-msgstr ""
+msgstr "_ດຳເນີນການຕໍ່"
 
 #. Translators: On button.
 #: src/ui/buttons.py
 msgid "_Confirm"
-msgstr ""
+msgstr "_ຢືນຢັນ"
 
 #. Translators: Hover information on toggle button that shows terminal output.
 #: src/ui/buttons.py
 msgid "Show Terminal Output"
-msgstr ""
+msgstr "ສະແດງຜົນຈາກເທີມິນອລ"
 
 #. Translators: Dialog title
 #: src/ui/confirm_quit_dialog.py
 msgid "Installation Running"
-msgstr ""
+msgstr "ການຕິດຕັ້ງກຳລັງດຳເນີນຢູ່"
 
 #: src/ui/confirm_quit_dialog.py
 msgid ""
 "Stopping a running installation will leave the disk in an undefined state "
 "that might potentially be harmful"
 msgstr ""
+"ການຢຸດການຕິດຕັ້ງທີ່ກຳລັງດຳເນີນຢູ່ຈະເຮັດໃຫ້ດິດຢູ່ໃນສະຖານະທີ່ບໍ່ແນ່ນອນ ເຊິ່ງອາດຈະເປັນອັນຕະລາຍ"
 
 #. Translators: Underscore can not be the same as for 'Stop Installation'.
 #: src/ui/confirm_quit_dialog.py
 msgid "_Continue Installation"
-msgstr ""
+msgstr "_ດຳເນີນການຕິດຕັ້ງຕໍ່"
 
 #. Translators: Underscore can not be the same as for 'Continue Installation'.
 #: src/ui/confirm_quit_dialog.py
 msgid "_Stop Installation"
-msgstr ""
+msgstr "_ຢຸດການຕິດຕັ້ງ"
 
 #. Translators: Page title
 #: src/ui/page_wrapper.py
 msgid "Confirmation"
-msgstr ""
+msgstr "ການຢືນຢັນ"
 
 #. Translators: Page title
 #: src/ui/page_wrapper.py
 msgid "Desktop Selection"
-msgstr ""
+msgstr "ການເລືອກເດັສທັອບ"
 
 #. Translators: Page title
 #: src/ui/page_wrapper.py
 msgid "Disk Selection"
-msgstr ""
+msgstr "ການເລືອກດິດ"
 
 #. Translators: Page title
 #: src/ui/page_wrapper.py
 msgid "Installation Complete"
-msgstr ""
+msgstr "ການຕິດຕັ້ງສຳເລັດແລ້ວ"
 
 #. Translators: Page title
 #: src/ui/page_wrapper.py
 msgid "Disk Encryption"
-msgstr ""
+msgstr "ການເຂົ້າລະຫັດດິດ"
 
 #. Translators: Page title
 #: src/ui/page_wrapper.py
 msgid "Select Region"
-msgstr ""
+msgstr "ເລືອກພາກພື້ນ"
 
 #. Translators: Page title
 #: src/ui/page_wrapper.py
 msgid "Installing"
-msgstr ""
+msgstr "ກຳລັງຕິດຕັ້ງ"
 
 #. Translators: Page title
 #: src/ui/page_wrapper.py
 msgid "Internet Connection Check"
-msgstr ""
+msgstr "ກວດສອບການເຊື່ອມຕໍ່ອິນເຕີເນັດ"
 
 #. Translators: Page title
 #: src/ui/page_wrapper.py
 msgid "Keyboard Layout Selection"
-msgstr ""
+msgstr "ການເລືອກຜັງແປ້ນພິມ"
 
 #. Translators: Page title
 #: src/ui/page_wrapper.py
 msgid "Adapt to Location"
-msgstr ""
+msgstr "ປັບຕາມສະຖານທີ່"
 
 #. Translators: Page title
 #: src/ui/page_wrapper.py
 msgid "Restarting"
-msgstr ""
+msgstr "ກຳລັງເລີ່ມລະບົບໃໝ່"
 
 #. Translators: Page title
 #: src/ui/page_wrapper.py
 msgid "Summary"
-msgstr ""
+msgstr "ສະຫຼຸບ"
 
 #. Translators: Page title
 #: src/ui/page_wrapper.py
 msgid "Select Location"
-msgstr ""
+msgstr "ເລືອກສະຖານທີ່"
 
 #. Translators: Page title
 #: src/ui/page_wrapper.py
 msgid "Welcome"
-msgstr ""
+msgstr "ຍິນດີຕ້ອນຮັບ"
 
 #. Translators: Shown when list of selected software is empty.
 #: src/ui/pages/summary.py
 msgid "None"
-msgstr ""
+msgstr "ບໍ່ມີ"
 
 #. Translators: Description of selected disk.
 #: src/ui/row/device_rows.py
 msgid "Disk"
-msgstr ""
+msgstr "ດິດ"
