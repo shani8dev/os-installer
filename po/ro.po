@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: os-installer\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-10-16 14:26-0400\n"
-"PO-Revision-Date: 2024-10-16 18:27+0000\n"
-"Last-Translator: Prefill add-on <noreply-addon-prefill@weblate.org>\n"
+"PO-Revision-Date: 2026-10-01 14:51+0000\n"
+"Last-Translator: Dragoş-Sebastian Jugănaru <dannipk123@gmail.com>\n"
 "Language-Team: none\n"
 "Language: ro\n"
 "MIME-Version: 1.0\n"
@@ -17,18 +17,17 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < "
 "20)) ? 1 : 2;\n"
-"X-Generator: Weblate 5.8-rc\n"
+"X-Generator: Weblate 2026.10\n"
 
 msgid "OS-Installer"
 msgstr "OS-Installer"
 
 msgid "Install an Operating System"
-msgstr "Instalarea unui sistem de operare"
+msgstr "Instalează un sistem de operare"
 
 #. Translators: Dialog title
-#, fuzzy
 msgid "Installation Running"
-msgstr "Instalarea a eșuat"
+msgstr "Se instalează"
 
 #. Translators: Text in dialog shown if user wants to close app with installation running
 msgid ""
@@ -36,19 +35,19 @@ msgid ""
 "that might potentially be harmful"
 msgstr ""
 "Oprirea unei instalări în curs de execuție va lăsa discul într-o stare "
-"nedefinită care ar putea fi potențial dăunătoare."
+"nedefinită care ar putea fi dăunătoare."
 
 #. Translators: Underscore can not be the same as for 'Stop Installation'.
 msgid "_Continue Installation"
-msgstr "_Continuați instalarea"
+msgstr "_Continuati instalarea"
 
 #. Translators: Underscore can not be the same as for 'Continue Installation'.
 msgid "_Stop Installation"
-msgstr "Opriți instalarea"
+msgstr "_Opriti Instalarea"
 
 #. Translators: On button.
 msgid "_Continue"
-msgstr "_Continuă"
+msgstr "_Continua"
 
 #. Translators: Followed by a disk or partition name
 msgid "This will delete all data on"
@@ -56,12 +55,11 @@ msgstr "Acest lucru va șterge toate datele de pe"
 
 #. Translators: On button.
 msgid "_Confirm"
-msgstr "_Confirmați"
+msgstr "_Confirmati"
 
 #. Translators: On button, brackets will be replaced with desktop name.
-#, fuzzy
 msgid "_Use {}"
-msgstr "_Use {}"
+msgstr "_Foloseste {}"
 
 #. Translators: Button label to open disk management tool.
 msgid "_Manage Disks"
@@ -69,29 +67,27 @@ msgstr "Gestionarea discurilor"
 
 #. Translators: Title of a hint page
 msgid "No Disks avaliable"
-msgstr "Nu sunt discuri disponibile"
+msgstr "Nu sunt disponibile discuri"
 
 #. Translators: Body of a hint page
 msgid "Connect a disk and reload this page."
 msgstr "Conectează un disc și reîncarcă pagina."
 
 #. Translators: On button.
-#, fuzzy
 msgid "_Reload"
-msgstr "_Reload"
+msgstr "_Reincarcare"
 
 #. Translators: Button label to restart system directly after successful installation. Underscore can not be for same letter as 'Restart Later'.
 msgid "_Restart System"
-msgstr "_Repornește sistemul"
+msgstr "_Reporneste sistemul"
 
 #. Translators: Button label to delay restart after successful installation. Underscore can not be for same letter as 'Restart System'.
 msgid "Restart _Later"
-msgstr "Repornește mai _târziu"
+msgstr "Reporneste_mai_tarziu"
 
 #. Translators: Hover information on toggle button that shows terminal output during installation.
-#, fuzzy
 msgid "Show Terminal Output"
-msgstr "Afișează output-ul din terminal"
+msgstr "Afișează rezultatul din terminal"
 
 #. Translators: Used with option to enable disk encryption
 msgid "Encrypt Files"
@@ -102,9 +98,8 @@ msgid "Encryption PIN"
 msgstr "PIN de criptare"
 
 #. Translators: Disk encryption pin confirmation entry field
-#, fuzzy
 msgid "Confirm PIN"
-msgstr "_Confirmați"
+msgstr "Confirmă PIN-ul"
 
 #. Translators: Hint for disk encryption
 msgid ""
@@ -113,7 +108,7 @@ msgstr "Memorează acest PIN. Fără el nu vei putea accesa fișierele."
 
 #. Translators: Shown if installation fails.
 msgid "Search for Help on the Internet"
-msgstr "Caută ajutor pe internet"
+msgstr "Caută ajutor pe Internet"
 
 msgid "Filter"
 msgstr "Filtru"
@@ -124,19 +119,17 @@ msgstr "Niciun rezultat"
 
 #. Translators: Empty result placeholder, meant as a suggestion
 msgid "Try a different search"
-msgstr "Încearcă altă căutare"
+msgstr "Încearcă o altă căutare"
 
-#, fuzzy
 msgid "No connection detected"
-msgstr "Fără conexiune."
+msgstr "Nicio conexiune detectată"
 
 #. Translators: On button for opening wifi settings.
 msgid "_Open Settings"
-msgstr "_Deschide setările"
+msgstr "_Deschide setarile"
 
-#, fuzzy
 msgid "Connection detected"
-msgstr "Connection detected"
+msgstr "Conexiune detectată"
 
 #. selectable: false;
 #. Translators: Followed by a language name.
@@ -155,9 +148,8 @@ msgstr "Fus orar"
 
 #. Translators: Presented next to the current Formats.
 #. Translators: Description of selected format.
-#, fuzzy
 msgid "Formats"
-msgstr "Formate"
+msgstr "Formatează"
 
 #. Translators: Description of what is covered by formats.
 msgid "Defines the default format used for dates, times, numbers, etc."
@@ -192,9 +184,8 @@ msgstr ""
 "  • Partiție EFI"
 
 #. Translators: Bullet point listing.
-#, fuzzy
 msgid "  • BIOS boot partition"
-msgstr "  • partiție BIOS de boot"
+msgstr "  •partiție BIOS de boot"
 
 #. Translators: Title of a hint page
 #, fuzzy
@@ -227,21 +218,18 @@ msgid "User Account"
 msgstr "Cont de utilizator"
 
 #. Translators: Gets shown when autologin is enabled.
-#, fuzzy
 msgid "(Automatic Login)"
-msgstr "Logare automată"
+msgstr "(Logare automată)"
 
 #. Translators: Description of selected additional software.
 #. Translators: Page title
-#, fuzzy
 msgid "Additional Software"
-msgstr "Software în plus"
+msgstr "Software suplimentar"
 
 #. Translators: Shown when list of selected software is empty.
 #. Translators: Shown when list of selected features is empty.
-#, fuzzy
 msgid "None"
-msgstr "Niciunul/a"
+msgstr "N/A"
 
 #. Translators: Description of selected additional software.
 #. Translators: Page title
@@ -253,9 +241,8 @@ msgid "_Name"
 msgstr "_Nume"
 
 #. Translators: Used with entry field for linux username
-#, fuzzy
 msgid "_Username"
-msgstr "User"
+msgstr "_Utilizator"
 
 #. Translators: Used with option to enable automatic login of user upon booting
 #, fuzzy
@@ -264,7 +251,7 @@ msgstr "Logare automată"
 
 #. Translators: User password entry field
 msgid "_Password"
-msgstr "_Parolă"
+msgstr "_Parola"
 
 #. Translators: Used password confirmation entry field
 #, fuzzy
@@ -283,26 +270,24 @@ msgstr "Partiție fără nume"
 
 #. Translators: Shown for partitions that are not big enough to be installed on.
 #. * "{}" is replaced by a disk size value, e.g. "21.3 GB".
-#, fuzzy
 msgid "Not enough space for installation ({} required)"
-msgstr "Spațiu insuficient pentru instalare"
+msgstr "Spațiu insuficient pentru instalare ({} necesari)"
 
 #. Translators: Page title
 msgid "Confirmation"
 msgstr "Confirmare"
 
 #. Translators: Page title
-#, fuzzy
 msgid "Desktop Selection"
-msgstr "Selecția discurilor"
+msgstr "Selectare desktop"
 
 #. Translators: Page title
 msgid "Disk Selection"
-msgstr "Selecția discurilor"
+msgstr "Selectarea discului"
 
 #. Translators: Page title
 msgid "Installation Complete"
-msgstr "Instalare completă."
+msgstr "Instalare completă"
 
 #. Translators: Page title
 msgid "Disk Encryption"
@@ -322,7 +307,7 @@ msgstr "Se instalează"
 
 #. Translators: Page title
 msgid "Internet Connection Check"
-msgstr "Verificare conexiune internet"
+msgstr "Verificarea de conexiune la internet"
 
 #. Translators: Page title
 #, fuzzy
@@ -348,12 +333,11 @@ msgstr "Alege locația"
 
 #. Translators: Page title
 msgid "Welcome"
-msgstr "Bine ai venit!"
+msgstr "Bine ai venit"
 
 #. Translators: Notification text
-#, fuzzy
 msgid "Finished Installation"
-msgstr "_Continuați instalarea"
+msgstr "Instalare finalizată"
 
 #, fuzzy
 #~ msgid "Disk"
