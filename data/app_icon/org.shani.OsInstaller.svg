@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ShaniOS Installer icon. Saturn mark taken from the ShaniOS logo
+     (shani-website/assets/images/logo.svg), cropped to the planet, over
+     the dark adwaita-style plate. -->
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+     width="128" height="128" viewBox="0 0 128 128">
+  <defs>
+    <linearGradient id="plate" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#3a3547"/>
+      <stop offset="0.09" stop-color="#241f31"/>
+      <stop offset="0.91" stop-color="#241f31"/>
+      <stop offset="1" stop-color="#171320"/>
+    </linearGradient>
+id="SvgjsDefs1001"><linearGradient id="SvgjsLinearGradient1011"><stop id="SvgjsStop1012" stop-color="#ef4136" offset="0"></stop><stop id="SvgjsStop1013" stop-color="#fbb040" offset="1"></stop></linearGradient><linearGradient id="SvgjsLinearGradient1014"><stop id="SvgjsStop1015" stop-color="#ef4136" offset="0"></stop><stop id="SvgjsStop1016" stop-color="#fbb040" offset="1"></stop></linearGradient>
+  </defs>
+  <rect x="0" y="0" width="128" height="128" rx="26" ry="26" fill="url(#plate)"/>
+  <svg x="14.00" y="37.18" width="100.00" height="53.63" viewBox="136 136 3000 1609" preserveAspectRatio="xMidYMid meet">
+    <g transform="scale(13.636363636363637) translate(10, 10)"><g id="SvgjsG1007" featureKey="symbolFeature-0" transform="matrix(2.4425918689768698,0,0,2.4425918689768698,-12.134580773740755,-59.162643587563586)" fill="url(#SvgjsLinearGradient1011)"><path xmlns="http://www.w3.org/2000/svg" d="M37.8,69.3c0,0,19.2-5.3,35.8-17.9c-1.1,8.3-6.5,15.9-14.8,19.3C51.8,73.6,44,72.9,37.8,69.3z M53.9,58.9  C29.1,69,7.1,72.4,5.1,67.7c-1.3-3.3,7.1-10,20.6-17.2C24.8,40.2,30.6,30.1,40.6,26c12.3-5,26.4,0.9,31.5,13.2  c0.3,0.6,0.5,1.3,0.7,1.9c5.3-3.2,8.4-5.8,7.8-7.1c-0.5-1.1-2.9-1.2-7.7-0.2c-0.4,0.1-0.7-0.1-1-0.3c0,0,0,0,0,0  c-0.5-0.5-0.2-1.4,0.5-1.6c12.8-3.5,21.3-4,22.5-1C96.8,35.7,78.6,48.7,53.9,58.9z M28.3,59.4c-0.3-0.6-0.6-1.2-0.9-1.9  c-0.7-1.6-1.1-3.3-1.4-5c-5.7,3.3-9,6.1-8.5,7.4C18,61.2,22.1,60.9,28.3,59.4z"></path></g></g>
+  </svg>
+</svg>

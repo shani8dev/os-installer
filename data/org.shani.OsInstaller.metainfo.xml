@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>org.shani.OsInstaller</id>
+
+  <name>ShaniOS Installer</name>
+  <summary>Install ShaniOS on this computer</summary>
+
+  <url type="homepage">https://github.com/shani8dev/os-installer</url>
+  <url type="bugtracker">https://github.com/shani8dev/os-installer/issues</url>
+  <url type="vcs-browser">https://github.com/shani8dev/os-installer</url>
+
+  <developer id="org.shani">
+    <name>ShaniOS</name>
+  </developer>
+
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>GPL-3.0-or-later</project_license>
+
+  <supports>
+    <control>pointing</control>
+    <control>keyboard</control>
+    <control>touch</control>
+  </supports>
+
+  <description>
+    <p>
+      The installer used by ShaniOS live images. It is a fork of GNOME's
+      os-installer and provides the Adwaita interface ShaniOS ships: language,
+      keyboard, disk and encryption selection, user setup, then the distro's
+      own prepare/install/configure scripts.
+    </p>
+    <p>ShaniOS specific behaviour comes from /etc/os-installer and its config.yaml, not from this package.</p>
+  </description>
+
+  <releases>
+    <release version="0.6.0" date="2026-11-14">
+      <url type="details">https://github.com/shani8dev/os-installer/blob/main/NEWS</url>
+      <description>
+        <p>First release of the ShaniOS fork:</p>
+        <ul>
+          <li>Runs install scripts through bash instead of exec'ing them directly</li>
+          <li>Optional root password, with its state shown on the summary page</li>
+          <li>Encryption and root-password rows on the summary page</li>
+          <li>Fix generated usernames never being used</li>
+          <li>Fix a race when reading the fixed language from the config</li>
+          <li>Fix the keyboard language fallback tuple</li>
+          <li>Use the EFI partition device path rather than its name</li>
+        </ul>
+      </description>
+    </release>
+    <release version="0.5.1" date="2025-10-12">
+      <url type="details">https://github.com/shani8dev/os-installer/blob/main/NEWS</url>
+      <description>
+        <p>Last release inherited from upstream os-installer.</p>
+      </description>
+    </release>
+  </releases>
+
+  <content_rating type="oars-1.1" />
+
+  <launchable type="desktop-id">org.shani.OsInstaller.desktop</launchable>
+</component>
