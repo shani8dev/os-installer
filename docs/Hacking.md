@@ -109,10 +109,13 @@ loader turns it back into `"yes"`):
   `/etc/shadow`, which needs the root password to be set (the page says so and
   blocks Continue if it is not). Exported as `OSI_MOK_ENROLL`,
   `OSI_MOK_PASSWORD`, `OSI_MOK_ROOT_PW`.
-* **TPM** offers to let the TPM unlock the encrypted disk. Enrollment itself
-  needs the *booted* installed system (the LUKS mapper and the final PCRs),
-  so the installer only records the choice: `OSI_USE_TPM`. First boot enrolls
-  with `gen-efi.sh enroll-tpm2` (PCR 0+7 with Secure Boot, 0 without).
+* **TPM** offers to let the TPM unlock the encrypted disk. The installer
+  enrolls it during installation, against the target's LUKS mapper, with the
+  same literal PCR policy `gen-efi` uses on a booted system (0+7 with Secure
+  Boot, 0 without); the PIN slot stays as a fallback. Exported as
+  `OSI_USE_TPM`; `configure.sh` does the enrollment (a pcrlock policy is left
+  to `gen-efi.sh enroll-tpm2` after first boot, since it needs the booted
+  initramfs).
 
 `configure.sh` stages MOK in the target chroot; `gen-efi.sh` is the tool for
 the live system (and owns the PCR policy).

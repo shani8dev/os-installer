@@ -15,13 +15,13 @@ template $TpmPage : Box {
          automatically. */
       title: _("Unlock the disk with the TPM");
       /* Translators: Shown under the TPM switch. */
-      subtitle: _("Once enrolled, the disk unlocks without a PIN on this machine. The encryption PIN stays as a fallback.");
+      subtitle: _("The disk unlocks automatically on this machine. The encryption PIN stays as a fallback.");
       notify::active => $switch_row_clicked();
     }
   }
 
   Adw.Banner hint_banner {
-    title: _("The installer prepares the system for this. Finish after the first boot with: sudo gen-efi.sh enroll-tpm2");
+    title: _("The installer enrolls the TPM during installation. If the firmware or Secure Boot state changes later, run: sudo gen-efi.sh enroll-tpm2");
     revealed: true;
   }
 
