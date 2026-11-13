@@ -1,5 +1,6 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
+from copy import deepcopy
 from enum import Enum
 from pathlib import Path
 from threading import Lock
@@ -156,7 +157,11 @@ def _validate(variables):
 
 class Config:
     def __init__(self):
-        self.variables = default_config
+        # A copy, never the module-level dict: init() and _preprocess_values()
+        # mutate values (e.g. min_size is multiplied by 1000^3), so sharing it
+        # would grow it again on every Config()/init(), and a fallback to the
+        # defaults after a broken config would inherit the mutated values.
+        self.variables = deepcopy(default_config)
         self.subscription_lock = Lock()
         self.subscriptions = {}
         self.initialized = False
@@ -168,7 +173,13 @@ class Config:
             traceback.print_stack()
 
     def _load_from_file(self, file):
-        config_from_file = yaml.load(file, Loader=yaml.Loader)
+        # safe_load: the config file is data. The default Loader can build
+        # arbitrary Python objects (!!python/object/apply), i.e. run code, and
+        # /etc/os-installer/config.yaml is writable by anyone who can write to
+        # /etc — no reason for the installer to accept more than YAML values.
+        config_from_file = yaml.safe_load(file)
+        if not isinstance(config_from_file, dict):
+            raise ValueError('Config file must contain a mapping at the top level')
         for config_property in config_from_file:
             if config_property in legacy_values:
                 self._handle_legacy(
@@ -243,6 +254,11 @@ class Config:
         return variable in self.variables
 
     def init(self, config_path, demo_mode, test_mode):
+        # Start from a clean copy every time: init() is called once at startup,
+        # but a second call (tests, a reload) must not inherit the previous
+        # run's values or multiply min_size again.
+        self.variables = deepcopy(default_config)
+
         if demo_mode and test_mode:
             print("Only one of demo and test mode can be set at a time! "
                   "Using demo mode.")
@@ -271,7 +287,7 @@ class Config:
 
         if use_default_error:
             print(f'{use_default_error}. Running in demo mode.')
-            self.variables = default_config
+            self.variables = deepcopy(default_config)
 
             # Test default config to assure it doesn't contain errors
             if self.run_mode == RunMode.test and not _validate(default_config):
