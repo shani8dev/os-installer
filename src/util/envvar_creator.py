@@ -37,7 +37,7 @@ def _get_locale():
 
 
 def _get_username():
-    if config.has('user_username'):
+    if config.get('user')['request_username']:
         return config.get('user_username')
     else:
         # This sticks to common linux username rules:
