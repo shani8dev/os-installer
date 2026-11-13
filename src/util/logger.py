@@ -47,5 +47,10 @@ def install(path=None):
         return None
     sys.stdout = _Tee(sys.stdout, file)
     sys.stderr = _Tee(sys.stderr, file)
+    try:
+        from .config import config
+        config.set('log_path', path)
+    except Exception:
+        pass
     print(f'Logging to {path}')
     return path

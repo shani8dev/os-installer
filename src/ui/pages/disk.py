@@ -52,6 +52,8 @@ class DiskPage(Gtk.Stack):
             # Translators: Option when an existing install is found.
             _("Repair the existing installation"),
             # Translators: Option when an existing install is found.
+            _("Reinstall, keep /data"),
+            # Translators: Option when an existing install is found.
             _("Erase the disk and install"),
         ])
         self.existing_mode.set_model(mode_model)
@@ -150,7 +152,8 @@ class DiskPage(Gtk.Stack):
 
     @Gtk.Template.Callback('existing_continue')
     def _existing_continue(self, _):
-        # 0: repair, 1: erase and install
-        config.set('repair', self.existing_mode.get_selected() == 0)
-        config.set('keep_data', False)
+        # 0: repair, 1: reinstall keeping /data, 2: erase and install
+        mode = self.existing_mode.get_selected()
+        config.set('repair', mode == 0)
+        config.set('keep_data', mode == 1)
         config.set_next_page(self)

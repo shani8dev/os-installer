@@ -23,5 +23,9 @@ class ConfirmPage(Gtk.Box):
             # Translators: Followed by a disk or partition name.
             self.explanation_label.set_label(
                 _("This will repair the installation on"))
+        elif config.get('keep_data'):
+            # Translators: Followed by a disk or partition name.
+            self.explanation_label.set_label(
+                _("This will replace the system and keep /data on"))
 
     ### callbacks ###

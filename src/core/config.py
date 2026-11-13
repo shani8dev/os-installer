@@ -142,6 +142,7 @@ internal_values = {
     'terminal-placeholder': None,
     'display-toast': None,
     'version': -1,
+    'log_path': '',
 }
 
 fallback_values = {

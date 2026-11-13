@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: os-installer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-13 21:20+0000\n"
+"POT-Creation-Date: 2026-11-13 21:22+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -188,6 +188,10 @@ msgstr ""
 msgid ""
 "Details on the error that occurred can be found in the installation logs. "
 "Please report this error to {}."
+msgstr ""
+
+#: data/resources/ui/pages/failed.blp
+msgid "Copy log"
 msgstr ""
 
 #. Translators: Shown if installation fails.

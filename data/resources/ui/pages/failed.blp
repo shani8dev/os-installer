@@ -13,6 +13,25 @@ template $FailedPage : Box {
     child: $TerminalButton {};
   }
 
+  Box log_box {
+    orientation: vertical;
+    spacing: 6;
+
+    Label log_label {
+      selectable: true;
+      wrap: true;
+      xalign: 0;
+      styles ["dimmed"]
+    }
+
+    Button copy_log_button {
+      label: _("Copy log");
+      halign: start;
+      clicked => $copy_log();
+      styles ["pill"]
+    }
+  }
+
   Button {
     action-name: "external.error-search";
     focusable: true;
