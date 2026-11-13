@@ -119,6 +119,8 @@ def create_envs(installation_step: InstallationStep):
             f"OSI_USE_ENCRYPTION={_get('use_encryption')}",
             f"OSI_ENCRYPTION_PIN={_get('encryption_pin')}",
             f"OSI_DISK_ERASE={config.get('disk_erase')}",
+            f"OSI_REPAIR={_get('repair')}",
+            f"OSI_KEEP_DATA={_get('keep_data')}",
             f"OSI_USE_TPM_PIN={_get('use_tpm_pin')}",
             f"OSI_TPM_PIN={_get('tpm_pin')}",
             # Secure Boot: stage MOK enrollment (configure.sh does it in the

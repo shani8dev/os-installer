@@ -119,6 +119,9 @@ internal_values = {
     'use_tpm_pin': False,
     'tpm_pin': '',
     'recovery_key': '',
+    # run modes: repair an existing install, keep @data on reinstall
+    'repair': False,
+    'keep_data': False,
     'hostname_chosen': '',
     'installation_step': '',
     'root_password': '',

@@ -151,6 +151,24 @@ loader turns it back into `"yes"`):
 `configure.sh` stages MOK in the target chroot; `gen-efi.sh` is the tool for
 the live system (and owns the PCR policy).
 
+## Repair mode
+
+`os-installer --repair` (exported as `OSI_REPAIR=1`) does not partition,
+format or extract anything: `install.sh` execs `scripts/repair.sh`, which
+finds the active slot from `@data/current-slot`, runs `configure.sh` on the
+existing system (locale, keymap, hostname, accounts, boot entries, dracut) and
+re-runs `gen-efi configure <slot>` + `enroll-mok` for the boot chain. The
+machine-id and an existing user are kept.
+
+`--keep-data` (`OSI_KEEP_DATA=1`) is the reinstall variant: the value is
+exported for the install script; the subvolume-preserving path is the next
+step (it has to reuse the existing btrfs instead of `mkfs`, so it needs a real
+`iso-install` run to verify).
+
+Both are scripts-only; the GUI side is the flag, and the walk covers the
+normal install. Verify a repair on a real slot before trusting it on a
+machine.
+
 ## Structure
 The app tries to follow the best practices of GNOME/libadwaita apps.
 UI elements are described in Blueprint (.blp) files, which get used as templates by Python classes, that include the functionality.

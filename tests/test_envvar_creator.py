@@ -57,6 +57,8 @@ def clean_config():
         'time_sync': True,
         'copy_network': True,
         'disk_erase': 'quick',
+        'repair': False,
+        'keep_data': True,
         'skip_user': True,
         'skip_region': True,
         'install_policy': deepcopy(default_config['install_policy']),
@@ -149,6 +151,15 @@ def test_secure_boot_and_tpm_are_exported():
     values = envs(InstallationStep.configure)
     assert values['OSI_MOK_ROOT_PW'] == '1'
     assert values['OSI_USE_TPM'] == '1'
+
+
+def test_repair_and_keep_data_are_exported():
+    values = envs(InstallationStep.install)
+    assert values['OSI_REPAIR'] == '0'
+    assert values['OSI_KEEP_DATA'] == '1'
+
+    config.variables['repair'] = True
+    assert envs(InstallationStep.install)['OSI_REPAIR'] == '1'
 
 
 def test_security_envs_are_exported():

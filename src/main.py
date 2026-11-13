@@ -42,6 +42,10 @@ class Application(Adw.Application):
                              GLib.OptionArg.NONE, "Run in demo mode. Does not alter the system", None)
         self.add_main_option('test-mode', b't', GLib.OptionFlags.NONE,
                              GLib.OptionArg.NONE, "Run in testing mode. Does not alter system settings, but runs scripts.", None)
+        self.add_main_option('repair', b'r', GLib.OptionFlags.NONE,
+                             GLib.OptionArg.NONE, "Repair an existing installation instead of installing (no partitioning).", None)
+        self.add_main_option('keep-data', b'k', GLib.OptionFlags.NONE,
+                             GLib.OptionArg.NONE, "Reinstall but keep the existing @data subvolume.", None)
 
     def _setup_icons(self):
         icon_theme = Gtk.IconTheme.get_for_display(self.window.get_display())
@@ -69,6 +73,8 @@ class Application(Adw.Application):
                     options.get('demo-mode', False),
                     options.get('test-mode', False))
         config.set('version', self.version)
+        config.set('repair', options.get('repair', False))
+        config.set('keep-data', options.get('keep-data', False))
         config.subscribe('send_notification', self._send_notification)
 
         self.activate()
