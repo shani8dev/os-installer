@@ -23,6 +23,44 @@ template $SummaryPage : Box {
       page-name: "desktop";
     }
 
+    Adw.ActionRow encryption_row {
+      name: "encryption";
+      activatable: false;
+      visible: false;
+      /* Translators: Description of whether disk encryption is enabled. */
+      title: _("Disk Encryption");
+      styles ["property"]
+
+      Label encryption_status {
+        halign: end;
+        valign: center;
+        hexpand: true;
+        justify: right;
+        wrap: true;
+        xalign: 0;
+        styles ["dimmed"]
+      }
+    }
+
+    Adw.ActionRow root_password_row {
+      name: "root-password";
+      activatable: false;
+      visible: false;
+      /* Translators: Description of whether a root password is set. */
+      title: _("Root Password");
+      styles ["property"]
+
+      Label root_password_status {
+        halign: end;
+        valign: center;
+        hexpand: true;
+        justify: right;
+        wrap: true;
+        xalign: 0;
+        styles ["dimmed"]
+      }
+    }
+
     Adw.ActionRow user_row {
       name: "user";
       activatable: true;
