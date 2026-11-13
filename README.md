@@ -60,6 +60,17 @@ os-installer -d   # demo mode: dummy disks, no scripts
 os-installer -t   # test mode: real scripts, no system settings changed
 ```
 
+Test it without a desktop — unit tests and a full headless walk of every
+page, driven through the accessibility tree (needs Docker):
+
+```
+sh dev/check.sh unit
+sh dev/check.sh a11y
+```
+
+See [docs/Hacking.md](docs/Hacking.md#testing) for what the walk covers and
+how to drive the live installer inside shani-testbed.
+
 On ShaniOS, `os-installer-git` in
 [shani-pkgbuilds](https://github.com/shani8dev/shani-pkgbuilds) builds this
 repo; `os-installer` tracks the newest release tag.
