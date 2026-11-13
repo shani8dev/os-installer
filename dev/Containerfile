@@ -1,0 +1,31 @@
+# Dev/test image for the ShaniOS Installer: the app, its real dependencies, a
+# headless X server and the AT-SPI bus so every page can be walked the way a
+# user walks it.
+#
+#   docker build -t shani-os-installer-dev -f dev/Containerfile dev
+#   sh dev/check.sh            (builds it on first use)
+#
+# Deliberately not a mock: gtk4/libadwaita/vte4/gnome-desktop are the packages
+# the installer links against on the ISO, and the app is installed to /usr by
+# dev/build.sh exactly as the package installs it.
+FROM archlinux:latest
+
+RUN pacman -Syu --noconfirm --needed \
+        meson pkgconf git python-pytest \
+        blueprint-compiler appstream-glib \
+        gtk4 libadwaita gnome-desktop-4 libgweather-4 vte4 \
+        python-gobject python-yaml udisks2 \
+        xorg-server-xvfb xdotool imagemagick \
+        at-spi2-core python-atspi dbus \
+        ttf-dejavu adwaita-icon-theme gnome-themes-extra \
+        gtk-update-icon-cache desktop-file-utils \
+    && pacman -Scc --noconfirm
+
+# Software rendering, X11: the same choice shani-testbed's `app` makes for GTK4
+# (no GPU here, and native-Wayland input injection needs a compositor).
+ENV GDK_BACKEND=x11 \
+    GSK_RENDERER=cairo \
+    LIBGL_ALWAYS_SOFTWARE=1 \
+    NO_AT_BRIDGE=0
+
+WORKDIR /work

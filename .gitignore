@@ -12,3 +12,5 @@ tmp/
 # hidden files and folders, except the GitHub CI configuration
 .*
 !.github/
+# dev/check.sh artifacts (logs, screenshots, installed staging)
+/out/

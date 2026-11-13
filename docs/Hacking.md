@@ -17,6 +17,55 @@ To try the installer, without modifying any system settings, run it in test mode
 Running in GNOME Builder uses the demo mode (`os-installer -d`) and shows test dummy disks.
 Uninstall with `sudo ninja -C build uninstall `
 
+## Testing
+
+Everything below runs in a container; you need Docker and nothing else:
+
+```
+sh dev/check.sh              # unit + the full GUI walk
+sh dev/check.sh unit         # pytest only (fast)
+sh dev/check.sh a11y         # the walk, plus an accessible-name check per page
+sh dev/check.sh --build      # rebuild the image first (after dependency changes)
+```
+
+`dev/check.sh` is the only entry point. Its image (`dev/Containerfile`) is
+Arch Linux with the installer's real dependencies (gtk4, libadwaita, vte4,
+gnome-desktop), a headless X server (`Xvfb`), a private session bus and the
+AT-SPI broker. The app is built with meson and installed to `/usr`, i.e. the
+layout the package ships, and `dev/config/config.yaml` mirrors the live ISO's
+`/etc/os-installer/config.yaml` (fixed English, no user/region pages, no
+desktop list, encryption offered), with the three scripts from
+`os-installer-config` replaced by stubs that only log the `OSI_*` environment.
+
+`dev/a11y.py` drives the app through its accessibility tree — the native-app
+equivalent of a DOM — so pages are found by title and controls by role and
+name, not by coordinates. It walks Welcome → Keyboard → Disk → Encryption →
+Confirmation → Summary → Installing → Done → Restart Later, screenshots each
+page into `out/shots/`, and asserts what the scripts received (device path,
+encryption on, PIN, locale, username). A failure prints the tree at that
+point.
+
+The suites:
+
+| suite | what it proves |
+|---|---|
+| `unit` | config defaults are not mutated by loading, the YAML loader cannot execute code, validation falls back to demo mode, the `OSI_*` contract, the device model does not share mutable state |
+| `ui` | the pages above actually appear and advance in the ISO's configuration |
+| `a11y` | additionally, every on-screen control has an accessible name |
+
+The live environment — the real `os-installer-config`, real udisks disks, a
+real system bus — is shani-testbed's `app` command; see its README. Use it for
+the parts this harness cannot honestly fake (real disk enumeration, the
+distro's own scripts):
+
+```
+cd ../shani-install-media
+./run_in_container.sh build.sh test app blue --local-pkg=<pkg.tar.zst> \
+    --run="os-installer -d" --wait-window='ShaniOS Installer:120' \
+    --a11y-lint --screenshot=@out/welcome.png \
+    --click-element='button:^Continue$' --wait-element='label:^Keyboard Layout$'
+```
+
 ## Structure
 The app tries to follow the best practices of GNOME/libadwaita apps.
 UI elements are described in Blueprint (.blp) files, which get used as templates by Python classes, that include the functionality.

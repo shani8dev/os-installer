@@ -1,0 +1,61 @@
+%YAML 1.2
+---
+# The live ISO's /etc/os-installer/config.yaml, reduced to the choices that
+# change which pages exist, so the dev harness walks the same flow a real
+# ShaniOS image does. Keep the page-affecting keys here in sync with
+# os-installer-config's config.yaml:
+#
+#   fixed_language: en_US      -> no language page
+#   skip_region/skip_user: yes -> no region/user pages (gnome-initial-setup
+#                                 on first boot handles them)
+#   no desktop list            -> no desktop page (one ISO per edition)
+#   disk.partition_ok: no      -> whole disks only
+#   disk_encryption.offered    -> the encrypt page exists
+#   user.min_password_length   -> also governs the root password field
+#
+# The scripts are dev stubs: they log the OSI_* environment and never touch a
+# disk, so the walk can go all the way through the install page safely.
+distribution_name: 'Shani OS'
+
+scripts:
+  prepare: scripts/prepare.sh
+  install: scripts/install.sh
+  configure: scripts/configure.sh
+
+internet:
+  connection_required: no
+  checker_url: 'http://nmcheck.gnome.org/check_network_status.txt'
+
+fixed_language: en_US
+
+welcome_page:
+  logo: null
+  text: |
+    Welcome to Shani OS!
+
+    An Immutable OS for Ultimate Reliability
+
+    This installer will guide you through a quick and secure setup.
+  usage: yes
+
+disk:
+  partition_ok: no
+  # 1 GB: the demo-mode dummy disk is 10 KB and must stay rejected, the
+  # 100 GB one must stay selectable, without depending on the ISO's 28 GiB.
+  min_size: 1
+
+disk_encryption:
+  offered: yes
+  forced: no
+  generated: no
+  min_length: 4
+  confirmation: yes
+
+skip_region: yes
+skip_user: yes
+
+user:
+  min_password_length: 4
+  request_username: no
+  provide_autologin: no
+  password_confirmation: no

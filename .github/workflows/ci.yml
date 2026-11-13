@@ -31,13 +31,16 @@ jobs:
           pacman -Syu --noconfirm --needed \
             meson blueprint-compiler appstream-glib \
             gtk4 libadwaita gnome-desktop-4 libgweather-4 vte4 \
-            python-gobject python-yaml udisks2
+            python-gobject python-yaml udisks2 python-pytest
 
       - name: Configure
         run: meson setup build
 
       - name: Compile Blueprint UI and GResource
         run: ninja -C build
+
+      - name: Unit tests
+        run: python3 -m pytest tests -q
 
       # Runs the desktop-file, appstream and GSettings schema validators that
       # data/meson.build registers.
