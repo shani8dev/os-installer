@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: os-installer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-13 21:00+0000\n"
+"POT-Creation-Date: 2026-11-13 21:04+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -120,6 +120,21 @@ msgstr ""
 #. Translators: Button label to delay restart after successful installation. Underscore can not be for same letter as 'Restart System'.
 #: data/resources/ui/pages/done.blp
 msgid "Restart _Later"
+msgstr ""
+
+#. Translators: Heading above the LUKS recovery key.
+#: data/resources/ui/pages/done.blp
+msgid "Recovery key"
+msgstr ""
+
+#: data/resources/ui/pages/done.blp
+msgid ""
+"Write this down and keep it somewhere safe. It is the only way in if the PIN "
+"is lost."
+msgstr ""
+
+#: data/resources/ui/pages/done.blp
+msgid "Copy"
 msgstr ""
 
 #. Translators: Used with option to enable disk encryption
@@ -339,6 +354,21 @@ msgstr ""
 msgid ""
 "The disk unlocks automatically on this machine. The encryption PIN stays as "
 "a fallback."
+msgstr ""
+
+#. Translators: Ask for a PIN in addition to the TPM.
+#: data/resources/ui/pages/tpm.blp
+msgid "Require a PIN at boot"
+msgstr ""
+
+#. Translators: Shown under the TPM PIN switch.
+#: data/resources/ui/pages/tpm.blp
+msgid "A second factor: the TPM alone does not unlock the disk."
+msgstr ""
+
+#. Translators: TPM PIN entry field.
+#: data/resources/ui/pages/tpm.blp
+msgid "TPM PIN"
 msgstr ""
 
 #: data/resources/ui/pages/tpm.blp

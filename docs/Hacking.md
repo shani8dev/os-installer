@@ -98,9 +98,10 @@ terminal the user had to open. An empty list disables the check.
 
 ## Hostname, groups, log, power
 
-* `hostname` — `null` (default) asks on a page, a string fixes it and hides
-  the page. Exported as `OSI_HOSTNAME` (configure.sh used to use the distro
-  name).
+* `hostname` — `null` asks on a page, a string fixes it and hides the page.
+  ShaniOS keeps the distro name and leaves the account, region and hostname
+  to the first-run setup (gnome-initial-setup, plasma-setup, shani-shell's
+  niri setup). Exported as `OSI_HOSTNAME`.
 * `user.groups` — extra groups for the account (default `wheel`), exported as
   `OSI_USER_GROUPS` and added on top of the image's canonical list.
 * Every install writes one log: the app's output and each script's output are
@@ -111,6 +112,20 @@ terminal the user had to open. An empty list disables the check.
 * The disk page states the configured minimum size; the user page and the
   root password show a strength hint (a small heuristic for now — see
   `src/util/password_strength.py`).
+
+## Recovery key, TPM PIN, erase, time, network
+
+* `disk_encryption.recovery_key` (default on): the installer generates a
+  base32 key, configure.sh adds it as a LUKS keyslot with the PIN as the
+  existing passphrase, and the done page shows it once (copy button, stored
+  nowhere but `/run`, which a reboot clears). A failed add is a warning, not
+  a failed install.
+* The TPM page can require a PIN (`--tpm2-with-pin=yes`, `NEWPIN`), a second
+  factor on top of the TPM.
+* `disk_erase: quick|secure` — secure runs `blkdiscard` before partitioning.
+* `time_sync` (default on) enables `systemd-timesyncd` in the target.
+* `copy_network` (default on) copies the live session's NetworkManager
+  connections to the installed system.
 
 ## Secure Boot and TPM
 

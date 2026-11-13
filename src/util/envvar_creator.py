@@ -118,6 +118,9 @@ def create_envs(installation_step: InstallationStep):
             f"OSI_DEVICE_EFI_PARTITION={_get('disk_efi_partition')}",
             f"OSI_USE_ENCRYPTION={_get('use_encryption')}",
             f"OSI_ENCRYPTION_PIN={_get('encryption_pin')}",
+            f"OSI_DISK_ERASE={config.get('disk_erase')}",
+            f"OSI_USE_TPM_PIN={_get('use_tpm_pin')}",
+            f"OSI_TPM_PIN={_get('tpm_pin')}",
             # Secure Boot: stage MOK enrollment (configure.sh does it in the
             # target chroot, where /etc/shadow is the installed one).
             f"OSI_MOK_ENROLL={_get('mok_enroll')}",
@@ -137,6 +140,9 @@ def create_envs(installation_step: InstallationStep):
             f"OSI_USER_PASSWORD={_get('user_password')}",
             f"OSI_ROOT_PASSWORD={_get('root_password')}",
             f"OSI_HOSTNAME={_get_hostname()}",
+            f"OSI_RECOVERY_KEY={config.get('recovery_key')}",
+            f"OSI_TIME_SYNC={_get('time_sync')}",
+            f"OSI_COPY_NETWORK={_get('copy_network')}",
             f"OSI_FORMATS={_get('formats')}",
             f"OSI_TIMEZONE={_get('timezone')}",
             f"OSI_ADDITIONAL_SOFTWARE={_parse_choices('software_choices')}",

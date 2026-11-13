@@ -24,6 +24,26 @@ template $TpmPage : Box {
       subtitle: _("The disk unlocks automatically on this machine. The encryption PIN stays as a fallback.");
       notify::active => $switch_row_clicked();
     }
+
+    Adw.SwitchRow pin_switch_row {
+      activatable: true;
+      /* Translators: Ask for a PIN in addition to the TPM. */
+      title: _("Require a PIN at boot");
+      /* Translators: Shown under the TPM PIN switch. */
+      subtitle: _("A second factor: the TPM alone does not unlock the disk.");
+      notify::active => $pin_switch_clicked();
+    }
+
+    Adw.PasswordEntryRow tpm_pin_row {
+      activates-default: true;
+      use-underline: true;
+      width-chars: 10;
+      max-width-chars: 32;
+      visible: false;
+      /* Translators: TPM PIN entry field. */
+      title: _("TPM PIN");
+      changed => $pin_changed();
+    }
   }
 
   Adw.Banner hint_banner {

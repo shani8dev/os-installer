@@ -51,6 +51,12 @@ def clean_config():
                  'groups': ['wheel']},
         'hostname': None,
         'hostname_chosen': 'shanihost',
+        'recovery_key': 'AAAA-BBBB-CCCC-DDDD-EEEE-FFFF-2222-3333',
+        'use_tpm_pin': False,
+        'tpm_pin': '',
+        'time_sync': True,
+        'copy_network': True,
+        'disk_erase': 'quick',
         'skip_user': True,
         'skip_region': True,
         'install_policy': deepcopy(default_config['install_policy']),
@@ -143,6 +149,22 @@ def test_secure_boot_and_tpm_are_exported():
     values = envs(InstallationStep.configure)
     assert values['OSI_MOK_ROOT_PW'] == '1'
     assert values['OSI_USE_TPM'] == '1'
+
+
+def test_security_envs_are_exported():
+    values = envs(InstallationStep.configure)
+    assert values['OSI_RECOVERY_KEY'] == 'AAAA-BBBB-CCCC-DDDD-EEEE-FFFF-2222-3333'
+    assert values['OSI_TIME_SYNC'] == '1'
+    assert values['OSI_COPY_NETWORK'] == '1'
+    assert values['OSI_USE_TPM_PIN'] == '0'
+    assert values['OSI_TPM_PIN'] == ''
+    assert envs(InstallationStep.install)['OSI_DISK_ERASE'] == 'quick'
+
+    config.variables['use_tpm_pin'] = True
+    config.variables['tpm_pin'] = '4321'
+    values = envs(InstallationStep.configure)
+    assert values['OSI_USE_TPM_PIN'] == '1'
+    assert values['OSI_TPM_PIN'] == '4321'
 
 
 def test_hostname_and_groups_are_exported():

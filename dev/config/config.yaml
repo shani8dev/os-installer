@@ -28,6 +28,11 @@ internet:
 
 fixed_language: en_US
 
+# The account, region and hostname are handled by the first-run setup
+# (gnome-initial-setup / plasma-setup / shani-shell's niri setup); this is
+# only null so the harness walks the installer's own hostname page.
+hostname: null
+
 welcome_page:
   logo: null
   text: |

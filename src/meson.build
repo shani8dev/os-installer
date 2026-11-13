@@ -77,6 +77,7 @@ os_installer_sources = [
   'util/firmware.py',
   'util/logger.py',
   'util/password_strength.py',
+  'util/recovery_key.py',
   'util/power.py',
   'util/preloadable.py',
   'util/translations.py',

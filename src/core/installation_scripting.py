@@ -11,6 +11,7 @@ from .config import config
 from .envvar_creator import create_envs
 from .installation_step import InstallationStep
 from .logger import LOG_PATH
+from .recovery_key import generate as generate_recovery_key
 from .terminal_provider import terminal_provider
 
 
@@ -97,6 +98,14 @@ class InstallationScripting():
 
             # The script's output goes to the terminal and to the log file, so
             # a failed install can be reported without the in-app terminal.
+            if next_step is InstallationStep.configure:
+                # The recovery key has to exist before the configure script
+                # adds it to the LUKS header; shown once, on the done page.
+                if (not config.get('recovery_key') and
+                        config.get('disk_encryption')['recovery_key'] and
+                        config.get('use_encryption')):
+                    config.set('recovery_key', generate_recovery_key())
+
             envs = create_envs(next_step)
             envs.insert(len(envs) - 1, f'OSI_SCRIPT={script_path}')
             envs.insert(len(envs) - 1, f'OSI_LOG={LOG_PATH}')

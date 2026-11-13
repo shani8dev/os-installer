@@ -1,4 +1,5 @@
 using Gtk 4.0;
+using Adw 1;
 
 template $DonePage : Box {
   orientation: vertical;
@@ -28,7 +29,39 @@ template $DonePage : Box {
       receives-default: true;
       action-name: "win.quit";
       use-underline: true;
+      styles ["pill"]
+    }
+  }
 
+  Box recovery_key_box {
+    orientation: vertical;
+    spacing: 6;
+    visible: false;
+
+    Label {
+      /* Translators: Heading above the LUKS recovery key. */
+      label: _("Recovery key");
+      styles ["heading"]
+    }
+
+    Label recovery_key_label {
+      selectable: true;
+      wrap: true;
+      xalign: 0;
+      styles ["monospace", "card"]
+    }
+
+    Label {
+      label: _("Write this down and keep it somewhere safe. It is the only way in if the PIN is lost.");
+      wrap: true;
+      xalign: 0;
+      styles ["dimmed"]
+    }
+
+    Button copy_button {
+      label: _("Copy");
+      halign: start;
+      clicked => $copy_recovery_key();
       styles ["pill"]
     }
   }

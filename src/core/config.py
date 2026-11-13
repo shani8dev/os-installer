@@ -29,7 +29,14 @@ default_config = {
     'welcome_page': {'usage': True, 'logo': None, 'text': None},
     # disk
     'disk': {'partition_ok': False, 'min_size': 5},
-    'disk_encryption': {'offered': True, 'forced': False, 'generated': False, 'min_length': 1, 'confirmation': False},
+    'disk_encryption': {'offered': True, 'forced': False, 'generated': False, 'min_length': 1, 'confirmation': False, 'recovery_key': True},
+    # wipe the target before partitioning: quick (default) or secure (blkdiscard
+    # + a LUKS header overwrite)
+    'disk_erase': 'quick',
+    # keep the clock in sync in the installed system
+    'time_sync': True,
+    # copy the live session's NetworkManager connections to the target
+    'copy_network': True,
     # secure boot: offer the MOK enrollment page. "auto" = only on UEFI
     # (where the firmware can actually prompt for it), "yes"/"no" force it.
     'secure_boot': {'offered': 'auto', 'mok_password_min_length': 1},
@@ -43,8 +50,10 @@ default_config = {
     # optional pages
     'skip_region': False,
     'skip_user': False,
-    # hostname: null asks on a page, a string fixes it (page hidden)
-    'hostname': None,
+    # hostname: null asks on a page, a string fixes it (page hidden).
+    # ShaniOS leaves this to the first-run setup (gnome-initial-setup,
+    # plasma-setup, shani-shell's niri setup) and keeps the distro name.
+    'hostname': 'shanios',
     # warn if the install starts on battery
     'power_warning': True,
     # installation policy: the distro-specific values the install scripts
@@ -107,6 +116,9 @@ internal_values = {
     'mok_password': 'shanios',
     'mok_root_pw': False,
     'use_tpm': False,
+    'use_tpm_pin': False,
+    'tpm_pin': '',
+    'recovery_key': '',
     'hostname_chosen': '',
     'installation_step': '',
     'root_password': '',
@@ -185,6 +197,11 @@ def _validate(variables):
         _match(variables['disk_encryption'], 'generated', bool) and
         _match(variables['disk_encryption'], 'min_length', int) and
         _match(variables['disk_encryption'], 'confirmation', bool) and
+        _match(variables['disk_encryption'], 'recovery_key', bool) and
+        _match(variables, 'disk_erase', str) and
+        variables['disk_erase'] in ('quick', 'secure') and
+        _match(variables, 'time_sync', bool) and
+        _match(variables, 'copy_network', bool) and
         _match(variables, 'secure_boot', dict) and
         _match(variables['secure_boot'], 'offered', str) and
         _match(variables['secure_boot'], 'mok_password_min_length', int) and
