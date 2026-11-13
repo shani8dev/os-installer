@@ -14,3 +14,6 @@ tmp/
 !.github/
 # dev/check.sh artifacts (logs, screenshots, installed staging)
 /out/
+
+# python bytecode
+__pycache__/

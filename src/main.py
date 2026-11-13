@@ -94,5 +94,8 @@ class Application(Adw.Application):
 
 
 def main(version):
+    from .logger import install as install_logger
+    install_logger()
+
     app = Application(version)
     return app.run(sys.argv)

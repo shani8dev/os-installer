@@ -49,6 +49,7 @@ os_installer_sources = [
   'ui/pages/done.py',
   'ui/pages/encrypt.py',
   'ui/pages/failed.py',
+  'ui/pages/hostname.py',
   'ui/pages/filter.py',
   'ui/pages/install.py',
   'ui/pages/internet.py',
@@ -73,6 +74,9 @@ os_installer_sources = [
   'util/filterable_object.py',
   'util/functions.py',
   'util/installation_step.py',
+  'util/logger.py',
+  'util/password_strength.py',
+  'util/power.py',
   'util/preloadable.py',
   'util/translations.py',
 ]

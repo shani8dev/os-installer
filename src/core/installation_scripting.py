@@ -10,6 +10,7 @@ from gi.repository import Gio, GLib, Vte
 from .config import config
 from .envvar_creator import create_envs
 from .installation_step import InstallationStep
+from .logger import LOG_PATH
 from .terminal_provider import terminal_provider
 
 
@@ -62,6 +63,7 @@ class InstallationScripting():
 
         if self.finished_step is InstallationStep.configure:
             config.set('installation_running', False)
+            config.set('installation_step', '')
             # Translators: Notification text
             config.set('send_notification', _("Finished Installation"))
             GLib.idle_add(config.set_next_page, None)
@@ -72,8 +74,6 @@ class InstallationScripting():
         next_step = InstallationStep(self.finished_step.value + 1)
         if next_step != InstallationStep.prepare:
             config.set('installation_running', True)
-
-        envs = create_envs(next_step)
 
         # start script
         file_name = config.get('scripts')[next_step.name]
@@ -93,12 +93,22 @@ class InstallationScripting():
                 script_path = f"./{script_path}"
 
             print(f"Executing script: {script_path}")
+            config.set('installation_step', next_step.name)
+
+            # The script's output goes to the terminal and to the log file, so
+            # a failed install can be reported without the in-app terminal.
+            envs = create_envs(next_step)
+            envs.insert(len(envs) - 1, f'OSI_SCRIPT={script_path}')
+            envs.insert(len(envs) - 1, f'OSI_LOG={LOG_PATH}')
 
             pty = Vte.Pty.new_sync(Vte.PtyFlags.NO_CTTY, self.cancel)
-            # Run script through bash
+            # Run script through bash, tee'd into the log; pipefail keeps the
+            # script's exit status instead of tee's.
             pty.spawn_async(
                 '/',
-                ['/bin/bash', script_path],
+                ['/bin/bash', '-c',
+                 'set -o pipefail; /bin/bash "$OSI_SCRIPT" 2>&1 | tee -a "$OSI_LOG"',
+                 'os-installer'],
                 envs,
                 GLib.SpawnFlags.DEFAULT,
                 None,

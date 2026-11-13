@@ -133,11 +133,20 @@ def create_envs(installation_step: InstallationStep):
             f"OSI_USER_NAME={_get('user_name')}",
             f"OSI_USER_USERNAME={_get_username()}",
             f"OSI_USER_AUTOLOGIN={_get('user_autologin')}",
+            f"OSI_USER_GROUPS={' '.join(config.get('user').get('groups') or [])}",
             f"OSI_USER_PASSWORD={_get('user_password')}",
             f"OSI_ROOT_PASSWORD={_get('root_password')}",
+            f"OSI_HOSTNAME={_get_hostname()}",
             f"OSI_FORMATS={_get('formats')}",
             f"OSI_TIMEZONE={_get('timezone')}",
             f"OSI_ADDITIONAL_SOFTWARE={_parse_choices('software_choices')}",
             f"OSI_ADDITIONAL_FEATURES={_parse_choices('feature_choices')}",
         ]
     return envs + [None]
+
+
+def _get_hostname():
+    """A fixed hostname from the config, else the one typed on the page."""
+    if hostname := config.get('hostname'):
+        return hostname
+    return config.get('hostname_chosen') or 'shanios'

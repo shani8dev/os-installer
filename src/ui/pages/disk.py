@@ -18,6 +18,7 @@ class DiskPage(Gtk.Stack):
     __gtype_name__ = __qualname__
 
     disk_list = Gtk.Template.Child()
+    min_size_label = Gtk.Template.Child()
     disks_button = Gtk.Template.Child()
     no_disks_page = Gtk.Template.Child()
     reload_button = Gtk.Template.Child()
@@ -33,6 +34,11 @@ class DiskPage(Gtk.Stack):
         disk_conf = config.get('disk')
         self.minimum_disk_size = disk_conf['min_size']
         self.partition_ok = disk_conf['partition_ok']
+
+        self.min_size_label.set_label(
+            # Translators: Followed by a size in GB.
+            _("Requires at least {} GB free.").format(
+                f'{self.minimum_disk_size / 1000000000:.0f}'))
 
         # models
         self.disk_list.bind_model(

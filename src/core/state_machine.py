@@ -23,6 +23,7 @@ page_order = [
     'confirm',
     # configuration
     'user',
+    'hostname',
     'region',
     'software',
     'feature',
@@ -55,6 +56,7 @@ class StateMachine:
                 'desktop': config.get('desktop'),
                 'confirm': config.get('scripts')['install'],
                 'user': not config.get('skip_user'),
+                'hostname': not config.get('hostname'),
                 'region': not config.get('skip_region'),
                 'software': config.get('additional_software'),
                 'feature': config.get('additional_features'),

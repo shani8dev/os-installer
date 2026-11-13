@@ -39,6 +39,15 @@ template $KeyboardOverviewPage : Box {
       }
     }
 
+    Label passphrase_hint {
+      wrap: true;
+      xalign: 0;
+      styles ["dimmed"]
+      /* Translators: Shown on the keyboard page: the disk passphrase is typed
+         at boot with the console keymap that comes from this layout. */
+      label: _("The disk passphrase at boot is typed with this layout. Pick the one the keyboard actually has.");
+    }
+
     $ContinueButton {
       action-name: "win.advance";
       receives-default: true;

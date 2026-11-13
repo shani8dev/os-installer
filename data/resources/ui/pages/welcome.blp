@@ -5,6 +5,11 @@ template $WelcomePage : Box {
   orientation: vertical;
   spacing: 12;
 
+  Adw.Banner power_banner {
+    title: _("This computer is running on battery. Keep it plugged in during installation.");
+    revealed: false;
+  }
+
   Adw.Clamp {
     maximum-size: 280;
 

@@ -23,18 +23,22 @@ class SecureBootPage(Gtk.Box):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
+        self._ready = False
+
         translate_widgets(self.switch_row, self.root_pw_row, self.password_row,
                           self.confirm_row)
 
         self.min_length = config.get('secure_boot')['mok_password_min_length']
 
-        self.active = config.get('mok_enroll')
-        self.switch_row.set_active(self.active)
-
         # mokutil --root-pw takes the password hash from /etc/shadow: there
         # must be a root password for it to use.
         self.has_root_password = bool(config.get('root_password'))
         self.use_root_pw = config.get('mok_root_pw') and self.has_root_password
+
+        # Set before the switches: set_active() emits notify::active, which
+        # reads both of these.
+        self.active = config.get('mok_enroll')
+        self.switch_row.set_active(self.active)
         self.root_pw_row.set_active(self.use_root_pw)
 
         password = config.get('mok_password')
@@ -45,6 +49,7 @@ class SecureBootPage(Gtk.Box):
         self.password_row.set_text(password)
         self.confirm_row.set_text(password)
 
+        self._ready = True
         self._adjust()
 
     ### callbacks ###
@@ -82,7 +87,11 @@ class SecureBootPage(Gtk.Box):
         self._continue(None)
 
     def _adjust(self):
-        using_root_pw = self.active and self.use_root_pw
+        # Called from the switches' notify::active while the template is still
+        # being built, before the entries exist.
+        if not getattr(self, '_ready', False):
+            return
+        using_root_pw = self.active and getattr(self, 'use_root_pw', False)
         self.password_row.set_sensitive(self.active and not self.use_root_pw)
         self.confirm_row.set_sensitive(self.active and not self.use_root_pw)
         self.password_row.set_visible(not self.use_root_pw)

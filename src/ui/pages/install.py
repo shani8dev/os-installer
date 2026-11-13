@@ -15,9 +15,21 @@ class InstallPage(Gtk.Box):
 
     stack = Gtk.Template.Child()
     carousel = Gtk.Template.Child()
+    step_label = Gtk.Template.Child()
+
+    step_names = {
+        'prepare': _("Preparing the system…"),
+        'install': _("Installing…"),
+        'configure': _("Configuring the system…"),
+    }
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
+
+        config.subscribe('installation_step', self._update_step)
+
+    def _update_step(self, step):
+        self.step_label.set_label(self.step_names.get(step, ''))
 
         if self._setup_slideshow():
             self.stack.set_visible_child_name('slideshow')

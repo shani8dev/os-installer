@@ -14,6 +14,7 @@ from .done import DonePage
 from .encrypt import EncryptPage
 from .failed import FailedPage
 from .filter import FormatPage, TimezonePage
+from .hostname import HostnamePage
 from .install import InstallPage
 from .internet import InternetPage
 from .keyboard import KeyboardLanguagePage, KeyboardLayoutPage, KeyboardOverviewPage
@@ -39,6 +40,8 @@ page_name_to_page_title = {
     'encrypt':              _("Disk Encryption"),
     # Translators: Page title
     'failed':               _("Installation Failed"),
+    # Translators: Page title
+    'hostname':             _("Hostname"),
     # Translators: Page title
     'feature':              _("Additional Features"),
     # Translators: Page title
@@ -82,6 +85,7 @@ page_name_to_image = {
     'done':                 'success-symbolic',
     'encrypt':              'dialog-password-symbolic',
     'failed':               'computer-fail-symbolic',
+    'hostname':             'network-workgroup-symbolic',
     'feature':              'puzzle-piece-symbolic',
     'format':               'map-symbolic',
     'install':              'install-symbolic',
@@ -111,6 +115,7 @@ page_name_to_type = {
     'done':                 DonePage,
     'encrypt':              EncryptPage,
     'failed':               FailedPage,
+    'hostname':             HostnamePage,
     'feature':              FeaturePage,
     'format':               FormatPage,
     'install':              InstallPage,

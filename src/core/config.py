@@ -39,10 +39,14 @@ default_config = {
     # desktop
     'desktop': [],
     # user
-    'user': {'min_password_length': 1, 'request_username': False, 'provide_autologin': False, 'password_confirmation': False},
+    'user': {'min_password_length': 1, 'request_username': False, 'provide_autologin': False, 'password_confirmation': False, 'groups': ['wheel']},
     # optional pages
     'skip_region': False,
     'skip_user': False,
+    # hostname: null asks on a page, a string fixes it (page hidden)
+    'hostname': None,
+    # warn if the install starts on battery
+    'power_warning': True,
     # installation policy: the distro-specific values the install scripts
     # used to hardcode. The installer validates them, exports them as OSI_*
     # and owns the decisions it can make itself (e.g. who may install).
@@ -103,6 +107,8 @@ internal_values = {
     'mok_password': 'shanios',
     'mok_root_pw': False,
     'use_tpm': False,
+    'hostname_chosen': '',
+    'installation_step': '',
     'root_password': '',
     'desktop_chosen': ('', ''),
     'user_name': '',
@@ -190,6 +196,10 @@ def _validate(variables):
         _match(variables['user'], 'request_username', bool) and
         _match(variables['user'], 'provide_autologin', bool) and
         _match(variables['user'], 'password_confirmation', bool) and
+        _match(variables['user'], 'groups', list) and
+        all(isinstance(group, str) for group in variables['user']['groups']) and
+        _match(variables, 'hostname', str, type(None)) and
+        _match(variables, 'power_warning', bool) and
         _match(variables, 'additional_software', list) and
         _match(variables, 'additional_features', list) and
         _match(variables, 'install_slideshow', list) and

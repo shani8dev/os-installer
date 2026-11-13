@@ -96,6 +96,22 @@ makes itself: root may always install, and a user in one of the groups may.
 Without it the first script used to exit 1 and print the reason into a
 terminal the user had to open. An empty list disables the check.
 
+## Hostname, groups, log, power
+
+* `hostname` — `null` (default) asks on a page, a string fixes it and hides
+  the page. Exported as `OSI_HOSTNAME` (configure.sh used to use the distro
+  name).
+* `user.groups` — extra groups for the account (default `wheel`), exported as
+  `OSI_USER_GROUPS` and added on top of the image's canonical list.
+* Every install writes one log: the app's output and each script's output are
+  teed into `/tmp/os-installer-<uid>.log` (the terminal still shows them), so
+  a failed install can be reported.
+* `power_warning` — a banner on the welcome page when the machine is on
+  battery.
+* The disk page states the configured minimum size; the user page and the
+  root password show a strength hint (a small heuristic for now — see
+  `src/util/password_strength.py`).
+
 ## Secure Boot and TPM
 
 Two optional pages, both config-driven (`secure_boot.offered`, `tpm.offered`:

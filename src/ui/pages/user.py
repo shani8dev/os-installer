@@ -7,6 +7,7 @@ from gi.repository import Gtk
 from .buttons import ContinueButton
 from .config import config
 from .entry_error_enhancer import EntryErrorEnhancer
+from .password_strength import label as password_strength_label
 from .translations import translate_widgets
 
 
@@ -18,6 +19,7 @@ class UserPage(Gtk.Box):
     username_row = Gtk.Template.Child()
     autologin_row = Gtk.Template.Child()
     password_row = Gtk.Template.Child()
+    strength_label = Gtk.Template.Child()
     password_confirm_row = Gtk.Template.Child()
     continue_button = Gtk.Template.Child()
 
@@ -103,7 +105,14 @@ class UserPage(Gtk.Box):
         password = editable.get_text()
         if self.password.update_row(password):
             config.set('user_password', password)
+        self._update_strength(password)
         self._password_confirm_changed(self.password_confirm_row)
+
+    def _update_strength(self, password):
+        # Translators: Followed by the strength (Weak, Okay, ...).
+        self.strength_label.set_label(
+            _("Password strength: {}").format(password_strength_label(password))
+            if password else '')
 
     @Gtk.Template.Callback('password_active')
     def _password_active(self, object):

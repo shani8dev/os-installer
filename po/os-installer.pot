@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: os-installer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-13 20:37+0000\n"
+"POT-Creation-Date: 2026-11-13 20:58+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -190,6 +190,14 @@ msgstr ""
 msgid "Try a different search"
 msgstr ""
 
+#. Translators: The name other computers see on the network.
+#. Translators: Page title
+#. Translators: Description of the machine's hostname.
+#: data/resources/ui/pages/hostname.blp src/ui/page_wrapper.py
+#: src/ui/row/summary_row.py
+msgid "Hostname"
+msgstr ""
+
 #: data/resources/ui/pages/internet.blp
 msgid "No connection detected"
 msgstr ""
@@ -213,6 +221,14 @@ msgstr ""
 #. Translators: Used as placeholder in a entry field to try out a keyboard layout
 #: data/resources/ui/pages/keyboard_overview.blp
 msgid "Test the Keyboard Layout Here"
+msgstr ""
+
+#. Translators: Shown on the keyboard page: the disk passphrase is typed
+#. at boot with the console keymap that comes from this layout.
+#: data/resources/ui/pages/keyboard_overview.blp
+msgid ""
+"The disk passphrase at boot is typed with this layout. Pick the one the "
+"keyboard actually has."
 msgstr ""
 
 #. Translators: Presented next to the current Timezone.
@@ -341,6 +357,11 @@ msgstr ""
 #. Translators: Used password confirmation entry field
 #: data/resources/ui/pages/user.blp
 msgid "C_onfirm Password"
+msgstr ""
+
+#: data/resources/ui/pages/welcome.blp
+msgid ""
+"This computer is running on battery. Keep it plugged in during installation."
 msgstr ""
 
 #. Translators: Default welcome text. Squiggly brackets are replaced by distribution name.
@@ -562,6 +583,35 @@ msgstr ""
 msgid "Welcome"
 msgstr ""
 
+#. Translators: Hint under the hostname field.
+#: src/ui/pages/hostname.py
+msgid "This is the name other computers see on the network."
+msgstr ""
+
+#. Translators: Hint under the hostname field, followed by the name.
+#: src/ui/pages/hostname.py
+#, python-brace-format
+msgid "Other computers will reach this one as {}."
+msgstr ""
+
+#: src/ui/pages/hostname.py
+msgid ""
+"Use letters, digits and hyphens, not at the start or end, up to 63 "
+"characters."
+msgstr ""
+
+#: src/ui/pages/install.py
+msgid "Preparing the system…"
+msgstr ""
+
+#: src/ui/pages/install.py
+msgid "Installing…"
+msgstr ""
+
+#: src/ui/pages/install.py
+msgid "Configuring the system…"
+msgstr ""
+
 #. Translators: Shown in summary when disk encryption is enabled.
 #. Translators: Shown in summary when disk encryption is disabled.
 #: src/ui/pages/summary.py src/ui/row/summary_row.py
@@ -595,4 +645,29 @@ msgstr ""
 #. Translators: Description of selected language.
 #: src/ui/row/summary_row.py
 msgid "Language"
+msgstr ""
+
+#. Translators: Password strength.
+#: src/util/password_strength.py
+msgid "Too short"
+msgstr ""
+
+#. Translators: Password strength.
+#: src/util/password_strength.py
+msgid "Weak"
+msgstr ""
+
+#. Translators: Password strength.
+#: src/util/password_strength.py
+msgid "Okay"
+msgstr ""
+
+#. Translators: Password strength.
+#: src/util/password_strength.py
+msgid "Good"
+msgstr ""
+
+#. Translators: Password strength.
+#: src/util/password_strength.py
+msgid "Strong"
 msgstr ""

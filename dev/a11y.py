@@ -454,6 +454,8 @@ def check_script_log(path):
         'OSI_MOK_ENROLL': '1',
         'OSI_MOK_ROOT_PW': '1',
         'OSI_USE_TPM': '1',
+        'OSI_HOSTNAME': 'shani-host',
+        'OSI_USER_GROUPS': 'wheel',
     }
     for var, value in expect_configure.items():
         ok &= result(f'configure-{var}', configure.get(var) == value,
@@ -541,6 +543,13 @@ def walk(out_dir, lint_pages=False):
     walker.page('Confirmation')
     walker.shot('confirm')
     walker.click('button:^Confirm$')
+
+    walker.step('hostname')
+    walker.page('Hostname')
+    walker.shot('hostname')
+    walker.type('entry:.*', 'shani-host')
+    walker.expect('button:^Continue$', 'hostname accepted')
+    walker.click('button:^Continue$')
 
     walker.step('summary')
     walker.page('Summary')

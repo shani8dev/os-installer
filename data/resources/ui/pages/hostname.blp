@@ -1,0 +1,30 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $HostnamePage : Box {
+  orientation: vertical;
+  spacing: 12;
+
+  ListBox {
+    selection-mode: none;
+    styles ["boxed-list"]
+
+    Adw.EntryRow hostname_row {
+      /* Translators: The name other computers see on the network. */
+      title: _("Hostname");
+      changed => $hostname_changed();
+      entry-activated => $hostname_activated();
+    }
+  }
+
+  Label hint_label {
+    wrap: true;
+    xalign: 0;
+    styles ["dimmed"]
+  }
+
+  $ContinueButton continue_button {
+    action-name: "win.advance";
+    receives-default: true;
+  }
+}

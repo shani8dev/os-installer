@@ -47,7 +47,10 @@ def clean_config():
     from pathlib import Path
     config.base_path = Path('/etc/os-installer')
     config.variables = {
-        'user': {'request_username': False, 'min_password_length': 4},
+        'user': {'request_username': False, 'min_password_length': 4,
+                 'groups': ['wheel']},
+        'hostname': None,
+        'hostname_chosen': 'shanihost',
         'skip_user': True,
         'skip_region': True,
         'install_policy': deepcopy(default_config['install_policy']),
@@ -140,6 +143,16 @@ def test_secure_boot_and_tpm_are_exported():
     values = envs(InstallationStep.configure)
     assert values['OSI_MOK_ROOT_PW'] == '1'
     assert values['OSI_USE_TPM'] == '1'
+
+
+def test_hostname_and_groups_are_exported():
+    values = envs(InstallationStep.configure)
+    assert values['OSI_HOSTNAME'] == 'shanihost'
+    assert values['OSI_USER_GROUPS'] == 'wheel'
+
+    # A fixed hostname wins over the page.
+    config.variables['hostname'] = 'fixed-host'
+    assert envs(InstallationStep.configure)['OSI_HOSTNAME'] == 'fixed-host'
 
 
 def test_policy_can_be_overridden_from_the_config():

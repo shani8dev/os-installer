@@ -4,6 +4,7 @@ from gi.repository import Gtk
 
 from .buttons import ContinueButton
 from .config import config
+from .power import on_battery
 from .translator import config_gettext as _
 from .welcome_provider import welcome_provider
 
@@ -14,6 +15,7 @@ class WelcomePage(Gtk.Box):
     image = 'weather-clear-symbolic'
 
     description = Gtk.Template.Child()
+    power_banner = Gtk.Template.Child()
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -28,3 +30,6 @@ class WelcomePage(Gtk.Box):
             text = _(self.description.get_label())
             text = text.format(config.get('distribution_name'))
         self.description.set_label(text)
+
+        if config.get('power_warning'):
+            self.power_banner.set_revealed(on_battery())

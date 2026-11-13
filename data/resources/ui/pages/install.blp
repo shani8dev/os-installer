@@ -5,6 +5,11 @@ template $InstallPage : Box {
   orientation: vertical;
   spacing: 12;
 
+  Label step_label {
+    halign: center;
+    styles ["dimmed"]
+  }
+
   Stack stack {
     StackPage {
       name: "slideshow";

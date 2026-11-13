@@ -33,6 +33,7 @@ update_funcs = {
     "language": ("language_chosen", lambda language: language.name),
     "secure-boot": ("mok_enroll",
                     lambda enabled: _("Enabled") if enabled else _("Disabled")),
+    "hostname": ("hostname_chosen", lambda hostname: hostname),
     "timezone": ("timezone", lambda timezone: timezone),
     "software": ("software_choices", _get_choices),
     "tpm": ("use_tpm",
@@ -50,6 +51,8 @@ titles = {
     "keyboard-overview": _("Keyboard Layout"),
     # Translators: Description of selected language.
     "language": _("Language"),
+    # Translators: Description of the machine's hostname.
+    "hostname": _("Hostname"),
     # Translators: Description of the MOK enrollment choice.
     "secure-boot": _("Secure Boot"),
     # Translators: Description of selected timezone.

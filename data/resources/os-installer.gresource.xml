@@ -29,6 +29,7 @@
     <file preprocess="xml-stripblanks">ui/pages/done.ui</file>
     <file preprocess="xml-stripblanks">ui/pages/encrypt.ui</file>
     <file preprocess="xml-stripblanks">ui/pages/failed.ui</file>
+    <file preprocess="xml-stripblanks">ui/pages/hostname.ui</file>
     <file preprocess="xml-stripblanks">ui/pages/filter.ui</file>
     <file preprocess="xml-stripblanks">ui/pages/install.ui</file>
     <file preprocess="xml-stripblanks">ui/pages/internet.ui</file>

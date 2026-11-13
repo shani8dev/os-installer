@@ -17,6 +17,7 @@ class EncryptPage(Gtk.Box):
     pin_confirm_row = Gtk.Template.Child()
     info_revealer = Gtk.Template.Child()
     info_label = Gtk.Template.Child()
+    layout_hint = Gtk.Template.Child()
 
     root_password_switch_row = Gtk.Template.Child()
     root_password_row = Gtk.Template.Child()
@@ -83,6 +84,13 @@ class EncryptPage(Gtk.Box):
         self.root_password_confirm_row.set_text(config.get('root_password') or '')
 
         self._adjust_root_password_state()
+
+        # The PIN is typed at the boot prompt, with the console keymap the
+        # installed system gets from the keyboard page (rd.vconsole.keymap).
+        layout_name = config.get('keyboard_layout')[1]
+        # Translators: Followed by the keyboard layout name.
+        self.layout_hint.set_label(
+            _("At boot, type this PIN with the {} layout.").format(layout_name))
 
     def _adjust_pin_state(self):
         self.pin_row.set_sensitive(self.active)
