@@ -21,7 +21,7 @@ template $EncryptPage : Box {
       use-underline: true;
       width-chars: 10;
       max-width-chars: 16;
-      /* Translators: Disk encryption pin confirmation entry field */
+      /* Translators: Disk encryption pin entry field */
       title: _("Encryption PIN");
       changed => $pin_changed();
       entry-activated => $pin_activated();
@@ -35,7 +35,7 @@ template $EncryptPage : Box {
       /* Translators: Disk encryption pin confirmation entry field */
       title: _("Confirm PIN");
       changed => $pin_confirm_changed();
-      entry-activated => $continue();
+      entry-activated => $pin_confirm_activated();
     }
   }
 
@@ -43,7 +43,7 @@ template $EncryptPage : Box {
     transition-type: crossfade;
 
     Box {
-      halign:center;
+      halign: center;
       spacing: 12;
 
       Image {
@@ -59,6 +59,40 @@ template $EncryptPage : Box {
         /* Translators: Hint for disk encryption */
         label: _("Memorize this PIN well. Without it you will not be able to access your files.");
       }
+    }
+  }
+
+  ListBox {
+    selection-mode: none;
+    styles ["boxed-list"]
+
+    Adw.SwitchRow root_password_switch_row {
+      activatable: true;
+      /* Translators: Used with option to set a root password */
+      title: _("Set Root Password");
+      notify::active => $root_password_switch_row_clicked();
+    }
+
+    Adw.PasswordEntryRow root_password_row {
+      activates-default: true;
+      use-underline: true;
+      width-chars: 10;
+      max-width-chars: 16;
+      /* Translators: Root account password entry field */
+      title: _("Root Password");
+      changed => $root_password_changed();
+      entry-activated => $root_password_activated();
+    }
+
+    Adw.PasswordEntryRow root_password_confirm_row {
+      activates-default: true;
+      use-underline: true;
+      width-chars: 10;
+      max-width-chars: 16;
+      /* Translators: Root account password confirmation entry field */
+      title: _("Confirm Root Password");
+      changed => $root_password_confirm_changed();
+      entry-activated => $root_password_confirm_activated();
     }
   }
 

@@ -18,13 +18,20 @@ class EncryptPage(Gtk.Box):
     info_revealer = Gtk.Template.Child()
     info_label = Gtk.Template.Child()
 
+    root_password_switch_row = Gtk.Template.Child()
+    root_password_row = Gtk.Template.Child()
+    root_password_confirm_row = Gtk.Template.Child()
+
     continue_button = Gtk.Template.Child()
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
-        translate_widgets(self.switch_row, self.pin_row,
-                          self.pin_confirm_row, self.info_label)
+        translate_widgets(self.switch_row, self.pin_row, self.pin_confirm_row,
+                          self.info_label, self.root_password_switch_row,
+                          self.root_password_row, self.root_password_confirm_row)
+
+        ### Encryption PIN ###
 
         encryption_setting = config.get('disk_encryption')
         self.min_pin_length = encryption_setting['min_length']
@@ -43,8 +50,6 @@ class EncryptPage(Gtk.Box):
             self.pin_confirm_row.set_visible(False)
             self.info_revealer.set_visible(False)
 
-        self._adjust_pin_state()
-
         self.pin = EntryErrorEnhancer(
             self.pin_row, lambda text: len(text) >= self.min_pin_length)
         self.pin_row.set_text(config.get('encryption_pin'))
@@ -57,16 +62,47 @@ class EncryptPage(Gtk.Box):
         else:
             self.confirmation = True
 
+        self._adjust_pin_state()
+
+        ### Root Password ###
+
+        self.root_password_active = config.get('root_password') != ''
+        self.root_password_switch_row.set_active(self.root_password_active)
+
+        # Match the same minimum-length policy the distro configures for the
+        # primary user account, rather than a hardcoded "just non-empty" — so
+        # raising min_password_length later covers root too, not just the user.
+        self.min_root_password_length = config.get('user')['min_password_length']
+        self.root_password = EntryErrorEnhancer(
+            self.root_password_row,
+            lambda text: len(text) >= self.min_root_password_length)
+        self.root_password_row.set_text(config.get('root_password') or '')
+        self.root_password_confirm = EntryErrorEnhancer(
+            self.root_password_confirm_row,
+            lambda text: text == self.root_password_row.get_text())
+        self.root_password_confirm_row.set_text(config.get('root_password') or '')
+
+        self._adjust_root_password_state()
+
     def _adjust_pin_state(self):
         self.pin_row.set_sensitive(self.active)
         self.pin_confirm_row.set_sensitive(self.active)
         self.info_revealer.set_reveal_child(self.active)
         self._set_continue_button()
 
+    def _adjust_root_password_state(self):
+        self.root_password_row.set_sensitive(self.root_password_active)
+        self.root_password_confirm_row.set_sensitive(self.root_password_active)
+        self._set_continue_button()
+
     def _set_continue_button(self):
-        ok = (not self.active or self.generated or
-              (self.pin and self.confirmation))
-        self.continue_button.set_sensitive(ok)
+        pin_ok = (not self.active or self.generated or
+                  (self.pin and self.confirmation))
+        root_active = getattr(self, 'root_password_active', False)
+        root_ok = (not root_active or
+                   (getattr(self, 'root_password', None) and
+                    getattr(self, 'root_password_confirm', None)))
+        self.continue_button.set_sensitive(pin_ok and root_ok)
 
     ### callbacks ###
 
@@ -99,8 +135,53 @@ class EncryptPage(Gtk.Box):
     def _pin_activated(self, object):
         if self.use_confirmation:
             self.pin_confirm_row.grab_focus()
+        elif self.root_password_active:
+            self.root_password_row.grab_focus()
         else:
             self._continue(None)
+
+    @Gtk.Template.Callback('pin_confirm_activated')
+    def _pin_confirm_activated(self, object):
+        if self.root_password_active:
+            self.root_password_row.grab_focus()
+        else:
+            self._continue(None)
+
+    @Gtk.Template.Callback('root_password_switch_row_clicked')
+    def _root_password_switch_row_clicked(self, row, state):
+        self.root_password_active = self.root_password_switch_row.get_active()
+        self._adjust_root_password_state()
+
+        if self.root_password_active:
+            self.root_password_row.grab_focus()
+        else:
+            config.set('root_password', '')
+            # Clear the visible fields too — otherwise re-enabling the switch
+            # later shows the old password text even though it was discarded,
+            # which reads as if the "off" toggle never took effect.
+            self.root_password_row.set_text('')
+            self.root_password_confirm_row.set_text('')
+
+    @Gtk.Template.Callback('root_password_changed')
+    def _root_password_changed(self, editable):
+        password = editable.get_text()
+        if self.root_password.update_row(password):
+            config.set('root_password', password)
+        self._root_password_confirm_changed(self.root_password_confirm_row)
+
+    @Gtk.Template.Callback('root_password_confirm_changed')
+    def _root_password_confirm_changed(self, editable):
+        password = editable.get_text()
+        self.root_password_confirm.update_row(password)
+        self._set_continue_button()
+
+    @Gtk.Template.Callback('root_password_activated')
+    def _root_password_activated(self, object):
+        self.root_password_confirm_row.grab_focus()
+
+    @Gtk.Template.Callback('root_password_confirm_activated')
+    def _root_password_confirm_activated(self, object):
+        self._continue(None)
 
     @Gtk.Template.Callback('continue')
     def _continue(self, object):

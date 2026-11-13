@@ -66,6 +66,7 @@ internal_values = {
     'internet_connection': False,
     'use_encryption': False,
     'encryption_pin': '',
+    'root_password': '',
     'desktop_chosen': ('', ''),
     'user_name': '',
     'user_username': '',
