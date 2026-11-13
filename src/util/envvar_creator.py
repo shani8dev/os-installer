@@ -1,5 +1,6 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
+import os
 import re
 
 from gi.repository import GLib
@@ -64,11 +65,49 @@ def _parse_choices(choices_var):
     return ' '.join(keywords)
 
 
+def _get_policy_vars():
+    """The distro's install policy, as the scripts used to hardcode it.
+
+    Everything here used to be a constant at the top of install.sh/configure.sh
+    (labels, subvolumes, image paths, boot entries), which meant the installer
+    could not know it, show it, or change it. The installer owns it now and
+    exports it; a script reads OSI_* and keeps a fallback for an older
+    installer.
+    """
+    policy = config.get('install_policy')
+
+    layout = policy['partition_layout']
+    if not os.path.isabs(layout):
+        layout = str(config.base_path / layout)
+
+    values = {
+        'OSI_OS_NAME': policy['os_name'],
+        'OSI_ROOT_LABEL': policy['root_label'],
+        'OSI_BOOT_LABEL': policy['boot_label'],
+        'OSI_PARTITION_LAYOUT': layout,
+        'OSI_BTRFS_SUBVOLUMES': ' '.join(policy['btrfs_subvolumes']),
+        'OSI_BTRFS_TOP_OPTS': policy['btrfs_top_options'],
+        'OSI_SWAPFILE_PATH': policy['swapfile_path'],
+        'OSI_IMAGE_DIR': policy['image_dir'],
+        'OSI_ROOTFS_IMAGE': policy['rootfs_image'],
+        'OSI_FLATPAK_IMAGE': policy['flatpak_image'],
+        'OSI_SNAP_IMAGE': policy['snap_image'],
+        'OSI_AI_MODELS_IMAGE': policy['ai_models_image'],
+        'OSI_KERNEL_CMDLINE_CURRENT': policy['kernel_cmdline_current'],
+        'OSI_KERNEL_CMDLINE_CANDIDATE': policy['kernel_cmdline_candidate'],
+        'OSI_UKI_BOOT_ENTRIES': policy['uki_boot_entries'],
+        'OSI_SKIP_USER': _get('skip_user'),
+        'OSI_SKIP_REGION': _get('skip_region'),
+        'OSI_MIN_PASSWORD_LENGTH': config.get('user')['min_password_length'],
+    }
+    return [f'{name}={value}' for name, value in values.items()]
+
+
 def create_envs(installation_step: InstallationStep):
     with_configure_envs = installation_step is InstallationStep.configure
     with_install_envs = installation_step is InstallationStep.install or with_configure_envs
 
-    envs = []
+    envs = _get_policy_vars()
     if with_install_envs:
         envs += [
             f"OSI_DESKTOP={_get('desktop_chosen')}",

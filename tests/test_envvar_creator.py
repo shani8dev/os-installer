@@ -11,6 +11,8 @@ import pytest
 from os_installer.config import RunMode, config
 from os_installer import envvar_creator
 from os_installer.installation_step import InstallationStep
+from os_installer.config import default_config
+from os_installer.installation_scripting import _admin_problem
 
 
 class Language:
@@ -41,8 +43,14 @@ class Option:
 
 @pytest.fixture(autouse=True)
 def clean_config():
+    from copy import deepcopy
+    from pathlib import Path
+    config.base_path = Path('/etc/os-installer')
     config.variables = {
-        'user': {'request_username': False},
+        'user': {'request_username': False, 'min_password_length': 4},
+        'skip_user': True,
+        'skip_region': True,
+        'install_policy': deepcopy(default_config['install_policy']),
         'desktop_chosen': ('gnome', 'GNOME'),
         'language_chosen': Language('en_US.UTF-8'),
         'keyboard_layout': ('us', 'English (US)'),
@@ -75,13 +83,17 @@ def envs(step):
 
 
 @pytest.mark.parametrize('step', [InstallationStep.prepare, InstallationStep.none])
-def test_prepare_only_gets_the_inherited_environment(step):
-    assert envvar_creator.create_envs(step) == [None]
+def test_prepare_gets_the_policy_but_not_the_install_values(step):
+    values = envs(step)
+    assert 'OSI_DEVICE_PATH' not in values
+    assert 'OSI_USER_USERNAME' not in values
+    assert values['OSI_ROOT_LABEL'] == 'shani_root'
+    assert values['OSI_OS_NAME'] == 'shanios'
 
 
 def test_install_envs_are_complete():
     values = envs(InstallationStep.install)
-    assert values == {
+    expected = {
         'OSI_DESKTOP': 'gnome',
         'OSI_LOCALE': 'en_US.UTF-8',
         'OSI_KEYBOARD_LAYOUT': 'us',
@@ -91,6 +103,64 @@ def test_install_envs_are_complete():
         'OSI_USE_ENCRYPTION': '1',
         'OSI_ENCRYPTION_PIN': '1234',
     }
+    for var, value in expected.items():
+        assert values[var] == value, var
+
+
+def test_install_policy_is_exported():
+    """The values install.sh/configure.sh used to hardcode."""
+    values = envs(InstallationStep.install)
+    assert values['OSI_OS_NAME'] == 'shanios'
+    assert values['OSI_ROOT_LABEL'] == 'shani_root'
+    assert values['OSI_BOOT_LABEL'] == 'shani_boot'
+    assert values['OSI_PARTITION_LAYOUT'] == '/etc/os-installer/bits/part.sfdisk'
+    assert values['OSI_BTRFS_SUBVOLUMES'].split()[-1] == '@shani-chronoa'
+    assert values['OSI_SWAPFILE_PATH'] == '@swap/swapfile'
+    assert values['OSI_IMAGE_DIR'] == '/run/archiso/bootmnt/shanios/x86_64'
+    assert values['OSI_KERNEL_CMDLINE_CURRENT'] == '/etc/kernel/install_cmdline_blue'
+    assert values['OSI_UKI_BOOT_ENTRIES'] == '/boot/efi/loader/entries'
+    assert values['OSI_SKIP_USER'] == '1'
+    assert values['OSI_SKIP_REGION'] == '1'
+    assert values['OSI_MIN_PASSWORD_LENGTH'] == '4'
+
+
+def test_policy_can_be_overridden_from_the_config():
+    config.variables['install_policy'] = {
+        **default_config['install_policy'],
+        'root_label': 'fedora_root',
+        'admin_groups': [],
+    }
+    values = envs(InstallationStep.install)
+    assert values['OSI_ROOT_LABEL'] == 'fedora_root'
+
+
+def test_install_policy_from_a_relative_layout_is_absolute():
+    config.variables['install_policy'] = {
+        **default_config['install_policy'],
+        'partition_layout': 'bits/other.sfdisk',
+    }
+    assert envs(InstallationStep.install)['OSI_PARTITION_LAYOUT'] == \
+        '/etc/os-installer/bits/other.sfdisk'
+
+
+@pytest.mark.parametrize('euid,user,groups,expected', [
+    (0, 'root', {'root'}, None),
+    (1000, 'shani', {'wheel', 'users'}, None),
+    (1000, 'shani', {'sudo'}, None),
+    (1000, 'shani', {'users'}, 'administrator'),
+    (1000, 'shani', set(), 'administrator'),
+])
+def test_admin_policy(euid, user, groups, expected):
+    problem = _admin_problem({'admin_groups': ['wheel', 'sudo']},
+                             euid, user, groups)
+    if expected is None:
+        assert problem is None
+    else:
+        assert expected in problem
+
+
+def test_admin_check_can_be_disabled():
+    assert _admin_problem({'admin_groups': []}, 1000, 'shani', set()) is None
 
 
 def test_configure_envs_include_install_and_user_values():

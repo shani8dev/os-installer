@@ -9,6 +9,10 @@ layout once, in a temp dir, and import `os_installer.<module>` — the same
 modules, in the same shape, the installed app uses.
 """
 
+import gi
+
+gi.require_version("Vte", "3.91")
+
 import shutil
 import sys
 import tempfile

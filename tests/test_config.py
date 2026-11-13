@@ -5,6 +5,7 @@ These are regressions for bugs that made a broken (or re-read) config change
 the installer's behaviour in ways nothing on screen explains.
 """
 
+import pytest
 import yaml
 
 from os_installer import config as config_module
@@ -71,6 +72,37 @@ def test_invalid_disk_section_falls_back_to_demo(fresh_config, config_file):
 
     fresh_config.init(str(config_file), False, False)
     assert fresh_config.is_demo()
+
+
+def test_install_policy_defaults_are_valid():
+    assert config_module._validate(config_module.default_config)
+
+
+@pytest.mark.parametrize('bad', [
+    {'root_label': 5},
+    {'btrfs_subvolumes': '@root'},
+    {'btrfs_subvolumes': ['@root', 2]},
+    {'admin_groups': 'wheel'},
+    {'image_dir': None},
+])
+def test_invalid_install_policy_falls_back_to_demo(fresh_config, config_file, bad):
+    data = yaml.safe_load(config_file.read_text())
+    data['install_policy'] = bad
+    config_file.write_text(yaml.safe_dump(data))
+
+    fresh_config.init(str(config_file), False, False)
+    assert fresh_config.is_demo()
+
+
+def test_install_policy_overrides_merge_with_the_defaults(fresh_config, config_file):
+    data = yaml.safe_load(config_file.read_text())
+    data['install_policy'] = {'root_label': 'test_root'}
+    config_file.write_text(yaml.safe_dump(data))
+
+    fresh_config.init(str(config_file), False, False)
+    assert not fresh_config.is_demo()
+    assert fresh_config.get('install_policy')['root_label'] == 'test_root'
+    assert fresh_config.get('install_policy')['boot_label'] == 'shani_boot'
 
 
 def test_demo_and_test_flags_are_exclusive(fresh_config, config_file):

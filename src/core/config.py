@@ -37,6 +37,32 @@ default_config = {
     # optional pages
     'skip_region': False,
     'skip_user': False,
+    # installation policy: the distro-specific values the install scripts
+    # used to hardcode. The installer validates them, exports them as OSI_*
+    # and owns the decisions it can make itself (e.g. who may install).
+    'install_policy': {
+        'os_name': 'shanios',
+        'root_label': 'shani_root',
+        'boot_label': 'shani_boot',
+        'partition_layout': 'bits/part.sfdisk',
+        'btrfs_subvolumes': ['@root', '@home', '@data', '@nix', '@cache',
+                             '@log', '@flatpak', '@snapd', '@waydroid',
+                             '@containers', '@machines', '@lxc', '@lxd',
+                             '@libvirt', '@qemu', '@swap', '@shani-chronoa'],
+        'btrfs_top_options': 'defaults,noatime,compress=zstd,space_cache=v2,autodefrag',
+        'swapfile_path': '@swap/swapfile',
+        'image_dir': '/run/archiso/bootmnt/shanios/x86_64',
+        'rootfs_image': 'rootfs.zst',
+        'flatpak_image': 'flatpakfs.zst',
+        'snap_image': 'snapfs.zst',
+        'ai_models_image': 'aimodelsfs.zst',
+        'kernel_cmdline_current': '/etc/kernel/install_cmdline_blue',
+        'kernel_cmdline_candidate': '/etc/kernel/install_cmdline_green',
+        'uki_boot_entries': '/boot/efi/loader/entries',
+        # Groups allowed to run the install. Root is always allowed; an
+        # empty list disables the check (a distro that uses polkit only).
+        'admin_groups': ['wheel', 'sudo'],
+    },
     # software
     'additional_software': [],
     # feature
@@ -152,7 +178,31 @@ def _validate(variables):
         _match(variables, 'additional_features', list) and
         _match(variables, 'install_slideshow', list) and
         _match(variables, 'distribution_name', str) and
-        _match(variables, 'fixed_language', bool, str))
+        _match(variables, 'fixed_language', bool, str) and
+        _validate_install_policy(variables))
+
+
+def _validate_install_policy(variables):
+    policy = variables.get('install_policy')
+    if not _match(variables, 'install_policy', dict):
+        return False
+
+    text_keys = ('os_name', 'root_label', 'boot_label', 'partition_layout',
+                 'btrfs_top_options', 'swapfile_path', 'image_dir',
+                 'rootfs_image', 'flatpak_image', 'snap_image',
+                 'ai_models_image', 'kernel_cmdline_current',
+                 'kernel_cmdline_candidate', 'uki_boot_entries')
+    for key in text_keys:
+        if not _match(policy, key, str):
+            return False
+
+    for key in ('btrfs_subvolumes', 'admin_groups'):
+        values = policy.get(key)
+        if not isinstance(values, list) or not all(isinstance(v, str) for v in values):
+            print(f'Config error: install_policy.{key} must be a list of strings')
+            return False
+
+    return True
 
 
 class Config:

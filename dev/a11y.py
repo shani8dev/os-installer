@@ -25,6 +25,11 @@ Roles are normalised the way shani-testbed's a11y client does it: 'push
 button' is 'button', 'table row'/'list row' are 'row'. GTK4 reports no SCREEN
 extents, so coordinates come from WINDOW_COORDS; the dev display has no window
 manager, so a window sits at 0,0 and window == screen.
+
+Debug: OSI_DUMP=1 prints the whole tree at every page the walk reaches;
+OSI_DUMP_ALL=1 also prints controls that are not on screen (hidden rows, for
+example), which is how a page that looks empty is told apart from a page whose
+rows are hidden.
 """
 
 import os
@@ -443,13 +448,34 @@ def check_script_log(path):
         'OSI_TIMEZONE': 'UTC',
         'OSI_FORMATS': 'en_US.UTF-8',
         'OSI_ROOT_PASSWORD': '',
+        'OSI_SKIP_USER': '1',
+        'OSI_SKIP_REGION': '1',
+        'OSI_MIN_PASSWORD_LENGTH': '4',
     }
     for var, value in expect_configure.items():
         ok &= result(f'configure-{var}', configure.get(var) == value,
                      f'{configure.get(var)!r} != {value!r}')
 
+    # The install policy the installer owns and exports (the scripts used to
+    # hardcode these at the top of install.sh/configure.sh).
+    for var, value in (('OSI_OS_NAME', 'shanios'),
+                       ('OSI_ROOT_LABEL', 'shani_root'),
+                       ('OSI_BOOT_LABEL', 'shani_boot'),
+                       ('OSI_IMAGE_DIR', '/run/archiso/bootmnt/shanios/x86_64'),
+                       ('OSI_KERNEL_CMDLINE_CURRENT',
+                        '/etc/kernel/install_cmdline_blue'),
+                       ('OSI_UKI_BOOT_ENTRIES', '/boot/efi/loader/entries')):
+        ok &= result(f'policy-{var}', install.get(var) == value,
+                     f'{install.get(var)!r} != {value!r}')
+    ok &= result('policy-subvolumes',
+                 '@shani-chronoa' in install.get('OSI_BTRFS_SUBVOLUMES', '').split())
+    ok &= result('policy-partition-layout',
+                 install.get('OSI_PARTITION_LAYOUT', '').endswith('bits/part.sfdisk'))
+
     ok &= result('prepare-no-install-envs',
                  'OSI_DEVICE_PATH' not in envs.get('prepare', {}))
+    ok &= result('prepare-has-policy',
+                 envs.get('prepare', {}).get('OSI_ROOT_LABEL') == 'shani_root')
     return ok
 
 

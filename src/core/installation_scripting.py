@@ -1,7 +1,9 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 from threading import Lock
+import grp
 import os
+import pwd
 
 from gi.repository import Gio, GLib, Vte
 
@@ -9,6 +11,25 @@ from .config import config
 from .envvar_creator import create_envs
 from .installation_step import InstallationStep
 from .terminal_provider import terminal_provider
+
+
+def _admin_problem(policy, euid, user, groups):
+    """None when this user may install, else the message to show them.
+
+    The installer owns this decision now: prepare.sh used to exit 1 with a
+    sentence printed into the terminal, which the user only saw if they
+    opened it. The groups come from the config (default wheel/sudo); an empty
+    list disables the check for distros that authorise installs another way.
+    """
+    if euid == 0:
+        return None
+    allowed = policy.get('admin_groups') or []
+    if not allowed:
+        return None
+    if groups.intersection(allowed):
+        return None
+    return ('Installing needs an administrator: run the installer as root or '
+            f'as a user in {", ".join(allowed)} (current user: {user}).')
 
 
 class InstallationScripting():
@@ -26,6 +47,8 @@ class InstallationScripting():
         self.ready_step = InstallationStep.none
         self.running_step = InstallationStep.none
         self.finished_step = InstallationStep.none
+        self._admin_checked = False
+        self.admin_problem = None
 
     def _fail_installation(self, __):
         config.set('installation_running', False)
@@ -135,7 +158,35 @@ class InstallationScripting():
         self._set_ok_to_start_step(InstallationStep.install)
 
     def can_run_prepare(self):
+        if not self._admin_checked:
+            self._admin_checked = True
+            self.admin_problem = self._check_admin()
+
+        scripts = config.get('scripts')
+        if not (scripts['prepare'] or scripts['install']):
+            # Nothing to install: an info-only configuration must not be
+            # blocked by a policy about running install scripts.
+            self._set_ok_to_start_step(InstallationStep.prepare)
+            return
+
+        if self.admin_problem:
+            config.set('logged-error', self.admin_problem)
+            GLib.idle_add(self._fail_installation, None)
+            return
+
         self._set_ok_to_start_step(InstallationStep.prepare)
+
+    def _check_admin(self):
+        try:
+            euid = os.geteuid()
+            user = pwd.getpwuid(euid).pw_name
+            groups = {group.gr_name for group in grp.getgrall()
+                      if user in group.gr_mem}
+        except (KeyError, OSError):
+            # No passwd/group database (a container, a minimal image): the
+            # prepare script is the last word, as before.
+            return None
+        return _admin_problem(config.get('install_policy'), euid, user, groups)
 
 
 installation_scripting = InstallationScripting()

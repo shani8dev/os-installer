@@ -66,6 +66,36 @@ cd ../shani-install-media
     --click-element='button:^Continue$' --wait-element='label:^Keyboard Layout$'
 ```
 
+## Install policy
+
+The distro-specific install values used to be constants at the top of
+`install.sh`/`configure.sh`, so the installer could not know, show or change
+them. They are config now (`install_policy`), and the installer exports them
+to every step as `OSI_*`:
+
+| config key | environment |
+|---|---|
+| `os_name` | `OSI_OS_NAME` |
+| `root_label` / `boot_label` | `OSI_ROOT_LABEL` / `OSI_BOOT_LABEL` |
+| `partition_layout` | `OSI_PARTITION_LAYOUT` (absolute; relative to the config file) |
+| `btrfs_subvolumes` | `OSI_BTRFS_SUBVOLUMES` (space separated) |
+| `btrfs_top_options` | `OSI_BTRFS_TOP_OPTS` |
+| `swapfile_path` | `OSI_SWAPFILE_PATH` |
+| `image_dir`, `rootfs_image`, `flatpak_image`, `snap_image`, `ai_models_image` | `OSI_IMAGE_DIR`, `OSI_ROOTFS_IMAGE`, `OSI_FLATPAK_IMAGE`, `OSI_SNAP_IMAGE`, `OSI_AI_MODELS_IMAGE` |
+| `kernel_cmdline_current` / `_candidate`, `uki_boot_entries` | `OSI_KERNEL_CMDLINE_CURRENT`, `OSI_KERNEL_CMDLINE_CANDIDATE`, `OSI_UKI_BOOT_ENTRIES` |
+| `skip_user` / `skip_region` | `OSI_SKIP_USER` / `OSI_SKIP_REGION` |
+| `user.min_password_length` | `OSI_MIN_PASSWORD_LENGTH` |
+| `admin_groups` | — (the installer checks it before the first script) |
+
+Defaults are the ShaniOS layout, so a config that does not mention
+`install_policy` gets the values the scripts used to hardcode. A script reads
+`${OSI_ROOT_LABEL:-shani_root}` and still works with an older installer.
+
+`admin_groups` (default `wheel`, `sudo`) is the one decision the installer
+makes itself: root may always install, and a user in one of the groups may.
+Without it the first script used to exit 1 and print the reason into a
+terminal the user had to open. An empty list disables the check.
+
 ## Structure
 The app tries to follow the best practices of GNOME/libadwaita apps.
 UI elements are described in Blueprint (.blp) files, which get used as templates by Python classes, that include the functionality.
