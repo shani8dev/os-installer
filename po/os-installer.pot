@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: os-installer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-08 00:09+0200\n"
+"POT-Creation-Date: 2026-11-13 19:10+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,13 +17,64 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: data/com.github.p3732.OS-Installer.desktop.in
-msgid "OS-Installer"
+#: data/org.shani.OsInstaller.metainfo.xml
+#: data/org.shani.OsInstaller.desktop.in
+msgid "ShaniOS Installer"
 msgstr ""
 
-#: data/com.github.p3732.OS-Installer.desktop.in
-#: data/com.github.p3732.OS-Installer.metainfo.xml.in
-msgid "Install an Operating System"
+#: data/org.shani.OsInstaller.metainfo.xml
+#: data/org.shani.OsInstaller.desktop.in
+msgid "Install ShaniOS on this computer"
+msgstr ""
+
+#: data/org.shani.OsInstaller.metainfo.xml
+msgid ""
+"The installer used by ShaniOS live images. It is a fork of GNOME's os-"
+"installer and provides the Adwaita interface ShaniOS ships: language, "
+"keyboard, disk and encryption selection, user setup, then the distro's own "
+"prepare/install/configure scripts."
+msgstr ""
+
+#: data/org.shani.OsInstaller.metainfo.xml
+msgid ""
+"ShaniOS specific behaviour comes from /etc/os-installer and its config.yaml, "
+"not from this package."
+msgstr ""
+
+#: data/org.shani.OsInstaller.metainfo.xml
+msgid "First release of the ShaniOS fork:"
+msgstr ""
+
+#: data/org.shani.OsInstaller.metainfo.xml
+msgid "Runs install scripts through bash instead of exec'ing them directly"
+msgstr ""
+
+#: data/org.shani.OsInstaller.metainfo.xml
+msgid "Optional root password, with its state shown on the summary page"
+msgstr ""
+
+#: data/org.shani.OsInstaller.metainfo.xml
+msgid "Encryption and root-password rows on the summary page"
+msgstr ""
+
+#: data/org.shani.OsInstaller.metainfo.xml
+msgid "Fix generated usernames never being used"
+msgstr ""
+
+#: data/org.shani.OsInstaller.metainfo.xml
+msgid "Fix a race when reading the fixed language from the config"
+msgstr ""
+
+#: data/org.shani.OsInstaller.metainfo.xml
+msgid "Fix the keyboard language fallback tuple"
+msgstr ""
+
+#: data/org.shani.OsInstaller.metainfo.xml
+msgid "Use the EFI partition device path rather than its name"
+msgstr ""
+
+#: data/org.shani.OsInstaller.metainfo.xml
+msgid "Last release inherited from upstream os-installer."
 msgstr ""
 
 #. Translators: Label on button to copy terminal output.
@@ -48,7 +99,7 @@ msgstr ""
 
 #. Translators: Title of a hint page
 #: data/resources/ui/pages/disk.blp
-msgid "No Disks avaliable"
+msgid "No Disks available"
 msgstr ""
 
 #. Translators: Body of a hint page
@@ -76,7 +127,7 @@ msgstr ""
 msgid "Encrypt Files"
 msgstr ""
 
-#. Translators: Disk encryption pin confirmation entry field
+#. Translators: Disk encryption pin entry field
 #: data/resources/ui/pages/encrypt.blp
 msgid "Encryption PIN"
 msgstr ""
@@ -92,6 +143,22 @@ msgid ""
 "Memorize this PIN well. Without it you will not be able to access your files."
 msgstr ""
 
+#. Translators: Used with option to set a root password
+#: data/resources/ui/pages/encrypt.blp
+msgid "Set Root Password"
+msgstr ""
+
+#. Translators: Root account password entry field
+#. Translators: Description of whether a root password is set.
+#: data/resources/ui/pages/encrypt.blp data/resources/ui/pages/summary.blp
+msgid "Root Password"
+msgstr ""
+
+#. Translators: Root account password confirmation entry field
+#: data/resources/ui/pages/encrypt.blp
+msgid "Confirm Root Password"
+msgstr ""
+
 #. Translators: Title of installation failure page.
 #: data/resources/ui/pages/failed.blp
 msgid "Error During Installation"
@@ -100,7 +167,7 @@ msgstr ""
 #. Translators: Installation failure description. Brackets will be replaced by the distribution name.
 #: data/resources/ui/pages/failed.blp
 msgid ""
-"Details on the error that occured can be found in the installation logs. "
+"Details on the error that occurred can be found in the installation logs. "
 "Please report this error to {}."
 msgstr ""
 
@@ -150,13 +217,13 @@ msgstr ""
 
 #. Translators: Presented next to the current Timezone.
 #. Translators: Description of selected timezone.
-#: data/resources/ui/pages/region.blp data/resources/ui/pages/summary.blp
+#: data/resources/ui/pages/region.blp src/ui/row/summary_row.py
 msgid "Timezone"
 msgstr ""
 
 #. Translators: Presented next to the current Formats.
 #. Translators: Description of selected format.
-#: data/resources/ui/pages/region.blp data/resources/ui/pages/summary.blp
+#: data/resources/ui/pages/region.blp src/ui/row/summary_row.py
 msgid "Formats"
 msgstr ""
 
@@ -167,20 +234,10 @@ msgid ""
 "office program defaults."
 msgstr ""
 
-#. Translators: Description of selected language.
-#: data/resources/ui/pages/summary.blp
-msgid "Language"
-msgstr ""
-
-#. Translators: Description of selected keyboard layout.
+#. Translators: Description of whether disk encryption is enabled.
 #. Translators: Page title
 #: data/resources/ui/pages/summary.blp src/ui/page_wrapper.py
-msgid "Keyboard Layout"
-msgstr ""
-
-#. Translators: Description of selected keyboard layout.
-#: data/resources/ui/pages/summary.blp
-msgid "Desktop"
+msgid "Disk Encryption"
 msgstr ""
 
 #. Translators: Description of defined user account name and autologin status.
@@ -192,18 +249,6 @@ msgstr ""
 #. Translators: Gets shown when autologin is enabled.
 #: data/resources/ui/pages/summary.blp
 msgid "(Automatic Login)"
-msgstr ""
-
-#. Translators: Description of selected additional software.
-#. Translators: Page title
-#: data/resources/ui/pages/summary.blp src/ui/page_wrapper.py
-msgid "Additional Software"
-msgstr ""
-
-#. Translators: Description of selected additional features.
-#. Translators: Page title
-#: data/resources/ui/pages/summary.blp src/ui/page_wrapper.py
-msgid "Additional Features"
 msgstr ""
 
 #. Translators: Used with entry field for User's name
@@ -238,9 +283,20 @@ msgid ""
 "system."
 msgstr ""
 
+#. Translators: Tooltip on the icon-only About button (it has no label,
+#. so this is also its accessible name).
+#: data/resources/ui/pages/welcome.blp
+msgid "About"
+msgstr ""
+
 #. Translators: Label to use whole disk rather than a single partition.
 #: data/resources/ui/row/device_choice_row.blp
 msgid "Use Whole Disk"
+msgstr ""
+
+#. Translators: Description of selected disk.
+#: data/resources/ui/row/device_summary_row.blp
+msgid "Disk"
 msgstr ""
 
 #. Translators: Label for disk with mounted filesystem
@@ -248,14 +304,9 @@ msgstr ""
 msgid "Has filesystem(s) in use"
 msgstr ""
 
-#. Translators: Button to unmount filesystems
+#. Translators: Tooltip for unmount button
 #: data/resources/ui/row/device_mounted_row.blp
 msgid "Unmount"
-msgstr ""
-
-# Translators: Label for disk with root filesystem mounted
-#: data/resources/ui/row/device_rootfs_disk_row.blp
-msgid "System disk in use"
 msgstr ""
 
 #. Translators: Shown for partitions that are not big enough to be installed on.
@@ -370,8 +421,9 @@ msgid "Installation Complete"
 msgstr ""
 
 #. Translators: Page title
-#: src/ui/page_wrapper.py
-msgid "Disk Encryption"
+#. Translators: Description of selected additional features.
+#: src/ui/page_wrapper.py src/ui/row/summary_row.py
+msgid "Additional Features"
 msgstr ""
 
 #. Translators: Page title
@@ -395,6 +447,12 @@ msgid "Keyboard Layout Selection"
 msgstr ""
 
 #. Translators: Page title
+#. Translators: Description of selected keyboard layout.
+#: src/ui/page_wrapper.py src/ui/row/summary_row.py
+msgid "Keyboard Layout"
+msgstr ""
+
+#. Translators: Page title
 #: src/ui/page_wrapper.py
 msgid "Adapt to Location"
 msgstr ""
@@ -402,6 +460,12 @@ msgstr ""
 #. Translators: Page title
 #: src/ui/page_wrapper.py
 msgid "Restarting"
+msgstr ""
+
+#. Translators: Page title
+#. Translators: Description of selected additional software.
+#: src/ui/page_wrapper.py src/ui/row/summary_row.py
+msgid "Additional Software"
 msgstr ""
 
 #. Translators: Page title
@@ -419,12 +483,37 @@ msgstr ""
 msgid "Welcome"
 msgstr ""
 
-#. Translators: Shown when list of selected software is empty.
+#. Translators: Shown in summary when disk encryption is enabled.
+#. Translators: Shown in summary when disk encryption is disabled.
 #: src/ui/pages/summary.py
+msgid "Enabled"
+msgstr ""
+
+#: src/ui/pages/summary.py
+msgid "Disabled"
+msgstr ""
+
+#. Translators: Shown in summary when a root password will be set.
+#. Translators: Shown in summary when no root password will be set.
+#: src/ui/pages/summary.py
+msgid "Set"
+msgstr ""
+
+#: src/ui/pages/summary.py
+msgid "Not set"
+msgstr ""
+
+#. Translators: Shown when list of selected software is empty.
+#: src/ui/row/summary_row.py
 msgid "None"
 msgstr ""
 
-#. Translators: Description of selected disk.
-#: src/ui/row/device_rows.py
-msgid "Disk"
+#. Translators: Description of selected desktop.
+#: src/ui/row/summary_row.py
+msgid "Desktop"
+msgstr ""
+
+#. Translators: Description of selected language.
+#: src/ui/row/summary_row.py
+msgid "Language"
 msgstr ""
