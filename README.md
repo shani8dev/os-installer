@@ -87,6 +87,12 @@ The distro side lives outside this repo. `os-installer` reads
 partition layout, subvolume layout and first-boot handover are documented in
 [os-installer-config](https://github.com/shani8dev/os-installer-config).
 
+A config can also set `install_policy` (labels, subvolume list, image
+directory, swapfile, boot entries) and `secure_boot` / `tpm` (`auto`/`yes`/
+`no`): the installer validates them and exports them to the scripts as
+`OSI_*`, so the distro no longer has to hardcode them — see
+[docs/Hacking.md](docs/Hacking.md#install-policy).
+
 ## Translations
 
 The gettext domain and the `po/` tree are upstream's, and translations are

@@ -89,6 +89,37 @@ disk_encryption:
   min_length: 1
   confirmation: yes
 
+# Secure Boot: offer to stage MOK enrollment.
+#
+# offered                 "auto" (only on UEFI), "yes" or "no" (a bare yes/no
+#                         works: YAML 1.1 makes it a bool, the loader accepts
+#                         both)
+# mok_password_min_length Minimum length of the separate enrollment password
+secure_boot:
+  offered: auto
+  mok_password_min_length: 1
+
+# TPM: offer to unlock the encrypted disk with the TPM.
+#
+# offered  "auto" (only when a TPM is present), "yes" or "no"
+# pcrs     PCR policy used when enrolling (gen-efi decides 0+7 with Secure
+#          Boot and 0 without; kept here for the record)
+tpm:
+  offered: auto
+  pcrs: '0+7'
+
+# Install policy: the values the install scripts get as OSI_* instead of
+# hardcoding. Defaults are the ShaniOS layout; override only what differs.
+#
+# os_name, root_label, boot_label, partition_layout (relative to this file),
+# btrfs_subvolumes (list), btrfs_top_options, swapfile_path, image_dir,
+# rootfs_image, flatpak_image, snap_image, ai_models_image,
+# kernel_cmdline_current, kernel_cmdline_candidate, uki_boot_entries,
+# admin_groups (default wheel, sudo; root always, empty list disables)
+# install_policy:
+#   root_label: mydistro_root
+#   boot_label: mydistro_boot
+
 # Provide multiple desktop environments to choose from
 #
 # name        string  Name of desktop. Translatable.
