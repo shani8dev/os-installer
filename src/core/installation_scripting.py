@@ -88,8 +88,12 @@ class InstallationScripting():
             terminal_provider.set_pty(pty)
             self.running_step = next_step
         else:
-            config.set('logged-error', f'Could not find configured script "{file_path}"')
-            config.set('logged-error', 'Stopping installation')
+            # One message, not two: the second used to overwrite the first, so
+            # the terminal only ever said "Stopping installation" and never
+            # which script was missing.
+            config.set('logged-error',
+                       f'Could not find configured script "{file_path}". '
+                       'Stopping installation.')
             GLib.idle_add(self._fail_installation, None)
 
     ### callbacks ###
