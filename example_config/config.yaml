@@ -89,6 +89,22 @@ disk_encryption:
   min_length: 1
   confirmation: yes
 
+# Generate a LUKS recovery key and show it once, on the done page. The PIN is
+# what the user remembers; this is what they write down.
+# disk_encryption:
+#   recovery_key: yes
+
+# hostname: my-machine        # null/omitted: use the distro name. ShaniOS
+                              # leaves the hostname to its first-run setup.
+# power_warning: yes          # warn on the welcome page when on battery
+
+# user:
+#   groups: [wheel]           # extra groups for the account
+
+# disk_erase: quick           # quick (default) or secure (blkdiscard first)
+# time_sync: yes              # enable systemd-timesyncd in the target
+# copy_network: yes           # copy the live session's NM profiles over
+
 # Secure Boot: offer to stage MOK enrollment.
 #
 # offered                 "auto" (only on UEFI), "yes" or "no" (a bare yes/no
