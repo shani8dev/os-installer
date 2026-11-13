@@ -1,5 +1,18 @@
 # Release Notes
 
+## Version 0.6.3
+### ShaniOS
+* The distro's install policy is config, not constants in the scripts:
+  `install_policy` (os name, root/ESP labels, btrfs subvolumes and mount
+  options, swapfile, image directory and image names, kernel cmdline files,
+  UKI entry directory) is validated by the installer and exported to every
+  step as `OSI_*`. Defaults are the ShaniOS layout, so a config that does
+  not mention it behaves exactly as before.
+* The installer decides who may install: `install_policy.admin_groups`
+  (default `wheel`, `sudo`; root always, empty list disables). The reason is
+  shown on the failed page instead of being printed into a terminal the user
+  has to open.
+
 ## Version 0.6.2
 ### Fixes
 * `available_translations` (set by the launcher before `init()`) survived the
