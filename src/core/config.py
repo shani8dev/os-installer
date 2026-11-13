@@ -254,10 +254,17 @@ class Config:
         return variable in self.variables
 
     def init(self, config_path, demo_mode, test_mode):
-        # Start from a clean copy every time: init() is called once at startup,
-        # but a second call (tests, a reload) must not inherit the previous
-        # run's values or multiply min_size again.
+        # Start from a clean copy of the defaults every time, so a second
+        # call (tests, a reload) cannot inherit the previous run's values or
+        # multiply min_size again.
+        #
+        # Values set before the config was read are not part of the defaults
+        # and must survive: the launcher sets available_translations between
+        # importing this module and calling init().
+        preset = {key: value for key, value in self.variables.items()
+                  if key not in default_config}
         self.variables = deepcopy(default_config)
+        self.variables.update(preset)
 
         if demo_mode and test_mode:
             print("Only one of demo and test mode can be set at a time! "

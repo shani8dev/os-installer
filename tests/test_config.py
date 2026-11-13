@@ -79,6 +79,14 @@ def test_demo_and_test_flags_are_exclusive(fresh_config, config_file):
     assert not fresh_config.is_test()
 
 
+def test_init_keeps_values_set_before_the_config_is_read(config_file):
+    """The launcher sets available_translations before calling init()."""
+    cfg = Config()
+    cfg.variables['available_translations'] = ['en_US', 'de']
+    cfg.init(str(config_file), False, False)
+    assert cfg.get('available_translations') == ['en_US', 'de']
+
+
 def test_subscribe_and_steal(monkeypatch):
     cfg = Config()
     # start from the internal defaults, as init() would leave them
