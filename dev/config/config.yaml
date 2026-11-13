@@ -51,6 +51,17 @@ disk_encryption:
   min_length: 4
   confirmation: yes
 
+# Forced on: the dev container is not a UEFI machine and has no TPM, but both
+# pages must be walked like any other. The real config leaves these at "auto",
+# which shows them only where the firmware/hardware can use them.
+secure_boot:
+  offered: yes
+  mok_password_min_length: 4
+
+tpm:
+  offered: yes
+  pcrs: '0+7'
+
 skip_region: yes
 skip_user: yes
 

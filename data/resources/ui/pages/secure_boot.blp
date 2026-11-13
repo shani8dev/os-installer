@@ -1,0 +1,71 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $SecureBootPage : Box {
+  orientation: vertical;
+  spacing: 12;
+
+  ListBox {
+    selection-mode: none;
+    styles ["boxed-list"]
+
+    Adw.SwitchRow switch_row {
+      activatable: true;
+      /* Translators: Used with option to enroll the distribution's Machine
+         Owner Key, so Secure Boot accepts the installed system. */
+      title: _("Enroll the ShaniOS key (MOK)");
+      /* Translators: Shown under the MOK enrollment switch. */
+      subtitle: _("Required for Secure Boot to accept this system. You will confirm it once, on the next boot.");
+      notify::active => $switch_row_clicked();
+    }
+
+    Adw.SwitchRow root_pw_row {
+      activatable: true;
+      /* Translators: Use the root password (from /etc/shadow) as the one-time
+         MokManager password instead of a separate one. */
+      title: _("Use the root password");
+      /* Translators: Shown under the root-password switch. */
+      subtitle: _("On the next boot, confirm with the root password you set during installation.");
+      notify::active => $root_pw_clicked();
+    }
+
+    Adw.PasswordEntryRow password_row {
+      activates-default: true;
+      use-underline: true;
+      width-chars: 10;
+      max-width-chars: 32;
+      /* Translators: One-time password typed into the firmware's MokManager on
+         the next boot. */
+      title: _("Enrollment password");
+      changed => $password_changed();
+      entry-activated => $password_activated();
+    }
+
+    Adw.PasswordEntryRow confirm_row {
+      activates-default: true;
+      use-underline: true;
+      width-chars: 10;
+      max-width-chars: 32;
+      /* Translators: Confirmation of the one-time MokManager password. */
+      title: _("Confirm password");
+      changed => $confirm_changed();
+      entry-activated => $confirm_activated();
+    }
+  }
+
+  Adw.Banner hint_banner {
+    title: _("This password is only used once, on the next boot. It is not stored on the installed system.");
+    revealed: true;
+  }
+
+  Adw.Banner root_pw_banner {
+    title: _("No root password is set, so it cannot be used for enrollment. Set one on the encryption page, or use a separate enrollment password.");
+    revealed: false;
+    styles ["error"]
+  }
+
+  $ContinueButton continue_button {
+    action-name: "win.advance";
+    receives-default: true;
+  }
+}

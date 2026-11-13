@@ -15,7 +15,9 @@ data/resources/ui/pages/internet.blp
 data/resources/ui/pages/keyboard_layout.blp
 data/resources/ui/pages/keyboard_overview.blp
 data/resources/ui/pages/region.blp
+data/resources/ui/pages/secure_boot.blp
 data/resources/ui/pages/summary.blp
+data/resources/ui/pages/tpm.blp
 data/resources/ui/pages/user.blp
 data/resources/ui/pages/welcome.blp
 
@@ -30,6 +32,8 @@ src/provider/disk_provider.py
 src/ui/buttons.py
 src/ui/confirm_quit_dialog.py
 src/ui/page_wrapper.py
+src/ui/pages/secure_boot.py
 src/ui/pages/summary.py
+src/ui/pages/tpm.py
 src/ui/row/device_rows.py
 src/ui/row/summary_row.py

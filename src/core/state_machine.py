@@ -3,6 +3,8 @@
 from .config import config
 from .installation_scripting import installation_scripting
 
+from glob import glob
+import os
 from threading import Lock
 
 
@@ -14,6 +16,9 @@ page_order = [
     'internet',
     'disk',
     'encrypt',
+    # optional security setup
+    'secure-boot',
+    'tpm',
     'desktop',
     'confirm',
     # configuration
@@ -45,6 +50,8 @@ class StateMachine:
                 'welcome': config.get('welcome_page')['usage'],
                 'internet': config.get('internet')['connection_required'],
                 'encrypt': self._offer_encryption(),
+                'secure-boot': self._offer_secure_boot(),
+                'tpm': self._offer_tpm(),
                 'desktop': config.get('desktop'),
                 'confirm': config.get('scripts')['install'],
                 'user': not config.get('skip_user'),
@@ -62,8 +69,19 @@ class StateMachine:
             self.all_available_pages = list(self.available_pages)
 
     def _offer_language_selection(self):
+        # The fallback for language_use_fixed is False, which is also a valid
+        # answer, so "not set" has to be checked separately: otherwise the
+        # preload manager losing the race (it fills this in from a background
+        # thread) is indistinguishable from "no fixed language" and the
+        # language page appears even with one configured.
+        if not config.has('language_use_fixed'):
+            from .language_provider import language_provider
+            language_provider.preload()
+            config.set('language_use_fixed',
+                       language_provider.future.result())
+
         use_fixed_language = config.get('language_use_fixed')
-        if type(use_fixed_language) is not bool:
+        if not isinstance(use_fixed_language, bool):
             use_fixed_language = use_fixed_language.result()
             config.set('language_use_fixed', use_fixed_language)
         return not use_fixed_language
@@ -77,6 +95,26 @@ class StateMachine:
             return False
         else:
             return True
+
+    def _offer_secure_boot(self):
+        """MOK enrollment is only meaningful where the firmware can ask for it."""
+        offered = config.get('secure_boot')['offered']
+        if offered == 'no':
+            return False
+        if offered == 'yes':
+            return True
+        return os.path.isdir('/sys/firmware/efi')
+
+    def _offer_tpm(self):
+        """TPM unlock only helps an encrypted disk, and needs a TPM."""
+        if not config.get('disk_encryption')['offered']:
+            return False
+        offered = config.get('tpm')['offered']
+        if offered == 'no':
+            return False
+        if offered == 'yes':
+            return True
+        return bool(glob('/dev/tpmrm*') or glob('/sys/class/tpm/tpm[0-9]*'))
 
     ### public methods ###
 

@@ -1,0 +1,32 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $TpmPage : Box {
+  orientation: vertical;
+  spacing: 12;
+
+  ListBox {
+    selection-mode: none;
+    styles ["boxed-list"]
+
+    Adw.SwitchRow switch_row {
+      activatable: true;
+      /* Translators: Used with option to let the TPM unlock the encrypted disk
+         automatically. */
+      title: _("Unlock the disk with the TPM");
+      /* Translators: Shown under the TPM switch. */
+      subtitle: _("The disk then unlocks without a PIN on this machine. The encryption PIN stays as a fallback.");
+      notify::active => $switch_row_clicked();
+    }
+  }
+
+  Adw.Banner hint_banner {
+    title: _("The TPM is enrolled on the first boot after installation. The installer records this choice only.");
+    revealed: true;
+  }
+
+  $ContinueButton continue_button {
+    action-name: "win.advance";
+    receives-default: true;
+  }
+}

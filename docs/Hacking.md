@@ -96,6 +96,27 @@ makes itself: root may always install, and a user in one of the groups may.
 Without it the first script used to exit 1 and print the reason into a
 terminal the user had to open. An empty list disables the check.
 
+## Secure Boot and TPM
+
+Two optional pages, both config-driven (`secure_boot.offered`, `tpm.offered`:
+`auto`/`yes`/`no`; `auto` shows them only where the firmware/hardware can use
+them — a bare `offered: yes` works too, YAML 1.1 reads it as a bool and the
+loader turns it back into `"yes"`):
+
+* **Secure Boot** offers to stage MOK enrollment and takes the one-time
+  MokManager password. Two modes: a separate password, or
+  `mokutil --root-pw` — the root password from the installed system's
+  `/etc/shadow`, which needs the root password to be set (the page says so and
+  blocks Continue if it is not). Exported as `OSI_MOK_ENROLL`,
+  `OSI_MOK_PASSWORD`, `OSI_MOK_ROOT_PW`.
+* **TPM** offers to let the TPM unlock the encrypted disk. Enrollment itself
+  needs the *booted* installed system (the LUKS mapper and the final PCRs),
+  so the installer only records the choice: `OSI_USE_TPM`. First boot enrolls
+  with `gen-efi.sh enroll-tpm2` (PCR 0+7 with Secure Boot, 0 without).
+
+`configure.sh` stages MOK in the target chroot; `gen-efi.sh` is the tool for
+the live system (and owns the PCR policy).
+
 ## Structure
 The app tries to follow the best practices of GNOME/libadwaita apps.
 UI elements are described in Blueprint (.blp) files, which get used as templates by Python classes, that include the functionality.

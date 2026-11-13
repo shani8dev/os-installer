@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: os-installer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-13 19:10+0000\n"
+"POT-Creation-Date: 2026-11-13 19:50+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -234,6 +234,54 @@ msgid ""
 "office program defaults."
 msgstr ""
 
+#. Translators: Used with option to enroll the distribution's Machine
+#. Owner Key, so Secure Boot accepts the installed system.
+#: data/resources/ui/pages/secure_boot.blp
+msgid "Enroll the ShaniOS key (MOK)"
+msgstr ""
+
+#. Translators: Shown under the MOK enrollment switch.
+#: data/resources/ui/pages/secure_boot.blp
+msgid ""
+"Required for Secure Boot to accept this system. You will confirm it once, on "
+"the next boot."
+msgstr ""
+
+#. Translators: Use the root password (from /etc/shadow) as the one-time
+#. MokManager password instead of a separate one.
+#: data/resources/ui/pages/secure_boot.blp
+msgid "Use the root password"
+msgstr ""
+
+#. Translators: Shown under the root-password switch.
+#: data/resources/ui/pages/secure_boot.blp
+msgid ""
+"On the next boot, confirm with the root password you set during installation."
+msgstr ""
+
+#. Translators: One-time password typed into the firmware's MokManager on
+#. the next boot.
+#: data/resources/ui/pages/secure_boot.blp
+msgid "Enrollment password"
+msgstr ""
+
+#. Translators: Confirmation of the one-time MokManager password.
+#: data/resources/ui/pages/secure_boot.blp
+msgid "Confirm password"
+msgstr ""
+
+#: data/resources/ui/pages/secure_boot.blp
+msgid ""
+"This password is only used once, on the next boot. It is not stored on the "
+"installed system."
+msgstr ""
+
+#: data/resources/ui/pages/secure_boot.blp
+msgid ""
+"No root password is set, so it cannot be used for enrollment. Set one on the "
+"encryption page, or use a separate enrollment password."
+msgstr ""
+
 #. Translators: Description of whether disk encryption is enabled.
 #. Translators: Page title
 #: data/resources/ui/pages/summary.blp src/ui/page_wrapper.py
@@ -249,6 +297,25 @@ msgstr ""
 #. Translators: Gets shown when autologin is enabled.
 #: data/resources/ui/pages/summary.blp
 msgid "(Automatic Login)"
+msgstr ""
+
+#. Translators: Used with option to let the TPM unlock the encrypted disk
+#. automatically.
+#: data/resources/ui/pages/tpm.blp
+msgid "Unlock the disk with the TPM"
+msgstr ""
+
+#. Translators: Shown under the TPM switch.
+#: data/resources/ui/pages/tpm.blp
+msgid ""
+"The disk then unlocks without a PIN on this machine. The encryption PIN "
+"stays as a fallback."
+msgstr ""
+
+#: data/resources/ui/pages/tpm.blp
+msgid ""
+"The TPM is enrolled on the first boot after installation. The installer "
+"records this choice only."
 msgstr ""
 
 #. Translators: Used with entry field for User's name
@@ -463,6 +530,12 @@ msgid "Restarting"
 msgstr ""
 
 #. Translators: Page title
+#. Translators: Description of the MOK enrollment choice.
+#: src/ui/page_wrapper.py src/ui/row/summary_row.py
+msgid "Secure Boot"
+msgstr ""
+
+#. Translators: Page title
 #. Translators: Description of selected additional software.
 #: src/ui/page_wrapper.py src/ui/row/summary_row.py
 msgid "Additional Software"
@@ -471,6 +544,12 @@ msgstr ""
 #. Translators: Page title
 #: src/ui/page_wrapper.py
 msgid "Summary"
+msgstr ""
+
+#. Translators: Page title
+#. Translators: Description of the TPM auto-unlock choice.
+#: src/ui/page_wrapper.py src/ui/row/summary_row.py
+msgid "Automatic Unlock"
 msgstr ""
 
 #. Translators: Page title
@@ -485,11 +564,11 @@ msgstr ""
 
 #. Translators: Shown in summary when disk encryption is enabled.
 #. Translators: Shown in summary when disk encryption is disabled.
-#: src/ui/pages/summary.py
+#: src/ui/pages/summary.py src/ui/row/summary_row.py
 msgid "Enabled"
 msgstr ""
 
-#: src/ui/pages/summary.py
+#: src/ui/pages/summary.py src/ui/row/summary_row.py
 msgid "Disabled"
 msgstr ""
 

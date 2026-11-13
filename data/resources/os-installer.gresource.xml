@@ -37,8 +37,10 @@
     <file preprocess="xml-stripblanks">ui/pages/keyboard_overview.ui</file>
     <file preprocess="xml-stripblanks">ui/pages/language.ui</file>
     <file preprocess="xml-stripblanks">ui/pages/region.ui</file>
+    <file preprocess="xml-stripblanks">ui/pages/secure_boot.ui</file>
     <file preprocess="xml-stripblanks">ui/pages/restart.ui</file>
     <file preprocess="xml-stripblanks">ui/pages/summary.ui</file>
+    <file preprocess="xml-stripblanks">ui/pages/tpm.ui</file>
     <file preprocess="xml-stripblanks">ui/pages/user.ui</file>
     <file preprocess="xml-stripblanks">ui/pages/welcome.ui</file>
 

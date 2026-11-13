@@ -118,6 +118,14 @@ def create_envs(installation_step: InstallationStep):
             f"OSI_DEVICE_EFI_PARTITION={_get('disk_efi_partition')}",
             f"OSI_USE_ENCRYPTION={_get('use_encryption')}",
             f"OSI_ENCRYPTION_PIN={_get('encryption_pin')}",
+            # Secure Boot: stage MOK enrollment (configure.sh does it in the
+            # target chroot, where /etc/shadow is the installed one).
+            f"OSI_MOK_ENROLL={_get('mok_enroll')}",
+            f"OSI_MOK_PASSWORD={_get('mok_password')}",
+            f"OSI_MOK_ROOT_PW={_get('mok_root_pw')}",
+            # TPM auto-unlock: enrolled on the first boot of the installed
+            # system (gen-efi enroll-tpm2 needs the booted LUKS mapper).
+            f"OSI_USE_TPM={_get('use_tpm')}",
         ]
 
     if with_configure_envs:

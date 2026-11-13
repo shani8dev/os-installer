@@ -30,6 +30,12 @@ default_config = {
     # disk
     'disk': {'partition_ok': False, 'min_size': 5},
     'disk_encryption': {'offered': True, 'forced': False, 'generated': False, 'min_length': 1, 'confirmation': False},
+    # secure boot: offer the MOK enrollment page. "auto" = only on UEFI
+    # (where the firmware can actually prompt for it), "yes"/"no" force it.
+    'secure_boot': {'offered': 'auto', 'mok_password_min_length': 1},
+    # TPM: offer to bind the LUKS key to the TPM so the disk unlocks without
+    # a PIN. "auto" = only when a TPM is present; the PIN stays as fallback.
+    'tpm': {'offered': 'auto', 'pcrs': '7'},
     # desktop
     'desktop': [],
     # user
@@ -93,6 +99,10 @@ internal_values = {
     'internet_connection': False,
     'use_encryption': False,
     'encryption_pin': '',
+    'mok_enroll': True,
+    'mok_password': 'shanios',
+    'mok_root_pw': False,
+    'use_tpm': False,
     'root_password': '',
     'desktop_chosen': ('', ''),
     'user_name': '',
@@ -169,6 +179,12 @@ def _validate(variables):
         _match(variables['disk_encryption'], 'generated', bool) and
         _match(variables['disk_encryption'], 'min_length', int) and
         _match(variables['disk_encryption'], 'confirmation', bool) and
+        _match(variables, 'secure_boot', dict) and
+        _match(variables['secure_boot'], 'offered', str) and
+        _match(variables['secure_boot'], 'mok_password_min_length', int) and
+        _match(variables, 'tpm', dict) and
+        _match(variables['tpm'], 'offered', str) and
+        _match(variables['tpm'], 'pcrs', str) and
         _match(variables, 'user', dict) and
         _match(variables['user'], 'min_password_length', int) and
         _match(variables['user'], 'request_username', bool) and
@@ -179,7 +195,17 @@ def _validate(variables):
         _match(variables, 'install_slideshow', list) and
         _match(variables, 'distribution_name', str) and
         _match(variables, 'fixed_language', bool, str) and
+        _validate_offered(variables) and
         _validate_install_policy(variables))
+
+
+def _validate_offered(variables):
+    for section in ('secure_boot', 'tpm'):
+        value = variables[section]['offered']
+        if value not in ('auto', 'yes', 'no'):
+            print(f'Config error: {section}.offered must be "auto", "yes" or "no"')
+            return False
+    return True
 
 
 def _validate_install_policy(variables):
@@ -241,6 +267,13 @@ class Config:
                     self.variables[config_property][key] = value
             else:
                 self.variables[config_property] = config_from_file[config_property]
+
+        # YAML 1.1 reads a bare yes/no as a bool, and `offered: yes` is the
+        # natural way to write it. Accept both, and keep the value a string.
+        for section in ('secure_boot', 'tpm'):
+            offered = self.variables[section]['offered']
+            if isinstance(offered, bool):
+                self.variables[section]['offered'] = 'yes' if offered else 'no'
 
     def _handle_legacy(self, legacy_prop, legacy_val):
         replacement = legacy_values[legacy_prop]

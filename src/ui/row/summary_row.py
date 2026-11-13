@@ -31,8 +31,12 @@ update_funcs = {
     "format": ("formats", lambda formats: formats[1]),
     "keyboard-overview": ("keyboard_layout", lambda keyboard: keyboard[1]),
     "language": ("language_chosen", lambda language: language.name),
+    "secure-boot": ("mok_enroll",
+                    lambda enabled: _("Enabled") if enabled else _("Disabled")),
     "timezone": ("timezone", lambda timezone: timezone),
     "software": ("software_choices", _get_choices),
+    "tpm": ("use_tpm",
+            lambda enabled: _("Enabled") if enabled else _("Disabled")),
 }
 
 titles = {
@@ -46,8 +50,12 @@ titles = {
     "keyboard-overview": _("Keyboard Layout"),
     # Translators: Description of selected language.
     "language": _("Language"),
+    # Translators: Description of the MOK enrollment choice.
+    "secure-boot": _("Secure Boot"),
     # Translators: Description of selected timezone.
     "timezone": _("Timezone"),
+    # Translators: Description of the TPM auto-unlock choice.
+    "tpm": _("Automatic Unlock"),
     # Translators: Description of selected additional software.
     "software": _("Additional Software"),
 }

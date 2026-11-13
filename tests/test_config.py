@@ -74,6 +74,50 @@ def test_invalid_disk_section_falls_back_to_demo(fresh_config, config_file):
     assert fresh_config.is_demo()
 
 
+@pytest.mark.parametrize('section,bad', [
+    ('secure_boot', {'offered': 'maybe'}),
+    ('secure_boot', {'mok_password_min_length': 'four'}),
+    ('tpm', {'offered': 'sometimes'}),
+    ('tpm', {'pcrs': 7}),
+])
+def test_invalid_security_section_falls_back_to_demo(fresh_config, config_file,
+                                                     section, bad):
+    data = yaml.safe_load(config_file.read_text())
+    data[section] = bad
+    config_file.write_text(yaml.safe_dump(data))
+
+    fresh_config.init(str(config_file), False, False)
+    assert fresh_config.is_demo()
+
+
+def test_offered_accepts_yaml_booleans(fresh_config, config_file):
+    """`offered: yes` is the natural spelling; YAML 1.1 makes it a bool."""
+    data = yaml.safe_load(config_file.read_text())
+    data['secure_boot'] = {'offered': True}
+    data['tpm'] = {'offered': False}
+    config_file.write_text(yaml.safe_dump(data))
+
+    fresh_config.init(str(config_file), False, False)
+
+    assert not fresh_config.is_demo()
+    assert fresh_config.get('secure_boot')['offered'] == 'yes'
+    assert fresh_config.get('tpm')['offered'] == 'no'
+
+
+def test_security_sections_merge_with_the_defaults(fresh_config, config_file):
+    data = yaml.safe_load(config_file.read_text())
+    data['secure_boot'] = {'offered': 'yes'}
+    data['tpm'] = {'pcrs': '0+7'}
+    config_file.write_text(yaml.safe_dump(data))
+
+    fresh_config.init(str(config_file), False, False)
+    assert not fresh_config.is_demo()
+    assert fresh_config.get('secure_boot')['offered'] == 'yes'
+    assert fresh_config.get('secure_boot')['mok_password_min_length'] == 1
+    assert fresh_config.get('tpm')['pcrs'] == '0+7'
+    assert fresh_config.get('tpm')['offered'] == 'auto'
+
+
 def test_install_policy_defaults_are_valid():
     assert config_module._validate(config_module.default_config)
 

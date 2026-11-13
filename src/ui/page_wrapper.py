@@ -19,8 +19,10 @@ from .internet import InternetPage
 from .keyboard import KeyboardLanguagePage, KeyboardLayoutPage, KeyboardOverviewPage
 from .language import LanguagePage
 from .region import RegionPage
+from .secure_boot import SecureBootPage
 from .restart import RestartPage
 from .summary import SummaryPage
+from .tpm import TpmPage
 from .user import UserPage
 from .welcome import WelcomePage
 
@@ -58,9 +60,13 @@ page_name_to_page_title = {
     # Translators: Page title
     'restart':              _("Restarting"),
     # Translators: Page title
+    'secure-boot':          _("Secure Boot"),
+    # Translators: Page title
     'software':             _("Additional Software"),
     # Translators: Page title
     'summary':              _("Summary"),
+    # Translators: Page title
+    'tpm':                  _("Automatic Unlock"),
     # Translators: Page title
     'timezone':             _("Select Location"),
     # Translators: Page title
@@ -85,8 +91,10 @@ page_name_to_image = {
     'language':             'language-symbolic',
     'region':               'globe-symbolic',
     'restart':              'system-reboot-symbolic',
+    'secure-boot':          'security-high-symbolic',
     'software':             'system-software-install-symbolic',
     'summary':              None,
+    'tpm':                  'drive-harddisk-symbolic',
     'timezone':             'map-symbolic',
     'user':                 'user-symbolic',
 }
@@ -113,8 +121,10 @@ page_name_to_type = {
     'language':             LanguagePage,
     'region':               RegionPage,
     'restart':              RestartPage,
+    'secure-boot':          SecureBootPage,
     'software':             SoftwarePage,
     'summary':              SummaryPage,
+    'tpm':                  TpmPage,
     'timezone':             TimezonePage,
     'user':                 UserPage,
     'welcome':              WelcomePage,

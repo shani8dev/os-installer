@@ -51,6 +51,10 @@ def clean_config():
         'skip_user': True,
         'skip_region': True,
         'install_policy': deepcopy(default_config['install_policy']),
+        'mok_enroll': True,
+        'mok_password': 'shanios',
+        'mok_root_pw': False,
+        'use_tpm': False,
         'desktop_chosen': ('gnome', 'GNOME'),
         'language_chosen': Language('en_US.UTF-8'),
         'keyboard_layout': ('us', 'English (US)'),
@@ -122,6 +126,20 @@ def test_install_policy_is_exported():
     assert values['OSI_SKIP_USER'] == '1'
     assert values['OSI_SKIP_REGION'] == '1'
     assert values['OSI_MIN_PASSWORD_LENGTH'] == '4'
+
+
+def test_secure_boot_and_tpm_are_exported():
+    values = envs(InstallationStep.configure)
+    assert values['OSI_MOK_ENROLL'] == '1'
+    assert values['OSI_MOK_PASSWORD'] == 'shanios'
+    assert values['OSI_MOK_ROOT_PW'] == '0'
+    assert values['OSI_USE_TPM'] == '0'
+
+    config.variables['mok_root_pw'] = True
+    config.variables['use_tpm'] = True
+    values = envs(InstallationStep.configure)
+    assert values['OSI_MOK_ROOT_PW'] == '1'
+    assert values['OSI_USE_TPM'] == '1'
 
 
 def test_policy_can_be_overridden_from_the_config():

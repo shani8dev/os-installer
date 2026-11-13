@@ -447,10 +447,13 @@ def check_script_log(path):
         'OSI_USER_USERNAME': 'user',      # user_name is '' (skip_user: yes)
         'OSI_TIMEZONE': 'UTC',
         'OSI_FORMATS': 'en_US.UTF-8',
-        'OSI_ROOT_PASSWORD': '',
+        'OSI_ROOT_PASSWORD': 'rootpw',
         'OSI_SKIP_USER': '1',
         'OSI_SKIP_REGION': '1',
         'OSI_MIN_PASSWORD_LENGTH': '4',
+        'OSI_MOK_ENROLL': '1',
+        'OSI_MOK_ROOT_PW': '1',
+        'OSI_USE_TPM': '1',
     }
     for var, value in expect_configure.items():
         ok &= result(f'configure-{var}', configure.get(var) == value,
@@ -511,8 +514,27 @@ def walk(out_dir, lint_pages=False):
     # fields (also password texts) follow them.
     walker.type('password text:.*', '1234', nth=1)
     walker.type('password text:.*', '1234', nth=2)
+    walker.click('.*Set Root Password')
+    walker.type('password text:.*', 'rootpw', nth=3)
+    walker.type('password text:.*', 'rootpw', nth=4)
     walker.shot('encrypt-on')
     walker.expect('button:^Continue$', 'PIN accepted by the continue button')
+    walker.click('button:^Continue$')
+
+    walker.step('secure boot')
+    walker.page('Secure Boot')
+    walker.shot('secure-boot')
+    walker.expect('button:^Continue$', 'MOK enrollment password accepted')
+    walker.click('.*Use the root password')
+    walker.shot('secure-boot-root-pw')
+    walker.expect('button:^Continue$', 'root password can be used for enrollment')
+    walker.click('button:^Continue$')
+
+    walker.step('tpm')
+    walker.page('Automatic Unlock')
+    walker.shot('tpm-off')
+    walker.click('.*Unlock the disk with the TPM')
+    walker.shot('tpm-on')
     walker.click('button:^Continue$')
 
     walker.step('confirmation')
@@ -525,8 +547,8 @@ def walk(out_dir, lint_pages=False):
     walker.shot('summary')
     walker.expect_text('label:^(Enabled|Disabled)$', 'Enabled',
                        'summary says encryption is on')
-    walker.expect_text('label:^(Set|Not set)$', 'Not set',
-                       'summary says no root password')
+    walker.expect_text('label:^(Set|Not set)$', 'Set',
+                       'summary says a root password is set')
     walker.click('button:^Confirm$')
 
     walker.step('installing')

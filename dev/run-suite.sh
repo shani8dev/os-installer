@@ -22,7 +22,10 @@ echo "== build"
 sh "$REPO/dev/build.sh" || exit 1
 
 echo "== launch os-installer --config=$CONFIG --demo-mode"
-os-installer --config="$CONFIG" --demo-mode >"$OUT/logs/app.log" 2>&1 &
+# -u: the installer prints its config decisions at startup, and a killed
+# process does not flush them.
+python3 -u /usr/bin/os-installer --config="$CONFIG" --demo-mode \
+    >"$OUT/logs/app.log" 2>&1 &
 app=$!
 cleanup() {
     kill "$app" 2>/dev/null
