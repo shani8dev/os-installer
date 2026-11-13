@@ -1,5 +1,23 @@
 # Release Notes
 
+## Version 0.6.4
+### ShaniOS
+* New **Secure Boot** page: stages MOK enrollment and takes the one-time
+  MokManager password — a separate one, or the installed system's root
+  password via `mokutil --root-pw` (blocked when no root password is set).
+* New **TPM** page: records that the encrypted disk should unlock with the
+  TPM on first boot (`gen-efi.sh enroll-tpm2`, PCR 0+7 with Secure Boot, 0
+  without; the PIN stays as a fallback).
+* `secure_boot.offered` / `tpm.offered` (`auto`/`yes`/`no`) decide when each
+  page appears; `auto` means UEFI / a TPM present.
+* Both choices are summarised on the summary page.
+
+### Fixes
+* A fixed language could randomly lose the race with the preload thread and
+  show the language page: `language_use_fixed` falls back to `False`, which
+  is also a valid answer, so "not set" is now checked explicitly and the
+  decision is made before the first page is chosen.
+
 ## Version 0.6.3
 ### ShaniOS
 * The distro's install policy is config, not constants in the scripts:
