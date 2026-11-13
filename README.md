@@ -56,9 +56,13 @@ sudo meson install -C build
 Try it without touching the system:
 
 ```
-os-installer -d   # demo mode: dummy disks, no scripts
-os-installer -t   # test mode: real scripts, no system settings changed
+os-installer -d   # demo mode: dummy disks, no system calls
+os-installer -t   # test mode: real disks and real scripts, no system calls
 ```
+
+Neither mode stops the configured scripts (prepare/install/configure run as
+configured), so point `-c` at a config whose scripts are safe — see
+[docs/Hacking.md](docs/Hacking.md#testing-mode).
 
 Test it without a desktop — unit tests and a full headless walk of every
 page, driven through the accessibility tree (needs Docker):

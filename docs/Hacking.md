@@ -99,7 +99,14 @@ In this mode the installer does not show the actual available system disks, but 
 
 ## Testing Mode
 With `-t` the installer runs in testing mode (with `-t`).
-Similar to demo mode this prevents the installer from making any changes to the system, but it still lists actually present disks.
+It changes how the installer itself behaves — no system calls (reboot, EFI
+entries) are made — and it still lists the disks that are actually present,
+so a real disk can be selected.
+
+It does **not** stop the configured scripts: prepare/install/configure are
+run for real, exactly as in a normal install. Test it with a config whose
+scripts only log their environment (`dev/config/` is one) or with no scripts
+at all, never with the distro's own install script unless you mean to run it.
 It also slightly changes some behaviour:
 * Disks are randomly pretended to not be available (12.5%)
 * Additional shortcuts are available
