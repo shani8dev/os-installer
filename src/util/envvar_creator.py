@@ -27,28 +27,31 @@ def _get_device_path():
     if disk := config.get('chosen_device'):
         return disk.device_path
     else:
-        print('Interal Error: No chosen disk set!')
+        print('Internal Error: No chosen disk set!')
         return ''
 
 
 def _get_locale():
-    language = config.get('language_chosen')
-    return language.locale
+    if language := config.get('language_chosen'):
+        return language.locale
+    print('Internal Error: No language chosen, using the C locale.')
+    return 'C.UTF-8'
 
 
 def _get_username():
     if config.get('user')['request_username']:
-        return config.get('user_username')
-    else:
-        # This sticks to common linux username rules:
-        # * starts with a lowercase letter
-        # * only lowercase letters, numbers, underscore (_), and dash (-)
-        # If the generation fails, a fallback is used.
-        asciified = GLib.str_to_ascii(config.get('user_name')).lower()
-        filtered = re.sub(r'[^a-z0-9-_]+', '', asciified)
-        if (position := re.search(r'[a-z]', filtered)) is None:
-            return 'user'
-        return filtered[position.start():]
+        if username := config.get('user_username'):
+            return username
+    # This sticks to common linux username rules:
+    # * starts with a lowercase letter
+    # * only lowercase letters, numbers, underscore (_), and dash (-)
+    # If the generation fails (including when the user page is skipped and
+    # user_name is still ''), a fallback is used.
+    asciified = GLib.str_to_ascii(config.get('user_name') or '').lower()
+    filtered = re.sub(r'[^a-z0-9-_]+', '', asciified)
+    if (position := re.search(r'[a-z]', filtered)) is None:
+        return 'user'
+    return filtered[position.start():]
 
 
 def _parse_choices(choices_var):
