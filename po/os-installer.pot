@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: os-installer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-13 21:04+0000\n"
+"POT-Creation-Date: 2026-11-13 21:12+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -723,4 +723,16 @@ msgstr ""
 #. Translators: Password strength.
 #: src/util/password_strength.py
 msgid "Strong"
+msgstr ""
+
+#. Translators: Followed by the strength, then libpwquality's reason.
+#: src/util/password_strength.py
+#, python-brace-format
+msgid "Password strength: {} — {}"
+msgstr ""
+
+#. Translators: Followed by the strength.
+#: src/util/password_strength.py
+#, python-brace-format
+msgid "Password strength: {}"
 msgstr ""

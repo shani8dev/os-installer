@@ -456,6 +456,8 @@ def check_script_log(path):
         'OSI_USE_TPM': '1',
         'OSI_HOSTNAME': 'shani-host',
         'OSI_USER_GROUPS': 'wheel',
+        'OSI_USE_TPM_PIN': '1',
+        'OSI_TPM_PIN': '4321',
     }
     for var, value in expect_configure.items():
         ok &= result(f'configure-{var}', configure.get(var) == value,
@@ -536,6 +538,8 @@ def walk(out_dir, lint_pages=False):
     walker.page('Automatic Unlock')
     walker.shot('tpm-off')
     walker.click('.*Unlock the disk with the TPM')
+    walker.click('.*Require a PIN at boot')
+    walker.type('password text:^TPM PIN$', '4321')
     walker.shot('tpm-on')
     walker.click('button:^Continue$')
 
@@ -562,10 +566,20 @@ def walk(out_dir, lint_pages=False):
 
     walker.step('installing')
     walker.page('Installing')
+    # configure.sh writes the recovery key here after adding the LUKS keyslot;
+    # there is no LUKS in the container, so the walker puts it there itself to
+    # exercise the done page.
+    import os as _os
+    _os.makedirs('/run/os-installer', exist_ok=True)
+    with open('/run/os-installer/recovery-key', 'w') as _key:
+        _key.write('AAAA-BBBB-CCCC-DDDD-EEEE-FFFF-2222-3333')
     walker.shot('installing')
     walker.step('done')
     walker.page('Installation Complete', 180)
     walker.shot('done')
+    walker.expect_text('label:^AAAA-BBBB', 'AAAA-BBBB',
+                       'done page shows the recovery key')
+    walker.expect('button:^Copy$', 'recovery key copy button')
     walker.expect('button:^Restart System$', 'restart button')
     walker.expect('button:^Restart Later$', 'restart-later button')
     walker.click('button:^Restart Later$')
