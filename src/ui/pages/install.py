@@ -15,6 +15,7 @@ class InstallPage(Gtk.Box):
 
     stack = Gtk.Template.Child()
     carousel = Gtk.Template.Child()
+    progress_bar = Gtk.Template.Child()
     step_label = Gtk.Template.Child()
 
     step_names = {
@@ -26,6 +27,15 @@ class InstallPage(Gtk.Box):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
+        # The scripts only report "finished", not how far along they are, so
+        # the bar is indeterminate: it shows work is happening.
+        config.subscribe('installation_running', self._update_progress,
+                         delayed=True)
+        self._update_progress(config.get('installation_running'))
+        self._alive = True
+        self.connect('destroy', self._stop_pulse)
+        GLib.timeout_add(120, self._pulse)
+
         config.subscribe('installation_step', self._update_step)
 
     def _update_step(self, step):
@@ -35,6 +45,19 @@ class InstallPage(Gtk.Box):
             self.stack.set_visible_child_name('slideshow')
         else:
             self.stack.set_visible_child_name('spinner')
+
+    def _update_progress(self, running):
+        self.progress_bar.set_visible(bool(running))
+
+    def _stop_pulse(self, *_):
+        self._alive = False
+
+    def _pulse(self):
+        if not self._alive:
+            return False
+        if config.get('installation_running'):
+            self.progress_bar.pulse()
+        return True
 
     def _setup_slideshow(self):
         slideshow = slideshow_provider.get_slideshow()

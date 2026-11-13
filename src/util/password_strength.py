@@ -12,6 +12,12 @@ The distro's `user.min_password_length` remains the policy: this is a hint.
 import ctypes
 import re
 
+try:                      # the app installs gettext's _ into builtins
+    _
+except NameError:         # imported by the tests without it
+    def _(text):
+        return text
+
 LABELS = [
     # Translators: Password strength.
     _("Too short"),

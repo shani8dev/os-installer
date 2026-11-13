@@ -5,6 +5,7 @@ from gi.repository import Gtk
 from .buttons import ContinueButton
 from .config import config
 from .entry_error_enhancer import EntryErrorEnhancer
+from .password_strength import hint as password_strength_hint
 from .translations import translate_widgets
 
 
@@ -17,6 +18,7 @@ class EncryptPage(Gtk.Box):
     pin_confirm_row = Gtk.Template.Child()
     info_revealer = Gtk.Template.Child()
     info_label = Gtk.Template.Child()
+    root_strength_label = Gtk.Template.Child()
     layout_hint = Gtk.Template.Child()
 
     root_password_switch_row = Gtk.Template.Child()
@@ -173,6 +175,8 @@ class EncryptPage(Gtk.Box):
     @Gtk.Template.Callback('root_password_changed')
     def _root_password_changed(self, editable):
         password = editable.get_text()
+        self.root_strength_label.set_label(
+            password_strength_hint(password))
         if self.root_password.update_row(password):
             config.set('root_password', password)
         self._root_password_confirm_changed(self.root_password_confirm_row)
