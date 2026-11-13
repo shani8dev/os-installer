@@ -2,18 +2,18 @@
 
 ## Development Setup
 Consider developing with [`toolbx`](https://handbook.gnome.org/development/toolbx.html).
-Install the dependencies:
-`blueprint-compiler gnome-desktop gtk4 libadwaita libgweather python-yaml udisks vte`
+Install the dependencies (Arch; see README for the current list):
+`meson blueprint-compiler appstream-glib gtk4 libadwaita gnome-desktop-4 libgweather-4 vte4 python-gobject python-yaml udisks2`
 Then clone and install:
 
 ```
-git clone --recursive https://gitlab.gnome.org/p3732/os-installer.git
+git clone --recursive https://github.com/shani8dev/os-installer.git
 cd os-installer
 meson setup build
 sudo meson install -C build
 ```
 
-To try OS-Installer, without modifying any system settings, run it in test mode with `os-installer -t`.
+To try the installer, without modifying any system settings, run it in test mode with `os-installer -t`.
 Running in GNOME Builder uses the demo mode (`os-installer -d`) and shows test dummy disks.
 Uninstall with `sudo ninja -C build uninstall `
 

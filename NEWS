@@ -1,5 +1,23 @@
 # Release Notes
 
+## Version 0.6.0 — ShaniOS fork
+First release of the ShaniOS fork of GNOME's os-installer. Forked at
+upstream commit ba5b74d.
+
+### ShaniOS
+* Renamed to ShaniOS Installer (`org.shani.OsInstaller`), new icon, desktop
+  entry, metainfo and GSettings schema; GResource prefix moved to
+  `/org/shani/os-installer`. Binary and gettext domain are unchanged.
+* Install scripts are run with `/bin/bash` instead of being exec'd directly.
+* Optional root password on the encryption page (`OSI_ROOT_PASSWORD`).
+* Summary page now lists disk encryption and root-password state.
+
+### Fixes
+* Generated usernames are used when `user.request_username` is off.
+* Fixed-language provider no longer reads the config before it is loaded.
+* `keyboard_language` fallback is a proper 2-tuple.
+* Disk page stores the EFI partition device path, not its name.
+
 ## Version 0.5.1
 * Adjust desktop selection
 * Improve handling of missing images

@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<schemalist gettext-domain="os-installer">
-	<schema id="com.github.p3732.OS_Installer" path="/com/github/p3732/os-installer/">
-	</schema>
-</schemalist>

@@ -1,63 +1,99 @@
-A simple operating system installer, intended to be used with live install systems.
-It provides a GNOME Adwaita-style interface for:
-* Bootstrapping: Language, keyboard, internet connection, disk selection, user configuration
-* Customazibility: Welcome page, installation slideshow, additional software options, all fully translatable
-* Over 25 translations
+# ShaniOS Installer
 
-# Translations
-<a href="https://hosted.weblate.org/engage/os-installer/">
-<img src="https://hosted.weblate.org/widgets/os-installer/-/os-installer/multi-auto.svg" alt="Translation status" />
-</a>
+The installer ShaniOS live images ship, forked from GNOME's
+[os-installer](https://gitlab.gnome.org/p3732/os-installer) (GPL-3.0-or-later).
 
-Help with translations is always welcome! The simplest way is via [__Weblate__](https://hosted.weblate.org/projects/os-installer/), which provides a very intuitive website.
+Upstream's last code change was in December 2025; everything after that is
+Weblate translation drops. We carry a small, reviewable set of our own fixes
+on top instead of maintaining a `patch -p1` stack in the PKGBUILD, and we keep
+upstream fixes cherry-pickable.
 
-Alternatively you could try the autonomous way:
-* Fork, clone and build this repository.
-* Add your [language code](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) `xx` to the `po/LINGUAS` file.
-* Generate a new translation file with `ninja -C build os-installer-update-po` and [edit it](https://flathub.org/apps/org.gnome.Gtranslator).
-* Test the translation, commit and push the changes to your fork and create a merge request. Thank you!
+The app keeps its upstream shape: GTK4/libadwaita, Python, Blueprint UI, pages
+driven by `state_machine.py`, distro behaviour supplied by `/etc/os-installer`
+(see [os-installer-config](https://github.com/shani8dev/os-installer-config)).
 
-# Testing
-Clone the project with [GNOME Builder](https://apps.gnome.org/Builder/) via `https://gitlab.gnome.org/p3732/os-installer.git` and run it (this will not make changes to your system).
+## What is different from upstream
 
-# Hacking
-See [`Hacking.md`](https://gitlab.gnome.org/p3732/os-installer/-/blob/main/docs/HACKING.md)
+* **App identity** — `org.shani.OsInstaller` (was `com.github.p3732.os_installer`),
+  renamed desktop entry, metainfo, GSettings schema, GResource prefix and
+  icons. The binary is still `os-installer` and the gettext domain is still
+  `os-installer`, so upstream `.po` files keep working.
+* **Install scripts run through bash** — upstream `exec`s `./<script>`, which
+  needs the executable bit and a shebang. ShaniOS ships its scripts from
+  `/etc/os-installer` and always runs them with `/bin/bash`.
+* **Optional root password** — an extra field on the encryption page, exported
+  as `OSI_ROOT_PASSWORD`, governed by `user.min_password_length` like the user
+  password.
+* **Encryption and root-password rows on the summary page** — the `encrypt`
+  page has no `SummaryRow` of its own, so editions that skip the
+  language/desktop/user/region pages could reach the summary with nothing but
+  the keyboard layout listed.
+* **Bug fixes** — generated usernames are actually used
+  (`user.request_username` was tested instead of `user_username`); the
+  fixed-language lookup no longer races config loading; the
+  `keyboard_language` fallback is a real 2-tuple; the EFI partition is stored
+  as its device path, not its name.
 
-# Distributions
-The following describes how to use this in a distribution.
+`NEWS` has the per-release detail.
+
+## Building
+
+Dependencies (Arch):
+
+```
+sudo pacman -S meson blueprint-compiler appstream-glib \
+  gtk4 libadwaita gnome-desktop-4 libgweather-4 vte4 python-gobject python-yaml udisks2
+```
+
+Build and install:
+
+```
+meson setup build --prefix=/usr
+ninja -C build
+sudo meson install -C build
+```
+
+Try it without touching the system:
+
+```
+os-installer -d   # demo mode: dummy disks, no scripts
+os-installer -t   # test mode: real scripts, no system settings changed
+```
+
+On ShaniOS, `os-installer-git` in
+[shani-pkgbuilds](https://github.com/shani8dev/shani-pkgbuilds) builds this
+repo; `os-installer` tracks the newest release tag.
 
 ## Configuration
-Place a configuration and installation scripts under `/etc/os-installer` (or symlink it to another folder).
-An example structure is given in the `example_config` folder,
-where `config.yaml` is the config file.
-In it scripts for up to 3 stages of an installation can be set:
-* Preparation - Testing mirrors, package pre-fetching
-* Installation - Bootstrap system and write to disk
-* Configuration - Apply user choices to new system
-Any later stage can do what a previous stage can do, so only the last one is needed.
-The example scripts list which environment variables are made available to each script.
 
-The scripts can be written in any language as long as a shell can correctly execute them.
-Also, the installer will run scripts as the user it is started by.
-If they require elevated priviledges (hint: they probably do),
-these need to be granted to the script through other means.
+The distro side lives outside this repo. `os-installer` reads
+`/etc/os-installer/config.yaml` (or `--config <path>`) and runs the
+`prepare`/`install`/`configure` scripts it names. ShaniOS's configuration,
+partition layout, subvolume layout and first-boot handover are documented in
+[os-installer-config](https://github.com/shani8dev/os-installer-config).
 
-## Dependencies
-In addition to the dependencies listed under Development Setup,
-the default OS-Installer config also expects these GNOME apps to be available:
-`epiphany`, `gnome-disk-utility`, `gnome-control-center`
-Alternatives can be specified in the config.
+## Translations
 
-Similarly `systemd` is expected to be available, i.e. `localectl` and `timedatectl`.
+The gettext domain and the `po/` tree are upstream's, and translations are
+still synced from
+[upstream Weblate](https://hosted.weblate.org/projects/os-installer/). Our new
+strings live in the same `.po` files; run `ninja -C build os-installer-update-po`
+after changing translatable UI text.
 
-## Examples
-Example configurations of distributions (experimenting) with using OS-Installer:
-* https://github.com/snowflakelinux/os-installer-snowflake-config (NixOS-based)
-* https://github.com/arkanelinux/os-installer-config (Arch-based)
+## Upstream
 
-# Contact
-There is a matrix room https://matrix.to/#/#os-installer:matrix.org in which you can ask questions.
-Response time might vary.
+Forked at commit `ba5b74d` (2026-09-30, `main`). To pull an upstream fix:
 
-# Code of Conduct
-The project follows the [GNOME Code of Conduct](https://conduct.gnome.org/).
+```
+git remote add upstream https://gitlab.gnome.org/p3732/os-installer.git
+git fetch upstream
+git cherry-pick <commit>
+```
+
+Keep app-ID and resource-path churn out of cherry-picked commits so upstream
+commits apply with minimal conflict.
+
+## License
+
+GPL-3.0-or-later, same as upstream. See `LICENSE`; authorship of the original
+work is Peter Eisenmann and os-installer contributors.
