@@ -1,5 +1,32 @@
 # Release Notes
 
+## Version 0.6.1
+### ShaniOS
+* New `dev/` harness: `sh dev/check.sh unit|a11y` builds the app the way the
+  package installs it, in an Arch container with a headless X server and the
+  AT-SPI bus, and walks the real GUI from Welcome to Restart Later. It
+  screenshots every page and asserts the `OSI_*` environment the distro
+  scripts receive.
+* pytest suite for config loading, the `OSI_*` contract and the device model,
+  also run in CI.
+
+### Fixes
+* The summary page rendered an empty box after Confirm: the state machine's
+  page list is also what widgets ask "does this page exist?", and navigation
+  had truncated it to the pages that can no longer be reached.
+* Ctrl+T/W/Q, Ctrl+C in the terminal dialog and the test-mode Ctrl+S/F did
+  nothing: GTK spells the modifier `<Control>`, not `<Ctl>`. Ctrl+R now
+  reloads the page, as Hacking.md documents.
+* The icon-only previous/next/reload/about buttons have accessible names.
+* Config loading uses `safe_load` (a config file can no longer execute Python
+  code) and no longer mutates the module defaults or multiplies
+  `disk.min_size` on a second init.
+* Device objects no longer share mount points or partitions between disks.
+* The missing-script error is no longer overwritten by "Stopping
+  installation".
+* "No Disks avaliable" / "error that occured" typos; translation template
+  regenerated for the new and changed strings.
+
 ## Version 0.6.0 — ShaniOS fork
 First release of the ShaniOS fork of GNOME's os-installer. Forked at
 upstream commit ba5b74d.
