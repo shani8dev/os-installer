@@ -9,6 +9,7 @@ from .device_info import DeviceInfo, Disk
 from .device_rows import DeviceChoiceRow, DeviceRootfsDiskRow, DeviceRow, DeviceTooSmallRow, DeviceMountedRow, NoEfiPartitionRow
 from .disk_provider import disk_provider
 from .functions import reset_model
+from .install_detection import find_existing
 from .translator import config_gettext
 from .translations import translate_widgets
 
@@ -19,6 +20,10 @@ class DiskPage(Gtk.Stack):
 
     disk_list = Gtk.Template.Child()
     min_size_label = Gtk.Template.Child()
+    existing_box = Gtk.Template.Child()
+    existing_label = Gtk.Template.Child()
+    existing_mode = Gtk.Template.Child()
+    existing_continue = Gtk.Template.Child()
     disks_button = Gtk.Template.Child()
     no_disks_page = Gtk.Template.Child()
     reload_button = Gtk.Template.Child()
@@ -39,6 +44,17 @@ class DiskPage(Gtk.Stack):
             # Translators: Followed by a size in GB.
             _("Requires at least {} GB free.").format(
                 f'{self.minimum_disk_size / 1000000000:.0f}'))
+
+        # The choices are built here, not in Blueprint: a Gtk.StringList in a
+        # template needs the newer `strings:` syntax.
+        mode_model = Gtk.StringList()
+        mode_model.splice(0, 0, [
+            # Translators: Option when an existing install is found.
+            _("Repair the existing installation"),
+            # Translators: Option when an existing install is found.
+            _("Erase the disk and install"),
+        ])
+        self.existing_mode.set_model(mode_model)
 
         # models
         self.disk_list.bind_model(
@@ -102,4 +118,39 @@ class DiskPage(Gtk.Stack):
         config.set('chosen_device', row.device)
         config.set('disk_is_partition', not type(row.device) == Disk)
         config.set('disk_efi_partition', row.device.efi_partition)
+
+        # Like the Windows/macOS installers: if the target already holds an
+        # install, say so and ask what to do instead of erasing it silently.
+        existing = None
+        if (isinstance(row.device, Disk) and
+                not config.is_demo() and not config.is_test()):
+            existing = find_existing(row.device.device_path)
+
+        if existing:
+            self._show_existing(existing)
+        else:
+            self._hide_existing()
+            config.set_next_page(self)
+
+    def _show_existing(self, existing):
+        self.existing_label.set_label(
+            # Translators: {} is replaced by the root device path.
+            _("An existing installation was found on this disk ({}).").format(
+                existing.get('shani_root') or existing.get('shani_boot') or ''))
+        self.existing_mode.set_selected(0)   # Repair is the safe default
+        self.existing_box.set_visible(True)
+        self.existing_continue.set_visible(True)
+        self.existing_continue.grab_focus()
+
+    def _hide_existing(self):
+        self.existing_box.set_visible(False)
+        self.existing_continue.set_visible(False)
+        config.set('repair', False)
+        config.set('keep_data', False)
+
+    @Gtk.Template.Callback('existing_continue')
+    def _existing_continue(self, _):
+        # 0: repair, 1: erase and install
+        config.set('repair', self.existing_mode.get_selected() == 0)
+        config.set('keep_data', False)
         config.set_next_page(self)

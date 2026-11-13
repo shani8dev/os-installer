@@ -73,6 +73,7 @@ os_installer_sources = [
   'util/envvar_creator.py',
   'util/filterable_object.py',
   'util/functions.py',
+  'util/install_detection.py',
   'util/installation_step.py',
   'util/firmware.py',
   'util/logger.py',

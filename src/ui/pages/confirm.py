@@ -19,4 +19,9 @@ class ConfirmPage(Gtk.Box):
 
         translate_widgets(self.explanation_label)
 
+        if config.get('repair'):
+            # Translators: Followed by a disk or partition name.
+            self.explanation_label.set_label(
+                _("This will repair the installation on"))
+
     ### callbacks ###

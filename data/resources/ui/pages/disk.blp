@@ -18,6 +18,28 @@ template $DiskPage : Stack {
         styles ["dimmed"]
       }
 
+      Box existing_box {
+        orientation: vertical;
+        spacing: 6;
+        visible: false;
+
+        Label existing_label {
+          wrap: true;
+          xalign: 0;
+          styles ["heading"]
+        }
+
+        Adw.ComboRow existing_mode {
+          title: _("What should the installer do?");
+        }
+
+        $ContinueButton existing_continue {
+          clicked => $existing_continue();
+          receives-default: true;
+          visible: false;
+        }
+      }
+
       Box {
         orientation: vertical;
         spacing: 12;
