@@ -13,6 +13,7 @@ class SecureBootPage(Gtk.Box):
     __gtype_name__ = __qualname__
 
     switch_row = Gtk.Template.Child()
+    firmware_row = Gtk.Template.Child()
     root_pw_row = Gtk.Template.Child()
     password_row = Gtk.Template.Child()
     confirm_row = Gtk.Template.Child()
@@ -29,6 +30,15 @@ class SecureBootPage(Gtk.Box):
                           self.confirm_row)
 
         self.min_length = config.get('secure_boot')['mok_password_min_length']
+
+        from .firmware import secure_boot_state
+        state = secure_boot_state()
+        if state is None:
+            # Translators: Shown when the firmware is not UEFI.
+            self.firmware_row.set_subtitle(_("Not a UEFI system"))
+        else:
+            # Translators: Secure Boot state.
+            self.firmware_row.set_subtitle(_("Enabled") if state else _("Disabled"))
 
         # mokutil --root-pw takes the password hash from /etc/shadow: there
         # must be a root password for it to use.

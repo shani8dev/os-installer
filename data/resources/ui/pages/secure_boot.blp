@@ -9,6 +9,12 @@ template $SecureBootPage : Box {
     selection-mode: none;
     styles ["boxed-list"]
 
+    Adw.ActionRow firmware_row {
+      /* Translators: Firmware state shown on the Secure Boot page. */
+      title: _("Secure Boot");
+      activatable: false;
+    }
+
     Adw.SwitchRow switch_row {
       activatable: true;
       /* Translators: Used with option to enroll the distribution's Machine

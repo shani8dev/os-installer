@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: os-installer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-13 20:58+0000\n"
+"POT-Creation-Date: 2026-11-13 21:00+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -250,6 +250,14 @@ msgid ""
 "office program defaults."
 msgstr ""
 
+#. Translators: Firmware state shown on the Secure Boot page.
+#. Translators: Page title
+#. Translators: Description of the MOK enrollment choice.
+#: data/resources/ui/pages/secure_boot.blp src/ui/page_wrapper.py
+#: src/ui/row/summary_row.py
+msgid "Secure Boot"
+msgstr ""
+
 #. Translators: Used with option to enroll the distribution's Machine
 #. Owner Key, so Secure Boot accepts the installed system.
 #: data/resources/ui/pages/secure_boot.blp
@@ -313,6 +321,11 @@ msgstr ""
 #. Translators: Gets shown when autologin is enabled.
 #: data/resources/ui/pages/summary.blp
 msgid "(Automatic Login)"
+msgstr ""
+
+#. Translators: TPM state shown on the TPM page.
+#: data/resources/ui/pages/tpm.blp
+msgid "TPM 2.0"
 msgstr ""
 
 #. Translators: Used with option to let the TPM unlock the encrypted disk
@@ -551,12 +564,6 @@ msgid "Restarting"
 msgstr ""
 
 #. Translators: Page title
-#. Translators: Description of the MOK enrollment choice.
-#: src/ui/page_wrapper.py src/ui/row/summary_row.py
-msgid "Secure Boot"
-msgstr ""
-
-#. Translators: Page title
 #. Translators: Description of selected additional software.
 #: src/ui/page_wrapper.py src/ui/row/summary_row.py
 msgid "Additional Software"
@@ -612,13 +619,21 @@ msgstr ""
 msgid "Configuring the system…"
 msgstr ""
 
+#. Translators: Shown when the firmware is not UEFI.
+#: src/ui/pages/secure_boot.py
+msgid "Not a UEFI system"
+msgstr ""
+
+#. Translators: Secure Boot state.
 #. Translators: Shown in summary when disk encryption is enabled.
 #. Translators: Shown in summary when disk encryption is disabled.
-#: src/ui/pages/summary.py src/ui/row/summary_row.py
+#: src/ui/pages/secure_boot.py src/ui/pages/summary.py
+#: src/ui/row/summary_row.py
 msgid "Enabled"
 msgstr ""
 
-#: src/ui/pages/summary.py src/ui/row/summary_row.py
+#: src/ui/pages/secure_boot.py src/ui/pages/summary.py
+#: src/ui/row/summary_row.py
 msgid "Disabled"
 msgstr ""
 
@@ -630,6 +645,14 @@ msgstr ""
 
 #: src/ui/pages/summary.py
 msgid "Not set"
+msgstr ""
+
+#: src/ui/pages/tpm.py
+msgid "Found"
+msgstr ""
+
+#: src/ui/pages/tpm.py
+msgid "Not found"
 msgstr ""
 
 #. Translators: Shown when list of selected software is empty.

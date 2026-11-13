@@ -74,6 +74,7 @@ os_installer_sources = [
   'util/filterable_object.py',
   'util/functions.py',
   'util/installation_step.py',
+  'util/firmware.py',
   'util/logger.py',
   'util/password_strength.py',
   'util/power.py',

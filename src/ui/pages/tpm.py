@@ -12,6 +12,7 @@ class TpmPage(Gtk.Box):
     __gtype_name__ = __qualname__
 
     switch_row = Gtk.Template.Child()
+    tpm_row = Gtk.Template.Child()
     hint_banner = Gtk.Template.Child()
     continue_button = Gtk.Template.Child()
 
@@ -19,6 +20,11 @@ class TpmPage(Gtk.Box):
         super().__init__(**kwargs)
 
         translate_widgets(self.switch_row)
+
+        from .firmware import tpm_present
+        # Translators: TPM state.
+        self.tpm_row.set_subtitle(
+            _("Found") if tpm_present() else _("Not found"))
 
         self.active = config.get('use_tpm')
         self.switch_row.set_active(self.active)

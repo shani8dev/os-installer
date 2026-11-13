@@ -9,6 +9,12 @@ template $TpmPage : Box {
     selection-mode: none;
     styles ["boxed-list"]
 
+    Adw.ActionRow tpm_row {
+      /* Translators: TPM state shown on the TPM page. */
+      title: _("TPM 2.0");
+      activatable: false;
+    }
+
     Adw.SwitchRow switch_row {
       activatable: true;
       /* Translators: Used with option to let the TPM unlock the encrypted disk
