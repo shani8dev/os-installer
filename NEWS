@@ -1,5 +1,12 @@
 # Release Notes
 
+## Version 0.6.2
+### Fixes
+* `available_translations` (set by the launcher before `init()`) survived the
+  config load again, so the language list is the packaged one and not the
+  fallback. A regression in 0.6.1, caught by installing the package into a
+  shani-testbed slot and starting it there.
+
 ## Version 0.6.1
 ### ShaniOS
 * New `dev/` harness: `sh dev/check.sh unit|a11y` builds the app the way the
