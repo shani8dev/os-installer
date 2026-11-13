@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: os-installer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-13 19:50+0000\n"
+"POT-Creation-Date: 2026-11-13 19:57+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -308,14 +308,14 @@ msgstr ""
 #. Translators: Shown under the TPM switch.
 #: data/resources/ui/pages/tpm.blp
 msgid ""
-"The disk then unlocks without a PIN on this machine. The encryption PIN "
-"stays as a fallback."
+"Once enrolled, the disk unlocks without a PIN on this machine. The "
+"encryption PIN stays as a fallback."
 msgstr ""
 
 #: data/resources/ui/pages/tpm.blp
 msgid ""
-"The TPM is enrolled on the first boot after installation. The installer "
-"records this choice only."
+"The installer prepares the system for this. Finish after the first boot "
+"with: sudo gen-efi.sh enroll-tpm2"
 msgstr ""
 
 #. Translators: Used with entry field for User's name
