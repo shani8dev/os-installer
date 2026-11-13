@@ -3,7 +3,7 @@
 from gi.repository import Adw, GObject, Gtk
 
 
-@Gtk.Template(resource_path='/com/github/p3732/os-installer/ui/row/progress_row.ui')
+@Gtk.Template(resource_path='/org/shani/os-installer/ui/row/progress_row.ui')
 class ProgressRow(Adw.ActionRow):
     __gtype_name__ = __qualname__
 

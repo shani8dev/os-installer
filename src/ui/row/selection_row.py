@@ -5,7 +5,7 @@ from gi.repository import Adw, Gtk
 from .translator import config_gettext as _
 
 
-@Gtk.Template(resource_path='/com/github/p3732/os-installer/ui/row/multi_selection_row.ui')
+@Gtk.Template(resource_path='/org/shani/os-installer/ui/row/multi_selection_row.ui')
 class MultiSelectionRow(Adw.ComboRow):
     __gtype_name__ = __qualname__
 
@@ -37,7 +37,7 @@ class MultiSelectionRow(Adw.ComboRow):
         self.choice.state = self.choice.options[self.get_selected()]
 
 
-@Gtk.Template(resource_path='/com/github/p3732/os-installer/ui/row/selection_row.ui')
+@Gtk.Template(resource_path='/org/shani/os-installer/ui/row/selection_row.ui')
 class SelectionRow(Adw.ActionRow):
     __gtype_name__ = __qualname__
 

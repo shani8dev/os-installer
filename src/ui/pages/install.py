@@ -9,7 +9,7 @@ from .config import config
 from .slideshow_provider import slideshow_provider
 
 
-@Gtk.Template(resource_path='/com/github/p3732/os-installer/ui/pages/install.ui')
+@Gtk.Template(resource_path='/org/shani/os-installer/ui/pages/install.ui')
 class InstallPage(Gtk.Box):
     __gtype_name__ = __qualname__
 

@@ -11,7 +11,7 @@ from .progress_row import ProgressRow
 from .translations import translate_widgets
 
 
-@Gtk.Template(resource_path='/com/github/p3732/os-installer/ui/pages/keyboard_language.ui')
+@Gtk.Template(resource_path='/org/shani/os-installer/ui/pages/keyboard_language.ui')
 class KeyboardLanguagePage(Gtk.Box):
     __gtype_name__ = __qualname__
 
@@ -33,7 +33,7 @@ class KeyboardLanguagePage(Gtk.Box):
         config.set_next_page(self)
 
 
-@Gtk.Template(resource_path='/com/github/p3732/os-installer/ui/pages/keyboard_layout.ui')
+@Gtk.Template(resource_path='/org/shani/os-installer/ui/pages/keyboard_layout.ui')
 class KeyboardLayoutPage(Gtk.Box):
     __gtype_name__ = __qualname__
 
@@ -68,7 +68,7 @@ class KeyboardLayoutPage(Gtk.Box):
         config.set('displayed-page', 'keyboard-language')
 
 
-@Gtk.Template(resource_path='/com/github/p3732/os-installer/ui/pages/keyboard_overview.ui')
+@Gtk.Template(resource_path='/org/shani/os-installer/ui/pages/keyboard_overview.ui')
 class KeyboardOverviewPage(Gtk.Box):
     __gtype_name__ = __qualname__
 

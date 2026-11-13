@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=ShaniOS Installer
+Comment=Install ShaniOS on this computer
+Exec=os-installer
+# Translators: Do NOT translate or transliterate this text (this is an icon file name)!
+Icon=org.shani.OsInstaller
+Terminal=false
+Type=Application
+StartupNotify=true
+Categories=GTK;System;
+X-GNOME-UsesNotifications=true

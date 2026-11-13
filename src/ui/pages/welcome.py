@@ -8,7 +8,7 @@ from .translator import config_gettext as _
 from .welcome_provider import welcome_provider
 
 
-@Gtk.Template(resource_path='/com/github/p3732/os-installer/ui/pages/welcome.ui')
+@Gtk.Template(resource_path='/org/shani/os-installer/ui/pages/welcome.ui')
 class WelcomePage(Gtk.Box):
     __gtype_name__ = __qualname__
     image = 'weather-clear-symbolic'

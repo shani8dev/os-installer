@@ -8,7 +8,7 @@ from .state_machine import state_machine
 from .translations import translate_widgets
 
 
-@Gtk.Template(resource_path='/com/github/p3732/os-installer/ui/row/device_choice_row.ui')
+@Gtk.Template(resource_path='/org/shani/os-installer/ui/row/device_choice_row.ui')
 class DeviceChoiceRow(Adw.ExpanderRow):
     __gtype_name__ = __qualname__
 
@@ -30,7 +30,7 @@ class DeviceChoiceRow(Adw.ExpanderRow):
         return self._device
 
 
-@Gtk.Template(resource_path='/com/github/p3732/os-installer/ui/row/device_mounted_row.ui')
+@Gtk.Template(resource_path='/org/shani/os-installer/ui/row/device_mounted_row.ui')
 class DeviceMountedRow(Adw.ActionRow):
     __gtype_name__ = __qualname__
 
@@ -53,7 +53,7 @@ class DeviceMountedRow(Adw.ActionRow):
         return self._device
 
 
-@Gtk.Template(resource_path='/com/github/p3732/os-installer/ui/row/device_rootfs_disk_row.ui')
+@Gtk.Template(resource_path='/org/shani/os-installer/ui/row/device_rootfs_disk_row.ui')
 class DeviceRootfsDiskRow(Adw.ActionRow):
     __gtype_name__ = __qualname__
 
@@ -69,7 +69,7 @@ class DeviceRootfsDiskRow(Adw.ActionRow):
         return self._device
 
 
-@Gtk.Template(resource_path='/com/github/p3732/os-installer/ui/row/device_row.ui')
+@Gtk.Template(resource_path='/org/shani/os-installer/ui/row/device_row.ui')
 class DeviceRow(Adw.ActionRow):
     __gtype_name__ = __qualname__
 
@@ -82,7 +82,7 @@ class DeviceRow(Adw.ActionRow):
         return self._device
 
 
-@Gtk.Template(resource_path='/com/github/p3732/os-installer/ui/row/device_summary_row.ui')
+@Gtk.Template(resource_path='/org/shani/os-installer/ui/row/device_summary_row.ui')
 class DeviceSummaryRow(Adw.ExpanderRow):
     __gtype_name__ = __qualname__
 
@@ -125,7 +125,7 @@ class DeviceSummaryRow(Adw.ExpanderRow):
         return self._device
 
 
-@Gtk.Template(resource_path='/com/github/p3732/os-installer/ui/row/device_too_small_row.ui')
+@Gtk.Template(resource_path='/org/shani/os-installer/ui/row/device_too_small_row.ui')
 class DeviceTooSmallRow(Adw.ActionRow):
     __gtype_name__ = __qualname__
 
@@ -146,7 +146,7 @@ class DeviceTooSmallRow(Adw.ActionRow):
         return self._device
 
 
-@Gtk.Template(resource_path='/com/github/p3732/os-installer/ui/row/no_efi_partition_row.ui')
+@Gtk.Template(resource_path='/org/shani/os-installer/ui/row/no_efi_partition_row.ui')
 class NoEfiPartitionRow(Adw.ActionRow):
     __gtype_name__ = __qualname__
 

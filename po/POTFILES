@@ -1,6 +1,6 @@
-data/com.github.p3732.os_installer.metainfo.xml
-data/com.github.p3732.os_installer.desktop.in
-data/com.github.p3732.os_installer.gschema.xml
+data/org.shani.OsInstaller.metainfo.xml
+data/org.shani.OsInstaller.desktop.in
+data/org.shani.OsInstaller.gschema.xml
 
 data/resources/ui/terminal_dialog.blp
 

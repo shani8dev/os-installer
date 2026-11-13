@@ -7,7 +7,7 @@ from .config import config
 from .translations import translate_widgets
 
 
-@Gtk.Template(resource_path='/com/github/p3732/os-installer/ui/pages/region.ui')
+@Gtk.Template(resource_path='/org/shani/os-installer/ui/pages/region.ui')
 class RegionPage(Gtk.Box):
     __gtype_name__ = __qualname__
 

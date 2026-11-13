@@ -8,7 +8,7 @@ from .navigation import Navigation
 from .terminal_dialog import TerminalDialog
 
 
-@Gtk.Template(resource_path='/com/github/p3732/os-installer/ui/window.ui')
+@Gtk.Template(resource_path='/org/shani/os-installer/ui/window.ui')
 class OsInstallerWindow(Adw.ApplicationWindow):
     __gtype_name__ = __qualname__
 
@@ -67,7 +67,7 @@ class OsInstallerWindow(Adw.ApplicationWindow):
             self.toaster.add_toast(toast)
 
     def _show_about_page(self, _, __):
-        builder = Gtk.Builder.new_from_resource('/com/github/p3732/os-installer/ui/about_dialog.ui')
+        builder = Gtk.Builder.new_from_resource('/org/shani/os-installer/ui/about_dialog.ui')
         popup = builder.get_object('about_window')
         popup.present(self)
 

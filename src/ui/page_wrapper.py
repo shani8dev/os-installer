@@ -123,7 +123,7 @@ page_name_to_type = {
 reloadable_pages = ['disk']
 
 
-@Gtk.Template(resource_path='/com/github/p3732/os-installer/ui/widgets/page_wrapper.ui')
+@Gtk.Template(resource_path='/org/shani/os-installer/ui/widgets/page_wrapper.ui')
 class PageWrapper(Adw.NavigationPage):
     __gtype_name__ = __qualname__
 

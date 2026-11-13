@@ -3,7 +3,7 @@
 from gi.repository import Gtk
 
 
-@Gtk.Template(resource_path='/com/github/p3732/os-installer/ui/pages/restart.ui')
+@Gtk.Template(resource_path='/org/shani/os-installer/ui/pages/restart.ui')
 class RestartPage(Gtk.Box):
     __gtype_name__ = __qualname__
 

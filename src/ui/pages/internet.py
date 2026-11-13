@@ -10,7 +10,7 @@ from .system_calls import start_system_timesync
 from .translations import translate_widgets
 
 
-@Gtk.Template(resource_path='/com/github/p3732/os-installer/ui/pages/internet.ui')
+@Gtk.Template(resource_path='/org/shani/os-installer/ui/pages/internet.ui')
 class InternetPage(Gtk.Stack):
     __gtype_name__ = __qualname__
     image = 'network-wireless-disabled-symbolic'

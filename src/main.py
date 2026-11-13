@@ -20,7 +20,7 @@ from .preload_manager import preload_manager
 from .system_calls import SystemCaller
 from .window import OsInstallerWindow
 
-APP_ID = 'com.github.p3732.os_installer'
+APP_ID = 'org.shani.OsInstaller'
 DEFAULT_CONFIG_PATH = '/etc/os-installer/config.yaml'
 
 
@@ -45,8 +45,8 @@ class Application(Adw.Application):
 
     def _setup_icons(self):
         icon_theme = Gtk.IconTheme.get_for_display(self.window.get_display())
-        icon_theme.add_resource_path('/com/github/p3732/os-installer/')
-        icon_theme.add_resource_path('/com/github/p3732/os-installer/icon')
+        icon_theme.add_resource_path('/org/shani/os-installer/')
+        icon_theme.add_resource_path('/org/shani/os-installer/icon')
 
     ### parent functions ###
 
@@ -76,7 +76,7 @@ class Application(Adw.Application):
 
     def do_startup(self):
         # Startup application
-        self.set_resource_base_path('/com/github/p3732/os-installer')
+        self.set_resource_base_path('/org/shani/os-installer')
         Adw.Application.do_startup(self)
 
     ### callbacks ###

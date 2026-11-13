@@ -13,7 +13,7 @@ from .translator import config_gettext
 from .translations import translate_widgets
 
 
-@Gtk.Template(resource_path='/com/github/p3732/os-installer/ui/pages/disk.ui')
+@Gtk.Template(resource_path='/org/shani/os-installer/ui/pages/disk.ui')
 class DiskPage(Gtk.Stack):
     __gtype_name__ = __qualname__
 

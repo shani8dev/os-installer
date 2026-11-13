@@ -8,7 +8,7 @@ from .translator import config_gettext as _
 from .translations import translate_widgets
 
 
-@Gtk.Template(resource_path='/com/github/p3732/os-installer/ui/widgets/desktop_entry.ui')
+@Gtk.Template(resource_path='/org/shani/os-installer/ui/widgets/desktop_entry.ui')
 class DesktopEntry(Gtk.Button):
     __gtype_name__ = __qualname__
 
@@ -32,7 +32,7 @@ class DesktopEntry(Gtk.Button):
         return self._name
 
 
-@Gtk.Template(resource_path='/com/github/p3732/os-installer/ui/pages/desktop.ui')
+@Gtk.Template(resource_path='/org/shani/os-installer/ui/pages/desktop.ui')
 class DesktopPage(Gtk.Box):
     __gtype_name__ = __qualname__
 

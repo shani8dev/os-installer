@@ -6,7 +6,7 @@ from .terminal_provider import terminal_provider
 from .translations import translate_widgets
 
 
-@Gtk.Template(resource_path='/com/github/p3732/os-installer/ui/terminal_dialog.ui')
+@Gtk.Template(resource_path='/org/shani/os-installer/ui/terminal_dialog.ui')
 class TerminalDialog(Adw.Dialog):
     __gtype_name__ = __qualname__
 

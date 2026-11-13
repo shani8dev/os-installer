@@ -14,7 +14,7 @@ class FilterType(Enum):
     timezone = 1
 
 
-@Gtk.Template(resource_path='/com/github/p3732/os-installer/ui/pages/filter.ui')
+@Gtk.Template(resource_path='/org/shani/os-installer/ui/pages/filter.ui')
 class FilterPage(Gtk.Box):
     __gtype_name__ = __qualname__
 

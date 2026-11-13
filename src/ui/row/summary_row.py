@@ -53,7 +53,7 @@ titles = {
 }
 
 
-@Gtk.Template(resource_path='/com/github/p3732/os-installer/ui/row/summary_row.ui')
+@Gtk.Template(resource_path='/org/shani/os-installer/ui/row/summary_row.ui')
 class SummaryRow(Adw.ActionRow):
     __gtype_name__ = __qualname__
 

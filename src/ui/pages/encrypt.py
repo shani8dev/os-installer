@@ -8,7 +8,7 @@ from .entry_error_enhancer import EntryErrorEnhancer
 from .translations import translate_widgets
 
 
-@Gtk.Template(resource_path='/com/github/p3732/os-installer/ui/pages/encrypt.ui')
+@Gtk.Template(resource_path='/org/shani/os-installer/ui/pages/encrypt.ui')
 class EncryptPage(Gtk.Box):
     __gtype_name__ = __qualname__
 

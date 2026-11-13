@@ -7,7 +7,7 @@ from .language_provider import language_provider
 from .progress_row import ProgressRow
 
 
-@Gtk.Template(resource_path='/com/github/p3732/os-installer/ui/pages/language.ui')
+@Gtk.Template(resource_path='/org/shani/os-installer/ui/pages/language.ui')
 class LanguagePage(Gtk.Box):
     __gtype_name__ = __qualname__
 
