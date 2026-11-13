@@ -55,6 +55,11 @@ class StateMachine:
             page_available = lambda page: page_conditions.get(page, True)
 
             self.available_pages = list(filter(page_available, page_order))
+            # transition() truncates available_pages so navigation cannot go
+            # back past the point of no return. Widgets ask "does this page
+            # exist?" (a summary row deciding whether to show itself), and that
+            # must not change when the list is shortened: keep the full set.
+            self.all_available_pages = list(self.available_pages)
 
     def _offer_language_selection(self):
         use_fixed_language = config.get('language_use_fixed')
@@ -62,7 +67,6 @@ class StateMachine:
             use_fixed_language = use_fixed_language.result()
             config.set('language_use_fixed', use_fixed_language)
         return not use_fixed_language
-        list(filter(self._is_page_available, page_order))
 
     def _offer_encryption(self):
         encryption_settings = config.get('disk_encryption')
@@ -83,7 +87,7 @@ class StateMachine:
                 searched_name = 'region'
             case _:
                 searched_name = page_name
-        return searched_name in self.available_pages
+        return searched_name in self.all_available_pages
 
     def get_available_pages(self):
         self._assert_available_pages()
