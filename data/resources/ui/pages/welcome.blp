@@ -31,6 +31,9 @@ template $WelcomePage : Box {
     Button {
       action-name: "win.about-page";
       icon-name: "help-about-symbolic";
+      /* Translators: Tooltip on the icon-only About button (it has no label,
+         so this is also its accessible name). */
+      tooltip-text: _("About");
       focusable: true;
       valign: end;
       styles ["circular", "flat"]

@@ -33,7 +33,7 @@ class TerminalDialog(Adw.Dialog):
         # shortcut
         self.shortcut_controller = Gtk.ShortcutController()
         self.shortcut_controller.set_scope(Gtk.ShortcutScope(1))
-        for keybinding in ['<Ctl>C', '<Ctl><Shift>C']:
+        for keybinding in ['<Control>C', '<Control><Shift>C']:
             named_action = Gtk.NamedAction.new(f'terminal.{action_name}')
             trigger = Gtk.ShortcutTrigger.parse_string(keybinding)
             shortcut = Gtk.Shortcut.new(trigger, named_action)

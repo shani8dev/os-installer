@@ -46,15 +46,15 @@ class OsInstallerWindow(Adw.ApplicationWindow):
         self._add_action('next-page', lambda _, __: self.navigation.go_forward())
         self._add_action('previous-page', lambda _, __: self.navigation.go_backward())
         self._add_action('advance', lambda page, __: self.navigation.advance(page))
-        self._add_action('reload-page', lambda _, __: self.navigation.reload_page(), ['F5'])
+        self._add_action('reload-page', lambda _, __: self.navigation.reload_page(), ['F5', '<Control>r'])
 
         self._add_action('about-page', self._show_about_page, ['<Alt>Return'])
-        self._add_action('show-terminal', self._show_terminal, ['<Ctl>t'])
-        self._add_action('quit', self._show_confirm_dialog, ['<Ctl>q', '<Ctl>w'])
+        self._add_action('show-terminal', self._show_terminal, ['<Control>t'])
+        self._add_action('quit', self._show_confirm_dialog, ['<Control>q', '<Control>w'])
 
         if config.is_test():
-            self._add_action('fail-page', lambda _, __: self.navigation.show_failed(), ['<Ctl>F'])
-            self._add_action('skip', lambda _, __: self.navigation.advance(_), ['<Ctl>S'])
+            self._add_action('fail-page', lambda _, __: self.navigation.show_failed(), ['<Control>F'])
+            self._add_action('skip', lambda _, __: self.navigation.advance(_), ['<Control>S'])
 
         self.insert_action_group('win', self.action_group)
         self.add_controller(self.shortcut_controller)

@@ -142,8 +142,11 @@ class PageWrapper(Adw.NavigationPage):
         self.reload_button.set_visible(page_name in reloadable_pages)
 
     def __del__(self):
-        config.unsubscribe(self.page)
-        del self.page
+        # A wrapper can be collected while still being constructed (its page
+        # constructor raised), so "page" may not exist yet.
+        page = getattr(self, 'page', None)
+        if page is not None:
+            config.unsubscribe(page)
 
     def _set_new_page(self, page_name):
         self.page = page_name_to_type[page_name]()
