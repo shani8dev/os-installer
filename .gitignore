@@ -9,5 +9,6 @@ tmp/
 # temporary glade files
 \#*
 /subprojects/blueprint-compiler
-# hidden files and folders
+# hidden files and folders, except the GitHub CI configuration
 .*
+!.github/

@@ -1,0 +1,55 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lint:
+    name: Lint
+    uses: shani8dev/shani-ci-commons/.github/workflows/lint.yml@main
+    with:
+      language: python
+
+  build:
+    name: Build (Arch)
+    runs-on: ubuntu-latest
+    needs: lint
+    container: archlinux:latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Install build dependencies
+        run: |
+          pacman -Syu --noconfirm --needed \
+            meson blueprint-compiler appstream-glib \
+            gtk4 libadwaita gnome-desktop-4 libgweather-4 vte4 \
+            python-gobject python-yaml udisks2
+
+      - name: Configure
+        run: meson setup build
+
+      - name: Compile Blueprint UI and GResource
+        run: ninja -C build
+
+      # Runs the desktop-file, appstream and GSettings schema validators that
+      # data/meson.build registers.
+      - name: Validate desktop entry, metainfo and schema
+        run: meson test -C build --print-errorlogs
+
+      - name: Install into a staged root
+        run: DESTDIR="$PWD/stage" meson install -C build
+
+  security:
+    name: Security
+    uses: shani8dev/shani-ci-commons/.github/workflows/security.yml@main
+    with:
+      scan-type: secrets
+    needs: lint
