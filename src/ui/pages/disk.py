@@ -61,7 +61,7 @@ class DiskPage(Gtk.Stack):
 
         can_use_partitions = True
         is_booted_with_uefi = os.path.isdir("/sys/firmware/efi/efivars")
-        if is_booted_with_uefi and device.efi_partition is None:
+        if is_booted_with_uefi and not device.efi_partition:
             expander_row.add_row(NoEfiPartitionRow())
             can_use_partitions = False
 

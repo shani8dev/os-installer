@@ -41,7 +41,7 @@ class Disk(DeviceInfo):
 
         if partitions:
             efis = [partition for partition in partitions if partition.is_efi]
-            self.efi_partition = efis[0].name if len(efis) > 0 else ''
+            self.efi_partition = efis[0].device_path if len(efis) > 0 else ''
             for partition in partitions:
                 partition.efi_partition = self.efi_partition
                 if "/" in partition.mount_points:
