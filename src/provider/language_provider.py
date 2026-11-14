@@ -1,9 +1,31 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
+import subprocess
+
 from gi.repository import GObject, GnomeDesktop
 
 from .config import config
 from .preloadable import Preloadable
+
+_available_locales = None
+
+
+def _locale_available(locale):
+    """Is this locale generated on this system?
+
+    GnomeDesktop.get_language_from_locale() can block on a locale that is not
+    in the archive (an installed system without locale-gen), so check first:
+    an unavailable locale cannot be offered anyway.
+    """
+    global _available_locales
+    if _available_locales is None:
+        try:
+            out = subprocess.run(['locale', '-a'], capture_output=True,
+                                 text=True, timeout=5).stdout
+            _available_locales = {line.strip() for line in out.splitlines()}
+        except (OSError, subprocess.SubprocessError):
+            _available_locales = set()
+    return locale in _available_locales or locale.split('.')[0] in _available_locales
 
 
 # generated via language_codes_to_x_generator.py
@@ -91,6 +113,9 @@ class LanguageProvider(Preloadable):
 
     def _create_info(self, language_code):
         locale = language_to_default_locale.get(language_code, None)
+        if locale and not _locale_available(locale):
+            print(f'Locale {locale} is not available on this system')
+            return LanguageInfo(language_code, language_code, locale, False)
         if not locale and '_' in language_code:
             # already has territory, use as-is
             locale = f'{language_code}.UTF-8'
