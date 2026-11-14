@@ -408,7 +408,10 @@ class Config:
 
         if use_default_error:
             print(f'{use_default_error}. Running in demo mode.')
+            # Keep the values set before the config was read (the launcher's
+            # available_translations); only the file's values are discarded.
             self.variables = deepcopy(default_config)
+            self.variables.update(preset)
 
             # Test default config to assure it doesn't contain errors
             if self.run_mode == RunMode.test and not _validate(default_config):
