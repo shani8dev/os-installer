@@ -1,0 +1,19 @@
+%YAML 1.2
+---
+distribution_name: 'Shani OS'
+scripts:
+  prepare: prepare.sh
+  install: install.sh
+  configure: configure.sh
+internet:
+  connection_required: yes
+fixed_language: en_US
+skip_user: yes
+skip_region: yes
+welcome_page:
+  usage: yes
+disk:
+  partition_ok: no
+  min_size: 5
+disk_encryption:
+  offered: no
