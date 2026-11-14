@@ -72,6 +72,10 @@ class Application(Adw.Application):
         config.init(options.get('config', DEFAULT_CONFIG_PATH),
                     options.get('demo-mode', False),
                     options.get('test-mode', False))
+        # After init: the log path is config state, and setting it earlier
+        # trips "setting before the config was read".
+        from .logger import install as install_logger
+        install_logger()
         config.set('version', self.version)
         config.set('repair', options.get('repair', False))
         config.set('keep-data', options.get('keep-data', False))
@@ -100,8 +104,5 @@ class Application(Adw.Application):
 
 
 def main(version):
-    from .logger import install as install_logger
-    install_logger()
-
     app = Application(version)
     return app.run(sys.argv)
